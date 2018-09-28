@@ -19,8 +19,8 @@ public class GraphParsing {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
 		String script = "";
-		PBRWrapper< String > run_script = new PBRWrapper< String >( "" );
-		PBRWrapper< String > setup_script = new PBRWrapper< String >( "" );
+		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
+		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
@@ -84,8 +84,7 @@ public class GraphParsing {
 	}
 	
 	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script, PBRWrapper< String > setup_script ){
-		String out = "";
-		out += "mkdir stage" + stage + "_" + n.title() ;
+		setup_script.value += "mkdir stage" + stage + "_" + n.title() ;
 	}
 	
 }
