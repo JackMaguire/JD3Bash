@@ -15,13 +15,19 @@ public class GraphParsing {
 
 	public static String parseGraph( Graph g ) throws InvalidGraphException {
 		if( cycleExists(g) ) {
-			throw new InvalidGraphException( "" );
+			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
 		String script = "";
 
+		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
+		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
+			Node n = nodes_in_order.get( stage - 1 );//We are 1-indexing the stages
+			createInstructionsForNode( n, stage );
+		}
+		
 		return script;
 	}
-
+	
 	public static ArrayList< Node > determineOrderOfNodes( Graph g ) {
 		ArrayList< Node > unassigned_nodes = new ArrayList< Node >();
 		ArrayList< Node > assigned_nodes_in_order = new ArrayList< Node >();
@@ -72,6 +78,11 @@ public class GraphParsing {
 		}
 		nodes_already_visited.remove( starting_node );
 		return false;
+	}
+	
+	private static void createInstructionsForNode( Node n, int stage ){
+		String out = "";
+		out += "mkdir stage" + stage + "_" + n.title() ;
 	}
 	
 }

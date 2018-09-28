@@ -14,7 +14,8 @@ public class Node {
 	private ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
 	private String command_ = "rosetta_scripts.mpi.linuxgccrelease @ flags";
-
+	private String title_ = "[title]";
+	
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -104,6 +105,18 @@ public class Node {
 
 	public final void setCommand( String setting ) {
 		command_ = setting;
+	}
+	
+	public final String getTitle() {
+		return title_;
+	}
+
+	public final String title() {
+		return title_;
+	}
+
+	public final void setTitle( String setting ) {
+		title_ = setting;
 	}
 
 	///////////////////////////
