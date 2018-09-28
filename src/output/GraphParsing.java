@@ -31,7 +31,7 @@ public class GraphParsing {
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			Node n = nodes_in_order.get( stage - 1 );//We are 1-indexing the stages
-			createInstructionsForNode( n, stage, setup_script, run_script );
+			createInstructionsForNode( n, stage, run_script, setup_script );
 		}
 
 		return new Pair<String, String>( run_script.value, setup_script.value );
@@ -102,15 +102,17 @@ public class GraphParsing {
 		}
 		
 		//Run
+		run_script.value += "cd " + dirname + "\n";
 		run_script.value += n.command() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
-			run_script.value += "grep -v 'SEQUENCE:' " + dirname + "/score.sc > no_first_line.score.sc\n";
+			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges() ) {
 				final String path_to_next_stage_directory = "TO/DO";
 				final String sort_column = de.columnNameToSortBy();	
 				run_script.value += "\n#####\n";
 				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
-				run_script.value += "awk -v c1=\"" + sort_column + "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp";
+				run_script.value += "# This awk command prints the data for the column with header " + sort_column + " along with the title for each result\n";
+				run_script.value += "awk -v c1=\"" + sort_column + "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
 
 				if( de.positiveScoresAreBetter() ) {
 					run_script.value += "sort -nrk1 temp > temp2\n";
@@ -129,6 +131,8 @@ public class GraphParsing {
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
 				run_script.value += "echo temp3 >> " + path_to_next_stage_directory + "/input_files\n";
 			}
+			
+			run_script.value += "cd ..\n";
 		}
 	}
 	

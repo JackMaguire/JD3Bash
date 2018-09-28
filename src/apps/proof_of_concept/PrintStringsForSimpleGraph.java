@@ -17,7 +17,12 @@ public class PrintStringsForSimpleGraph {
 		Edge e2 = simple_graph.addEdge( n1, n2 );
 		
 		e1.setColumnNameToSortBy( "interchain_cen" );
+		e1.setUsePercentageInsteadOfCount( false );
+		e1.setNumResultsToTransfer( 100 );
+		
 		e2.setColumnNameToSortBy( "total_score" );
+		e2.setPercentageOfResultsToTransfer( 0.25 );
+		e2.setUsePercentageInsteadOfCount( true );
 		
 		Pair<String, String> scripts = null;
 		try {
