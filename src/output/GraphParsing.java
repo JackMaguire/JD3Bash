@@ -11,7 +11,7 @@ public class GraphParsing {
 		return script;
 	}
 	
-	private static ArrayList< Node > determineOrderOfNodes( Graph g ){
+	public static ArrayList< Node > determineOrderOfNodes( Graph g ){
 		ArrayList< Node > unassigned_nodes = new ArrayList< Node >();
 		ArrayList< Node > assigned_nodes_in_order = new ArrayList< Node >();
 		
