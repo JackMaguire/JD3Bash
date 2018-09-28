@@ -99,17 +99,17 @@ public class Node {
 	}
 
 	///////////////////////////
-	//Graph Parsing Utilities//
+	// Graph Parsing Utilities//
 	///////////////////////////
 	public final int inDegreeIgnoringTheseNodes( ArrayList< Node > nodes_to_ignore ) {
 		int degree = 0;
 		for( Edge e : upstream_edges_ ) {
 			Node upstream_node = e.sourceNode();
-			if( ! nodes_to_ignore.contains( upstream_node ) ) {
+			if( !nodes_to_ignore.contains( upstream_node ) ) {
 				++degree;
 			}
 		}
 		return degree;
 	}
-	
+
 }
