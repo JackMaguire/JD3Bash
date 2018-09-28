@@ -20,8 +20,9 @@ public class Graph {
 		return nodes_.get( index );
 	}
 
-	public void addNode( Node n ) {
+	public Node addNode( Node n ) {
 		nodes_.add( n );
+		return n;
 	}
 
 	public ArrayList< Node > Nodes() {

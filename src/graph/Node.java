@@ -14,12 +14,23 @@ public class Node {
 	private ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
 	private String command_ = "rosetta_scripts.mpi.linuxgccrelease @ flags";
-	private String title_ = "[title]";
+	private String title_;
 	
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
 		y_ = y;
+		title_ = "[title " + id_ + "]";
+
+		upstream_edges_ = new ArrayList< Edge >();
+		downstream_edges_ = new ArrayList< Edge >();
+	}
+	
+	public Node( int id, String title ) {
+		id_ = id;
+		x_ = 0;
+		y_ = 0;
+		title_ = title;
 
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();

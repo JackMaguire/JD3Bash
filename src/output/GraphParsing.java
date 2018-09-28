@@ -2,6 +2,7 @@ package output;
 
 import graph.*;
 import utility.PBRWrapper;
+import utility.Pair;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -14,7 +15,8 @@ import exceptions.InvalidGraphException;
 
 public class GraphParsing {
 
-	public static String parseGraph( Graph g ) throws InvalidGraphException {
+	//First string is the "run" script, second string is the "setup" script
+	public static Pair<String, String> parseGraph( Graph g ) throws InvalidGraphException {
 		if( cycleExists(g) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
@@ -22,13 +24,16 @@ public class GraphParsing {
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		
+		addGlobalIntroToScript( run_script );
+		addGlobalIntroToScript( setup_script );
+		
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			Node n = nodes_in_order.get( stage - 1 );//We are 1-indexing the stages
 			createInstructionsForNode( n, stage, setup_script, run_script );
 		}
-		
-		return script;
+
+		return new Pair<String, String>( run_script.value, setup_script.value );
 	}
 	
 	public static ArrayList< Node > determineOrderOfNodes( Graph g ) {
@@ -84,7 +89,20 @@ public class GraphParsing {
 	}
 	
 	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script, PBRWrapper< String > setup_script ){
-		setup_script.value += "mkdir stage" + stage + "_" + n.title() ;
+		addStageIntroToScript( stage, run_script );
+		addStageIntroToScript( stage, setup_script );
+		setup_script.value += "mkdir stage" + stage + "_" + n.title() + "\n";
+	}
+	
+	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {
+		script.value += "# Script was created using JD3BASH\n";
+		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n";
+	}
+	
+	private static void addStageIntroToScript( int stage, PBRWrapper< String > script ) {
+		script.value += "\n###########\n";
+		script.value += "# STAGE " + stage + " #\n";
+		script.value += "###########\n\n";
 	}
 	
 }
