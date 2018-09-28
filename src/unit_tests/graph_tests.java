@@ -9,8 +9,10 @@ public class graph_tests {
 		boolean success = true;
 
 		if( !test_SimpleGeometry() ) {
-			System.err.println( "test_SimpleGeometry() failed" );
+			System.err.println( "\ttest_SimpleGeometry() failed" );
 			success = false;
+		} else {
+			System.out.println( "\ttest_SimpleGeometry() passed" );
 		}
 
 		return success;
@@ -64,6 +66,7 @@ public class graph_tests {
 			}
 
 			if( !success ) {
+				//Don't do future tests if even these simple ones fail.
 				return false;
 			}
 		}
