@@ -1,6 +1,7 @@
 package output;
 
 import graph.*;
+import info.VersionInfo;
 import utility.PBRWrapper;
 import utility.Pair;
 
@@ -20,7 +21,7 @@ public class GraphParsing {
 		if( cycleExists(g) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
-		String script = "";
+
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		
@@ -96,6 +97,7 @@ public class GraphParsing {
 	
 	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {
 		script.value += "# Script was created using JD3BASH\n";
+		script.value += "# Version number: " + VersionInfo.current_version + "\n";
 		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n";
 	}
 	
