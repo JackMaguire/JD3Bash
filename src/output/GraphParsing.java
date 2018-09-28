@@ -16,9 +16,9 @@ public class GraphParsing {
 		ArrayList< Node > assigned_nodes_in_order = new ArrayList< Node >();
 		
 		for( Node n : g.Nodes() ) {
-			assigned_nodes_in_order.add( n );
+			unassigned_nodes.add( n );
 		}
-		
+
 		while( true ) {
 			//Add nodes that do not depend on any unassigned node
 			//Work backwards so that we can easily delete while we work

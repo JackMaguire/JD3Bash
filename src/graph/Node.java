@@ -105,7 +105,6 @@ public class Node {
 		int degree = 0;
 		for( Edge e : upstream_edges_ ) {
 			Node upstream_node = e.sourceNode();
-			//System.err.println( id_ + " " + upstream_node.id_ );
 			if( ! nodes_to_ignore.contains( upstream_node ) ) {
 				++degree;
 			}
