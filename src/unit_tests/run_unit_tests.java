@@ -16,7 +16,7 @@ public class run_unit_tests {
 		} else {
 			System.out.println( "output_tests passed." );
 		}
-		
+
 		if( !utility_tests.run_all_output_tests() ) {
 			System.err.println( "utility_tests failed. Stopping unit tests" );
 			return;

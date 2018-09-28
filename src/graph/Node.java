@@ -15,7 +15,7 @@ public class Node {
 
 	private String command_ = "rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
-	
+
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -25,7 +25,7 @@ public class Node {
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
 	}
-	
+
 	public Node( int id, String title ) {
 		id_ = id;
 		x_ = 0;
@@ -81,10 +81,10 @@ public class Node {
 		return upstream_edges_.get( i );
 	}
 
-	public final ArrayList< Edge > upstreamEdges(){
+	public final ArrayList< Edge > upstreamEdges() {
 		return upstream_edges_;
 	}
-	
+
 	public final void addDownstreamEdge( Edge e ) {
 		downstream_edges_.add( e );
 	}
@@ -102,10 +102,10 @@ public class Node {
 		return downstream_edges_.get( i );
 	}
 
-	public final ArrayList< Edge > downstreamEdges(){
+	public final ArrayList< Edge > downstreamEdges() {
 		return downstream_edges_;
 	}
-	
+
 	public final String getCommand() {
 		return command_;
 	}
@@ -117,7 +117,7 @@ public class Node {
 	public final void setCommand( String setting ) {
 		command_ = setting;
 	}
-	
+
 	public final String getTitle() {
 		return title_;
 	}

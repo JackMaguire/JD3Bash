@@ -66,12 +66,12 @@ public class graph_tests {
 			}
 
 			if( !success ) {
-				//Don't do future tests if even these simple ones fail.
+				// Don't do future tests if even these simple ones fail.
 				return false;
 			}
 		}
 
 		return success;
 	}// test_SimpleGeometry
-	
+
 }

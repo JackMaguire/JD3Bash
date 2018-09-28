@@ -16,27 +16,27 @@ import exceptions.InvalidGraphException;
 
 public class GraphParsing {
 
-	//First string is the "run" script, second string is the "setup" script
-	public static Pair<String, String> parseGraph( Graph g ) throws InvalidGraphException {
-		if( cycleExists(g) ) {
+	// First string is the "run" script, second string is the "setup" script
+	public static Pair< String, String > parseGraph( Graph g ) throws InvalidGraphException {
+		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
-		
+
 		addGlobalIntroToScript( run_script );
 		addGlobalIntroToScript( setup_script );
-		
+
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
-			Node n = nodes_in_order.get( stage - 1 );//We are 1-indexing the stages
+			Node n = nodes_in_order.get( stage - 1 );// We are 1-indexing the stages
 			createInstructionsForNode( n, stage, run_script, setup_script );
 		}
 
-		return new Pair<String, String>( run_script.value, setup_script.value );
+		return new Pair< String, String >( run_script.value, setup_script.value );
 	}
-	
+
 	public static ArrayList< Node > determineOrderOfNodes( Graph g ) {
 		ArrayList< Node > unassigned_nodes = new ArrayList< Node >();
 		ArrayList< Node > assigned_nodes_in_order = new ArrayList< Node >();
@@ -65,61 +65,64 @@ public class GraphParsing {
 	}
 
 	public static boolean cycleExists( Graph g ) {
-		//Recursion
+		// Recursion
 		HashSet< Node > nodes_already_visited = new HashSet< Node >();
 		for( Node n : g.Nodes() ) {
-			if( cycleExists(n, nodes_already_visited) ) {
+			if( cycleExists( n, nodes_already_visited ) ) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	private static boolean cycleExists( Node starting_node, HashSet< Node > nodes_already_visited ) {
 		if( nodes_already_visited.contains( starting_node ) ) {
 			return true;
 		}
 		nodes_already_visited.add( starting_node );
 		for( Edge e : starting_node.downstreamEdges() ) {
-			if( cycleExists(e.destinationNode(), nodes_already_visited) ) {
+			if( cycleExists( e.destinationNode(), nodes_already_visited ) ) {
 				return true;
 			}
 		}
 		nodes_already_visited.remove( starting_node );
 		return false;
 	}
-	
-	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script, PBRWrapper< String > setup_script ){
+
+	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script,
+			PBRWrapper< String > setup_script ) {
 		addStageIntroToScript( stage, run_script );
 		addStageIntroToScript( stage, setup_script );
 
 		final String dirname = "stage" + stage + "_" + n.title();
 
-		//Setup
+		// Setup
 		setup_script.value += "mkdir " + dirname + "\n";
 		if( n.numUpstreamEdges() > 0 ) {
 			setup_script.value += "echo '' > " + dirname + "/input_files";
 		}
-		
-		//Run
+
+		// Run
 		run_script.value += "cd " + dirname + "\n";
 		run_script.value += n.command() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges() ) {
 				final String path_to_next_stage_directory = "TO/DO";
-				final String sort_column = de.columnNameToSortBy();	
+				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
 				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
-				run_script.value += "# This awk command prints the data for the column with header " + sort_column + " along with the title for each result\n";
-				run_script.value += "awk -v c1=\"" + sort_column + "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
+				run_script.value += "# This awk command prints the data for the column with header " + sort_column
+						+ " along with the title for each result\n";
+				run_script.value += "awk -v c1=\"" + sort_column
+						+ "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
 
 				if( de.positiveScoresAreBetter() ) {
 					run_script.value += "sort -nrk1 temp > temp2\n";
 				} else {
 					run_script.value += "sort -nk1 temp > temp2\n";
 				}
-				
+
 				run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
 				if( de.usePercentageInsteadOfCount() ) {
 					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer() + "\"\n";
@@ -131,21 +134,21 @@ public class GraphParsing {
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
 				run_script.value += "echo temp3 >> " + path_to_next_stage_directory + "/input_files\n";
 			}
-			
+
 			run_script.value += "cd ..\n";
 		}
 	}
-	
+
 	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {
 		script.value += "# Script was created using JD3BASH\n";
 		script.value += "# Version number: " + VersionInfo.current_version + "\n";
 		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n";
 	}
-	
+
 	private static void addStageIntroToScript( int stage, PBRWrapper< String > script ) {
 		script.value += "\n###########\n";
 		script.value += "# STAGE " + stage + " #\n";
 		script.value += "###########\n\n";
 	}
-	
+
 }

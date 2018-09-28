@@ -1,10 +1,15 @@
 package utility;
+
 //Wrapper that allows you to pass by reference
-public class PBRWrapper<T> {
+public class PBRWrapper< T > {
 	public T value;
-	
-	public PBRWrapper(){}
-	public PBRWrapper( T setting ){ value = setting; }
+
+	public PBRWrapper() {
+	}
+
+	public PBRWrapper( T setting ) {
+		value = setting;
+	}
 }
 /* Intended usage:
  * 

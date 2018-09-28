@@ -11,5 +11,4 @@ public class InvalidGraphException extends Exception {
 		super( string );
 	}
 
-	
 }
