@@ -2,6 +2,11 @@ package output;
 
 import graph.*;
 import java.util.ArrayList;
+import java.util.HashSet;
+
+/*  This can be as slow as we want it to be.
+ *  Let's focus more on clarity and correctness than speed here.
+ */
 
 public class GraphParsing {
 
@@ -38,4 +43,29 @@ public class GraphParsing {
 		return assigned_nodes_in_order;
 	}
 
+	public static boolean cycleExists( Graph g ) {
+		//Recursion
+		HashSet< Node > nodes_already_visited = new HashSet< Node >();
+		for( Node n : g.Nodes() ) {
+			if( cycleExists(n, nodes_already_visited) ) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private static boolean cycleExists( Node starting_node, HashSet< Node > nodes_already_visited ) {
+		if( nodes_already_visited.contains( starting_node ) ) {
+			return true;
+		}
+		nodes_already_visited.add( starting_node );
+		for( Edge e : starting_node.downstreamEdges() ) {
+			if( cycleExists(e.destinationNode(), nodes_already_visited) ) {
+				return true;
+			}
+		}
+		nodes_already_visited.remove( starting_node );
+		return false;
+	}
+	
 }

@@ -69,6 +69,10 @@ public class Node {
 		return upstream_edges_.get( i );
 	}
 
+	public final ArrayList< Edge > upstreamEdges(){
+		return upstream_edges_;
+	}
+	
 	public final void addDownstreamEdge( Edge e ) {
 		downstream_edges_.add( e );
 	}
@@ -86,6 +90,10 @@ public class Node {
 		return downstream_edges_.get( i );
 	}
 
+	public final ArrayList< Edge > downstreamEdges(){
+		return downstream_edges_;
+	}
+	
 	public final String getCommand() {
 		return command_;
 	}
