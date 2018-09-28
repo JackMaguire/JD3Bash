@@ -92,7 +92,44 @@ public class GraphParsing {
 	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script, PBRWrapper< String > setup_script ){
 		addStageIntroToScript( stage, run_script );
 		addStageIntroToScript( stage, setup_script );
-		setup_script.value += "mkdir stage" + stage + "_" + n.title() + "\n";
+
+		final String dirname = "stage" + stage + "_" + n.title();
+
+		//Setup
+		setup_script.value += "mkdir " + dirname + "\n";
+		if( n.numUpstreamEdges() > 0 ) {
+			setup_script.value += "echo '' > " + dirname + "/input_files";
+		}
+		
+		//Run
+		run_script.value += n.command() + "\n";
+		if( n.numDownstreamEdges() > 0 ) {
+			run_script.value += "grep -v 'SEQUENCE:' " + dirname + "/score.sc > no_first_line.score.sc\n";
+			for( Edge de : n.downstreamEdges() ) {
+				final String path_to_next_stage_directory = "TO/DO";
+				final String sort_column = de.columnNameToSortBy();	
+				run_script.value += "\n#####\n";
+				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
+				run_script.value += "awk -v c1=\"" + sort_column + "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp";
+
+				if( de.positiveScoresAreBetter() ) {
+					run_script.value += "sort -nrk1 temp > temp2\n";
+				} else {
+					run_script.value += "sort -nk1 temp > temp2\n";
+				}
+				
+				run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
+				if( de.usePercentageInsteadOfCount() ) {
+					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer() + "\"\n";
+					run_script.value += "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
+				} else {
+					run_script.value += "nresults=\"" + de.numResultsToTransfer() + "\"\n";
+				}
+				run_script.value += "# Extract structures that will survive until the next stage\n";
+				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
+				run_script.value += "echo temp3 >> " + path_to_next_stage_directory + "/input_files\n";
+			}
+		}
 	}
 	
 	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {

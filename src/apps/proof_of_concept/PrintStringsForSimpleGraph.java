@@ -13,8 +13,11 @@ public class PrintStringsForSimpleGraph {
 		Node n1 = simple_graph.addNode( new Node(1,"HBNet") );
 		Node n2 = simple_graph.addNode( new Node(2,"Design") );
 		
-		simple_graph.addEdge( n0, n1 );
-		simple_graph.addEdge( n1, n2 );
+		Edge e1 = simple_graph.addEdge( n0, n1 );
+		Edge e2 = simple_graph.addEdge( n1, n2 );
+		
+		e1.setColumnNameToSortBy( "interchain_cen" );
+		e2.setColumnNameToSortBy( "total_score" );
 		
 		Pair<String, String> scripts = null;
 		try {
