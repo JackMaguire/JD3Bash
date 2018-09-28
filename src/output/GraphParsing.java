@@ -1,8 +1,11 @@
 package output;
 
 import graph.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
+
+import exceptions.InvalidGraphException;
 
 /*  This can be as slow as we want it to be.
  *  Let's focus more on clarity and correctness than speed here.
@@ -10,7 +13,10 @@ import java.util.HashSet;
 
 public class GraphParsing {
 
-	public static String parseGraph( Graph g ) {
+	public static String parseGraph( Graph g ) throws InvalidGraphException {
+		if( cycleExists(g) ) {
+			throw new InvalidGraphException( "" );
+		}
 		String script = "";
 
 		return script;
