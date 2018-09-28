@@ -28,73 +28,73 @@ public class Node {
 	//Getters and Setters//
 	///////////////////////
 	
-	public int id() {
+	public final int id() {
 		return id_;
 	}
 	
-	public void setId( int id ) {
+	public final void setId( int id ) {
 		id_ = id;
 	}
 	
-	public int x() {
+	public final int x() {
 		return x_;
 	}
 	
-	public void setX( int x ) {
+	public final void setX( int x ) {
 		x_ = x;
 	}
 	
-	public int y() {
+	public final int y() {
 		return y_;
 	}
 	
-	public void setY( int y ) {
+	public final void setY( int y ) {
 		y_ = y;
 	}
 	
-	public void addUpstreamEdge( Edge e ) {
+	public final void addUpstreamEdge( Edge e ) {
 		upstream_edges_.add( e );
 	}
 	
-	public void removeUpstreamEdge( Edge e ) {
+	public final void removeUpstreamEdge( Edge e ) {
 		upstream_edges_.remove( e );
 	}
 	
-	public int numUpstreamEdges() {
+	public final int numUpstreamEdges() {
 		return upstream_edges_.size();
 	}
 	
-	public Edge getUpstreamEdge( int i ) {
+	public final Edge getUpstreamEdge( int i ) {
 		//ArrayList does error handling so we don't have to
 		return upstream_edges_.get( i );
 	}
 	
-	public void addDownstreamEdge( Edge e ) {
+	public final void addDownstreamEdge( Edge e ) {
 		downstream_edges_.add( e );
 	}
 	
-	public void removeDownstreamEdge( Edge e ) {
+	public final void removeDownstreamEdge( Edge e ) {
 		downstream_edges_.remove( e );
 	}
 	
-	public int numDownstreamEdges() {
+	public final int numDownstreamEdges() {
 		return downstream_edges_.size();
 	}
 	
-	public Edge getDownstreamEdge( int i ) {
+	public final Edge getDownstreamEdge( int i ) {
 		//ArrayList does error handling so we don't have to
 		return downstream_edges_.get( i );
 	}
 	
-	public String getCommand() {
+	public final String getCommand() {
 		return command_;
 	}
 	
-	public String command() {
+	public final String command() {
 		return command_;
 	}
 	
-	public void setCommand( String setting ) {
+	public final void setCommand( String setting ) {
 		command_ = setting;
 	}
 	
