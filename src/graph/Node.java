@@ -1,5 +1,6 @@
 package graph;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,10 +11,11 @@ public class Node {
 
 	private int id_;
 
-	// GUI position
+	// GUI
 	private int x_;
 	private int y_;
-
+	private Color color_ = Color.black;
+	
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
@@ -74,6 +76,18 @@ public class Node {
 		return y_;
 	}
 
+	public final Color color() {
+		return color_;
+	}
+	
+	public final Color getColor() {
+		return color_;
+	}
+	
+	public final void setColor( Color setting ) {
+		color_ = setting;
+	}
+	
 	public final void setY( int y ) {
 		y_ = y;
 	}
