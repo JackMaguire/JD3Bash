@@ -199,6 +199,8 @@ public class Node {
 		if( upstream_edges_.size() > 0 ) {
 			list.add( "-l input_files" );
 			list.add( "-in:file:srlz 1" );
+		} else {
+			list.add( "# Don't forget to add input file flags (-s, -l, etc)" );
 		}
 		
 		if( downstream_edges_.size() > 0 ) {
