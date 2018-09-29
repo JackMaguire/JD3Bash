@@ -120,7 +120,7 @@ public class GraphParsing {
 			setup_script.value += "echo '' > " + dirname + "/input_files\n";
 		}
 		
-		setup_script.value += "echo '' > " + dirname + "/flags\n";
+		//setup_script.value += "echo '' > " + dirname + "/flags\n";
 		for( String flag : n.getRosettaFlags_const() ) {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}

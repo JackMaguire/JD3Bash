@@ -19,7 +19,8 @@ public class Node {
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
-
+	private String xml_script_ = "script.xml";
+	
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
 	// stage_is_valid_ is meant to prevent other methods from calling getStage() and
@@ -141,6 +142,14 @@ public class Node {
 
 	public final void setTitle( String setting ) {
 		title_ = setting;
+	}
+	
+	public final String getXMLScript() {
+		return xml_script_;
+	}
+
+	public final void setXMLScript( String setting ) {
+		xml_script_ = setting;
 	}
 
 	public final int getStage() throws UndefinedValueException {
