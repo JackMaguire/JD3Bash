@@ -1,6 +1,8 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import exceptions.UndefinedValueException;
 
@@ -12,8 +14,8 @@ public class Node {
 	private int x_;
 	private int y_;
 
-	private ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
-	private ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
+	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
+	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
@@ -25,7 +27,7 @@ public class Node {
 	private int stage_ = 0;
 	private boolean stage_is_valid_ = false;
 
-	
+	private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
 	
 	public Node( int id, int x, int y ) {
 		id_ = id;
@@ -92,8 +94,8 @@ public class Node {
 		return upstream_edges_.get( i );
 	}
 
-	public final ArrayList< Edge > upstreamEdges() {
-		return upstream_edges_;
+	public final List< Edge > upstreamEdges() {
+		return Collections.unmodifiableList( upstream_edges_ );
 	}
 
 	public final void addDownstreamEdge( Edge e ) {
@@ -113,8 +115,8 @@ public class Node {
 		return downstream_edges_.get( i );
 	}
 
-	public final ArrayList< Edge > downstreamEdges() {
-		return downstream_edges_;
+	public final List< Edge > downstreamEdges() {
+		return Collections.unmodifiableList( downstream_edges_ );
 	}
 
 	public final String getCommand() {
@@ -160,6 +162,19 @@ public class Node {
 		stage_is_valid_ = setting;
 	}
 
+	public final void addRosettaFlag( String s ) {
+		rosetta_flags_.add( s );
+	}
+	
+	public final void setAllRosettaFlags( ArrayList< String > new_flags ) {
+		rosetta_flags_ = new_flags;
+	}
+	
+	public final List< String > getRosettaFlags_const(){
+		return Collections.unmodifiableList( rosetta_flags_ );
+		//return rosetta_flags_;
+	}
+	
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////
