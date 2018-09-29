@@ -14,7 +14,7 @@ public class Node {
 	// GUI
 	private int x_;
 	private int y_;
-	private Color color_ = Color.black;
+	private Color color_ = Color.DARK_GRAY;
 
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
@@ -46,6 +46,16 @@ public class Node {
 		id_ = id;
 		x_ = 0;
 		y_ = 0;
+		title_ = title;
+
+		upstream_edges_ = new ArrayList< Edge >();
+		downstream_edges_ = new ArrayList< Edge >();
+	}
+	
+	public Node( int id, String title, int x, int y  ) {
+		id_ = id;
+		x_ = x;
+		y_ = y;
 		title_ = title;
 
 		upstream_edges_ = new ArrayList< Edge >();

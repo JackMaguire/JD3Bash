@@ -1,8 +1,10 @@
 package views;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Stroke;
 
 import javax.swing.JPanel;
 
@@ -16,27 +18,40 @@ public class GraphView extends JPanel {
 	private static final long serialVersionUID = -208575025484602711L;
 
 	private final Graph graph_;
-	private int grid_size_ = 10;
+	private int grid_size_ = 25;
 	private int node_width_ = 3;
-	private boolean view_grid_ = false;
+	private boolean view_grid_ = true;
 
+	//COLORS:
+	private final Color background_color_ = Color.LIGHT_GRAY;
+	private final Color grid_color_ = Color.GRAY;
+	private final Color edge_color_ = Color.BLACK;
+	
+	//Edge Geometry:
+	private final int arrow_length_ = 5;
+	private final double arrow_length_squared_ = arrow_length_ * arrow_length_;
+	
 	public GraphView( Graph g ) {
 		graph_ = g;
 	}
 
 	public void paint( Graphics g ) {
 		Graphics2D g2D = (Graphics2D) g;
+		drawBackground( g2D );
+		drawEdge( g2D, graph_.getNode( 0 ), graph_.getNode( 1 ) );
+		//drawEdge( g2D, graph_.getNode( 1 ), graph_.getNode( 2 ) );
+		drawNodes( g2D );
 	}
 
 	public void drawBackground( Graphics2D g2D ) {
 		g2D.setColor( Color.LIGHT_GRAY );
 		g2D.fillRect( 0, 0, getWidth(), getHeight() );
 		if( view_grid_ ) {
-			g2D.setColor( Color.DARK_GRAY );
-			for( int x = 0; x < getWidth(); x += grid_size_ ) {
+			g2D.setColor( Color.GRAY );
+			for( int x = -1; x < getWidth(); x += grid_size_ ) {
 				g2D.drawLine( x, 0, x, getHeight() );
 			}
-			for( int y = 0; y < getHeight(); y += grid_size_ ) {
+			for( int y = -1; y < getHeight(); y += grid_size_ ) {
 				g2D.drawLine( 0, y, getWidth(), y );
 			}
 		}
@@ -45,10 +60,62 @@ public class GraphView extends JPanel {
 	public void drawNodes( Graphics2D g2D ) {
 		for( Node n : graph_.allNodes_const() ) {
 			g2D.setColor( n.color() );
-			int x = n.x() * grid_size_;
-			int y = n.y() * grid_size_;
-			g2D.fillOval( x, y, node_width_, node_width_ );
+			int x = n.x() * grid_size_ + (grid_size_/2);
+			int y = n.y() * grid_size_ + (grid_size_/2);
+			int diameter = grid_size_ * node_width_;
+			g2D.fillOval( x, y, diameter, diameter );
 		}
 	}
 
+	public void drawEdge( Graphics2D g2D, Node n_from, Node n_to ) {
+		g2D.setStroke( new BasicStroke( 3 ) );
+		double Ix = n_from.x();
+		double Iy = n_from.y();
+		double Bx = (n_to.x() + Ix)/2;
+		double By = (n_to.y() + Iy)/2;
+		//double Wx = (n_to.x() + Ix)/2;
+		//ouble Wy = (n_to.y() + Iy)/2;
+		
+		System.out.println( n_from.x() + " " + Bx + " " + n_to.x() );
+		System.out.println( n_from.y() + " " + By + " " + n_to.y() );
+		
+		//double gamma_angle_radians = 2.5;
+		double gamma_angle_radians = 0.75;
+		
+		double IB_squared = Math.pow(Ix - Bx, 2) + Math.pow(Iy - By, 2);
+		double IB = Math.sqrt( IB_squared );
+		System.out.println( "IB: " + IB );
+		double IA = Math.sqrt( arrow_length_squared_ + IB_squared - 2.0 * arrow_length_ * IB * Math.cos( gamma_angle_radians ));
+		System.out.println( "IA: " + IA );
+
+		double phi_num = IA*IA + IB*IB - arrow_length_squared_;
+		double phi_denom = 2 * IA * IB;
+		double phi = Math.acos( phi_num / phi_denom );
+		
+		final double theta = Math.acos( ( Bx - Ix ) / IB );
+		
+		final double total_angle = theta + phi;
+		System.out.println( "theta: " + theta );
+		System.out.println( "phi: " + phi );
+		System.out.println( "total_angle: " + total_angle );
+		
+		double Ax = IA * Math.cos( total_angle );
+		double Ay = 2 * IA * Math.sin( total_angle );
+		
+		int x = (int)(Ax*grid_size_);
+		int y = (int)(Ay*grid_size_);
+		
+		int offset = (node_width_ - node_width_ / 2) * grid_size_;
+		
+		g2D.setColor( edge_color_ );
+		g2D.drawLine( n_from.x()*grid_size_ + offset, n_from.y()*grid_size_ + offset, n_to.x()*grid_size_ + offset, n_to.y()*grid_size_ + offset );
+		g2D.drawLine( (int) Bx*grid_size_ + offset, (int) By*grid_size_ + offset, x, y );
+		
+		//g2D.drawLine( x+5, y+5, x, y );
+		System.out.println( "Ix: " + Ix );
+		System.out.println( "Bx: " + Bx );
+		System.out.println( "(" + x + ", " + y + ")" );
+		System.out.println( "(" + Ax + ", " + Ay + ")" );
+	}
+	
 }
