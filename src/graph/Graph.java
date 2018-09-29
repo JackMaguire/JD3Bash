@@ -27,7 +27,7 @@ public class Graph {
 		return n;
 	}
 
-	public List< Node > Nodes() {
+	public List< Node > allNodes_const() {
 		return Collections.unmodifiableList( nodes_ );
 	}
 

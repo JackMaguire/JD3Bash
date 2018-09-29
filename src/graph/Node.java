@@ -94,7 +94,7 @@ public class Node {
 		return upstream_edges_.get( i );
 	}
 
-	public final List< Edge > upstreamEdges() {
+	public final List< Edge > upstreamEdges_const() {
 		return Collections.unmodifiableList( upstream_edges_ );
 	}
 
@@ -115,7 +115,7 @@ public class Node {
 		return downstream_edges_.get( i );
 	}
 
-	public final List< Edge > downstreamEdges() {
+	public final List< Edge > downstreamEdges_const() {
 		return Collections.unmodifiableList( downstream_edges_ );
 	}
 

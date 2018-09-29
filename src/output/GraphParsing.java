@@ -58,7 +58,7 @@ public class GraphParsing {
 		ArrayList< Node > unassigned_nodes = new ArrayList< Node >();
 		ArrayList< Node > assigned_nodes_in_order = new ArrayList< Node >();
 
-		for( Node n : g.Nodes() ) {
+		for( Node n : g.allNodes_const() ) {
 			unassigned_nodes.add( n );
 		}
 
@@ -84,7 +84,7 @@ public class GraphParsing {
 	public static boolean cycleExists( Graph g ) {
 		// Recursion
 		HashSet< Node > nodes_already_visited = new HashSet< Node >();
-		for( Node n : g.Nodes() ) {
+		for( Node n : g.allNodes_const() ) {
 			if( cycleExists( n, nodes_already_visited ) ) {
 				return true;
 			}
@@ -97,7 +97,7 @@ public class GraphParsing {
 			return true;
 		}
 		nodes_already_visited.add( starting_node );
-		for( Edge e : starting_node.downstreamEdges() ) {
+		for( Edge e : starting_node.downstreamEdges_const() ) {
 			if( cycleExists( e.destinationNode(), nodes_already_visited ) ) {
 				return true;
 			}
@@ -126,7 +126,7 @@ public class GraphParsing {
 		run_script.value += n.command() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
-			for( Edge de : n.downstreamEdges() ) {
+			for( Edge de : n.downstreamEdges_const() ) {
 				final String name_of_next_stage_directory = de.destinationNode().dirname();
 				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
