@@ -18,6 +18,10 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	private final Graph graph_;
 	private final HashMap< Node, Box > box_for_node_;
 
+	private boolean last_mouse_press_was_on_a_node_ = false;
+	private int last_mouse_press_x_ = 0;
+	private int last_mouse_press_y_ = 0;
+	
 	public GraphController( Graph g ) {
 		graph_ = g;
 		box_for_node_ = new HashMap< Node, Box >();
@@ -49,31 +53,42 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 	@Override
 	public void mouseClicked( MouseEvent e ) {
-		// TODO Auto-generated method stub
-		int x = e.getX();
-		int y = e.getY();
 
-		for( Node n : graph_.allNodes_const() ) {
-			if( box_for_node_.get( n ).pointIsInBox( x, y ) ) {
-				graph_.setSelectedNode( n );
-				GlobalData.top_panel.repaint();
-				return;
-			}
-		}
 
-		// Potentally Select A Node
+		
 	}
 
 	@Override
 	public void mousePressed( MouseEvent e ) {
 		// TODO Auto-generated method stub
+		last_mouse_press_x_ = e.getX();
+		last_mouse_press_y_ = e.getY();
 
+		// Potentially Select A Node
+		for( Node n : graph_.allNodes_const() ) {
+			if( box_for_node_.get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				graph_.setSelectedNode( n );
+				last_mouse_press_was_on_a_node_ = true;
+				GlobalData.top_panel.repaint();
+				return;
+			}
+		}
+		
+		last_mouse_press_was_on_a_node_ = false;
 	}
 
 	@Override
 	public void mouseReleased( MouseEvent e ) {
-		// TODO Auto-generated method stub
+		int x = e.getX();
+		int y = e.getY();
 
+		if( last_mouse_press_was_on_a_node_ ) {
+			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
+				//TODO pick up here!
+				GlobalData.top_panel.repaint();
+			}		
+		}
+		
 	}
 
 	@Override
