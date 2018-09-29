@@ -19,29 +19,29 @@ public class GraphView extends JPanel {
 	private int grid_size_ = 10;
 	private int node_width_ = 3;
 	private boolean view_grid_ = false;
-	
+
 	public GraphView( Graph g ) {
 		graph_ = g;
 	}
-	
+
 	public void paint( Graphics g ) {
 		Graphics2D g2D = (Graphics2D) g;
 	}
-	
+
 	public void drawBackground( Graphics2D g2D ) {
 		g2D.setColor( Color.LIGHT_GRAY );
 		g2D.fillRect( 0, 0, getWidth(), getHeight() );
 		if( view_grid_ ) {
 			g2D.setColor( Color.DARK_GRAY );
-			for( int x=0; x<getWidth(); x+=grid_size_ ) {
+			for( int x = 0; x < getWidth(); x += grid_size_ ) {
 				g2D.drawLine( x, 0, x, getHeight() );
 			}
-			for( int y=0; y<getHeight(); y+=grid_size_ ) {
+			for( int y = 0; y < getHeight(); y += grid_size_ ) {
 				g2D.drawLine( 0, y, getWidth(), y );
 			}
 		}
 	}
-	
+
 	public void drawNodes( Graphics2D g2D ) {
 		for( Node n : graph_.allNodes_const() ) {
 			g2D.setColor( n.color() );
@@ -50,5 +50,5 @@ public class GraphView extends JPanel {
 			g2D.fillOval( x, y, node_width_, node_width_ );
 		}
 	}
-	
+
 }
