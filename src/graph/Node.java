@@ -193,7 +193,7 @@ public class Node {
 		return "stage" + stage() + "_" + title_;
 	}
 
-	public final ArrayList< String > determineAutoFlags(){
+	public final ArrayList< String > determineAutoFlags() {
 		ArrayList< String > list = new ArrayList< String >();
 		
 		if( upstream_edges_.size() > 0 ) {
@@ -210,4 +210,11 @@ public class Node {
 		return list;
 	}
 	
+	public final static ArrayList< String > commonFlags() {
+		ArrayList< String > list = new ArrayList< String >();
+		list.add( "-linmem_ig 10 # save time and memory during packing" );
+		list.add( "-ignore_unrecognized_res true # false by default" );
+		list.add( "-ignore_waters false # true by default" );
+		return list;
+	}
 }
