@@ -4,8 +4,16 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import graph.Graph;
+
 public class GraphController implements MouseListener, MouseMotionListener {
 
+	private final Graph graph_;
+	
+	public GraphController( Graph g ) {
+		graph_ = g;
+	}
+	
 	@Override
 	public void mouseDragged( MouseEvent e ) {
 		// TODO Auto-generated method stub

@@ -10,6 +10,7 @@ import java.awt.geom.Line2D;
 
 import javax.swing.JPanel;
 
+import controllers.GraphController;
 import graph.*;
 
 public class GraphView extends JPanel {
@@ -20,6 +21,8 @@ public class GraphView extends JPanel {
 	private static final long serialVersionUID = -208575025484602711L;
 
 	private final Graph graph_;
+	private final GraphController controller_;
+	
 	private int grid_size_ = 10;
 	private int node_width_ = 3;
 	private boolean view_grid_ = true;
@@ -35,6 +38,9 @@ public class GraphView extends JPanel {
 
 	public GraphView( Graph g ) {
 		graph_ = g;
+		controller_ = new GraphController( graph_ );
+		this.addMouseListener( controller_ );
+		this.addMouseMotionListener( controller_ );
 	}
 
 	public void paint( Graphics g ) {
