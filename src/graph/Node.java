@@ -170,4 +170,8 @@ public class Node {
 		return degree;
 	}
 
+	public final String dirname() throws UndefinedValueException {
+		return "stage" + stage() + "_" + title_;
+	}
+	
 }

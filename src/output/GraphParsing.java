@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 
 import exceptions.InvalidGraphException;
+import exceptions.UndefinedValueException;
 
 /*  This can be as slow as we want it to be.
  *  Let's focus more on clarity and correctness than speed here.
@@ -17,6 +18,7 @@ import exceptions.InvalidGraphException;
 public class GraphParsing {
 
 	// First string is the "run" script, second string is the "setup" script
+	// This can return null if an error occurs!
 	public static Pair< String, String > parseGraph( Graph g ) throws InvalidGraphException {
 		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
@@ -29,11 +31,25 @@ public class GraphParsing {
 		addGlobalIntroToScript( setup_script );
 
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
+		//Assign stages to Nodes
+		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
+			nodes_in_order.get( stage - 1 ).setStage( stage );
+			nodes_in_order.get( stage - 1 ).setStageValidity( true );
+		}
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			Node n = nodes_in_order.get( stage - 1 );// We are 1-indexing the stages
-			createInstructionsForNode( n, stage, run_script, setup_script );
+			try {
+				createInstructionsForNode( n, run_script, setup_script );
+			}
+			catch( UndefinedValueException e ) {
+				System.err.println( "Node for stage " + stage + " of " + nodes_in_order.size() + " somehow did not get initialized" );
+				e.printStackTrace();
+				return null;
+			}
 		}
-
+		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
+			nodes_in_order.get( stage - 1 ).setStageValidity( false );
+		}
 		return new Pair< String, String >( run_script.value, setup_script.value );
 	}
 
@@ -89,12 +105,13 @@ public class GraphParsing {
 		return false;
 	}
 
-	private static void createInstructionsForNode( Node n, int stage, PBRWrapper< String > run_script,
-			PBRWrapper< String > setup_script ) {
-		addStageIntroToScript( stage, run_script );
-		addStageIntroToScript( stage, setup_script );
+	private static void createInstructionsForNode( Node n, PBRWrapper< String > run_script,
+			PBRWrapper< String > setup_script ) throws UndefinedValueException {
+		
+		addStageIntroToScript( n.stage(), run_script );
+		addStageIntroToScript( n.stage(), setup_script );
 
-		final String dirname = "stage" + stage + "_" + n.title();
+		final String dirname = "stage" + n.stage() + "_" + n.title();
 
 		// Setup
 		setup_script.value += "mkdir " + dirname + "\n";
