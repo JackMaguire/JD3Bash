@@ -35,7 +35,6 @@ public class GraphView extends JPanel {
 
 	// Edge Geometry:
 	private final double arrow_length_coeff_ = 1;
-	// private final double arrow_length_squared_ = arrow_length_ * arrow_length_;
 
 	public GraphView( Graph g ) {
 		graph_ = g;
@@ -108,7 +107,6 @@ public class GraphView extends JPanel {
 		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
 
 		final double theta = Math.atan2( source_y - By, source_x - Bx );
-		// System.out.println( theta );
 		AffineTransform at = AffineTransform.getRotateInstance( theta, line1.getX1(), line1.getY1() );
 
 		g2D.draw( at.createTransformedShape( line1 ) );
