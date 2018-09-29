@@ -24,6 +24,10 @@ public class PrintStringsForSimpleGraph {
 		e2.setPercentageOfResultsToTransfer( 0.25 );
 		e2.setUsePercentageInsteadOfCount( true );
 
+		for( Node n : simple_graph.allNodes_const() ) {
+			n.setAllRosettaFlags( n.determineAutoFlags() );
+		}
+		
 		Pair< String, String > scripts = null;
 		try {
 			scripts = GraphParsing.parseGraph( simple_graph );
