@@ -25,8 +25,8 @@ public class GraphView extends JPanel {
 	private boolean view_grid_ = true;
 
 	// COLORS:
-	private final Color background_color_ = Color.LIGHT_GRAY;
-	private final Color grid_color_ = Color.GRAY;
+	private final Color background_color_ = new Color( 220, 220, 220 );
+	private final Color grid_color_ = new Color( 180, 180, 180 );
 	private final Color edge_color_ = Color.BLACK;
 
 	// Edge Geometry:

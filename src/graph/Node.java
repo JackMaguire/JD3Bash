@@ -14,7 +14,7 @@ public class Node {
 	// GUI
 	private int x_;
 	private int y_;
-	private Color color_ = Color.DARK_GRAY;
+	private Color color_ = Color.gray;
 
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
