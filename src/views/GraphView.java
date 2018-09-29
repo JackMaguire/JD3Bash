@@ -83,9 +83,10 @@ public class GraphView extends JPanel {
 		final double Bx = grid_size_*(n_to.x() + n_from.x())/2 + offset;
 		final double By = grid_size_*(n_to.y() + n_from.y())/2 + offset;
 		final double arrow_length = grid_size_ * arrow_length_coeff_;
-		Line2D line1 = new Line2D.Double( Bx, By, Bx - arrow_length, By - arrow_length );
-		Line2D line2 = new Line2D.Double( Bx, By, Bx - arrow_length, By + arrow_length );
-		final double theta = Math.atan2( (grid_size_*n_from.x() + offset) - Bx , (grid_size_*n_from.y() + offset) - By);
+		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length, By - arrow_length );
+		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
+
+		final double theta = Math.atan2( (grid_size_*n_from.y() + offset) - By, (grid_size_*n_from.x() + offset) - Bx );
 		System.out.println( theta );
     AffineTransform at = 
         AffineTransform.getRotateInstance(
