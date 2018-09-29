@@ -31,7 +31,7 @@ public class GraphParsing {
 		addGlobalIntroToScript( setup_script );
 
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
-		//Assign stages to Nodes
+		// Assign stages to Nodes
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			nodes_in_order.get( stage - 1 ).setStage( stage );
 			nodes_in_order.get( stage - 1 ).setStageValidity( true );
@@ -42,7 +42,8 @@ public class GraphParsing {
 				createInstructionsForNode( n, run_script, setup_script );
 			}
 			catch( UndefinedValueException e ) {
-				System.err.println( "Node for stage " + stage + " of " + nodes_in_order.size() + " somehow did not get initialized" );
+				System.err
+						.println( "Node for stage " + stage + " of " + nodes_in_order.size() + " somehow did not get initialized" );
 				e.printStackTrace();
 				return null;
 			}
@@ -107,7 +108,7 @@ public class GraphParsing {
 
 	private static void createInstructionsForNode( Node n, PBRWrapper< String > run_script,
 			PBRWrapper< String > setup_script ) throws UndefinedValueException {
-		
+
 		addStageIntroToScript( n.stage(), run_script );
 		addStageIntroToScript( n.stage(), setup_script );
 

@@ -18,11 +18,13 @@ public class Node {
 	private String command_ = "rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
 
-	//The graph parser will assign a stage to this node, set stage_is_valid_ to true, run methods that call stage_, and set stage_is_valid_ to false
-	//stage_is_valid_ is meant to prevent other methods from calling getStage() and assuming it is the current stage when it is in fact unassigned
+	// The graph parser will assign a stage to this node, set stage_is_valid_ to
+	// true, run methods that call stage_, and set stage_is_valid_ to false
+	// stage_is_valid_ is meant to prevent other methods from calling getStage() and
+	// assuming it is the current stage when it is in fact unassigned
 	private int stage_ = 0;
 	private boolean stage_is_valid_ = false;
-	
+
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -140,22 +142,22 @@ public class Node {
 	public final int getStage() throws UndefinedValueException {
 		return stage();
 	}
-	
+
 	public final int stage() throws UndefinedValueException {
-		if( ! stage_is_valid_ ) {
+		if( !stage_is_valid_ ) {
 			throw new UndefinedValueException( "Node is prompted for stage_ which is in an undefined state" );
 		}
 		return stage_;
 	}
-	
+
 	public final void setStage( int stage ) {
 		stage_ = stage;
 	}
-	
+
 	public final void setStageValidity( boolean setting ) {
 		stage_is_valid_ = setting;
 	}
-	
+
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////
@@ -173,5 +175,5 @@ public class Node {
 	public final String dirname() throws UndefinedValueException {
 		return "stage" + stage() + "_" + title_;
 	}
-	
+
 }
