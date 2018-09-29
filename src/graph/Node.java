@@ -51,8 +51,8 @@ public class Node {
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
 	}
-	
-	public Node( int id, String title, int x, int y  ) {
+
+	public Node( int id, String title, int x, int y ) {
 		id_ = id;
 		x_ = x;
 		y_ = y;

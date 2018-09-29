@@ -9,7 +9,6 @@ import graph.Graph;
 import graph.Node;
 import views.GraphView;
 
-
 public class ViewSimpleGraph {
 
 	public static void main( String[] args ) {
@@ -19,7 +18,7 @@ public class ViewSimpleGraph {
 		Node n2 = simple_graph.addNode( new Node( 2, "Design", 30, 30 ) );
 
 		n1.setColor( Color.RED );
-		
+
 		Edge e1 = simple_graph.addEdge( n0, n1 );
 		Edge e2 = simple_graph.addEdge( n1, n2 );
 
@@ -39,8 +38,8 @@ public class ViewSimpleGraph {
 		F.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );
 		// F.setUndecorated( true );
-		F.add( new GraphView(simple_graph) );
+		F.add( new GraphView( simple_graph ) );
 		F.setVisible( true );
 	}
-	
+
 }

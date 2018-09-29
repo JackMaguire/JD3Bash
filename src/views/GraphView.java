@@ -24,15 +24,15 @@ public class GraphView extends JPanel {
 	private int node_width_ = 3;
 	private boolean view_grid_ = true;
 
-	//COLORS:
+	// COLORS:
 	private final Color background_color_ = Color.LIGHT_GRAY;
 	private final Color grid_color_ = Color.GRAY;
 	private final Color edge_color_ = Color.BLACK;
-	
-	//Edge Geometry:
+
+	// Edge Geometry:
 	private final double arrow_length_coeff_ = 1;
-	//private final double arrow_length_squared_ = arrow_length_ * arrow_length_;
-	
+	// private final double arrow_length_squared_ = arrow_length_ * arrow_length_;
+
 	public GraphView( Graph g ) {
 		graph_ = g;
 	}
@@ -50,10 +50,10 @@ public class GraphView extends JPanel {
 		g2D.fillRect( 0, 0, getWidth(), getHeight() );
 		if( view_grid_ ) {
 			g2D.setColor( grid_color_ );
-			for( int x = -1; x < getWidth(); x += 2*grid_size_ ) {
+			for( int x = -1; x < getWidth(); x += 2 * grid_size_ ) {
 				g2D.drawLine( x, 0, x, getHeight() );
 			}
-			for( int y = -1; y < getHeight(); y += 2*grid_size_ ) {
+			for( int y = -1; y < getHeight(); y += 2 * grid_size_ ) {
 				g2D.drawLine( 0, y, getWidth(), y );
 			}
 		}
@@ -62,38 +62,39 @@ public class GraphView extends JPanel {
 	public void drawNodes( Graphics2D g2D ) {
 		for( Node n : graph_.allNodes_const() ) {
 			g2D.setColor( n.color() );
-			int x = n.x() * grid_size_ + (grid_size_/2);
-			int y = n.y() * grid_size_ + (grid_size_/2);
+			int x = n.x() * grid_size_ + ( grid_size_ / 2 );
+			int y = n.y() * grid_size_ + ( grid_size_ / 2 );
 			int diameter = grid_size_ * node_width_;
 			g2D.fillOval( x, y, diameter, diameter );
 		}
 	}
-	
+
 	public void drawEdge( Graphics2D g2D, Node n_from, Node n_to ) {
 		g2D.setStroke( new BasicStroke( 3 ) );
 		g2D.setColor( edge_color_ );
-		
-		//Draw main line
-		int offset = (node_width_ - node_width_ / 2) * grid_size_;
-		g2D.drawLine( n_from.x()*grid_size_ + offset, n_from.y()*grid_size_ + offset, n_to.x()*grid_size_ + offset, n_to.y()*grid_size_ + offset );
-		//g2D.drawLine( (int) Bx*grid_size_ + offset, (int) By*grid_size_ + offset, x, y );
 
-		//Draw Arrow Heads
-		//B is halfway point between two nodes
-		final double Bx = grid_size_*(n_to.x() + n_from.x())/2 + offset;
-		final double By = grid_size_*(n_to.y() + n_from.y())/2 + offset;
+		// Draw main line
+		int offset = ( node_width_ - node_width_ / 2 ) * grid_size_;
+		g2D.drawLine( n_from.x() * grid_size_ + offset, n_from.y() * grid_size_ + offset, n_to.x() * grid_size_ + offset,
+				n_to.y() * grid_size_ + offset );
+		// g2D.drawLine( (int) Bx*grid_size_ + offset, (int) By*grid_size_ + offset, x,
+		// y );
+
+		// Draw Arrow Heads
+		// B is halfway point between two nodes
+		final double Bx = grid_size_ * ( n_to.x() + n_from.x() ) / 2 + offset;
+		final double By = grid_size_ * ( n_to.y() + n_from.y() ) / 2 + offset;
 		final double arrow_length = grid_size_ * arrow_length_coeff_;
 		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length, By - arrow_length );
 		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
 
-		final double theta = Math.atan2( (grid_size_*n_from.y() + offset) - By, (grid_size_*n_from.x() + offset) - Bx );
+		final double theta = Math.atan2( ( grid_size_ * n_from.y() + offset ) - By,
+				( grid_size_ * n_from.x() + offset ) - Bx );
 		System.out.println( theta );
-    AffineTransform at = 
-        AffineTransform.getRotateInstance(
-        		theta, line1.getX1(), line1.getY1() );
-		
-    g2D.draw(at.createTransformedShape(line1));
-    g2D.draw(at.createTransformedShape(line2));
+		AffineTransform at = AffineTransform.getRotateInstance( theta, line1.getX1(), line1.getY1() );
+
+		g2D.draw( at.createTransformedShape( line1 ) );
+		g2D.draw( at.createTransformedShape( line2 ) );
 	}
-	
+
 }
