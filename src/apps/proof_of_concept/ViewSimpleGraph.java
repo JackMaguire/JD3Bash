@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
+import views.GlobalData;
 import views.GraphView;
 
 public class ViewSimpleGraph {
@@ -38,7 +39,9 @@ public class ViewSimpleGraph {
 		F.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );
 		// F.setUndecorated( true );
-		F.add( new GraphView( simple_graph ) );
+		GraphView graph_view = new GraphView( simple_graph );
+		GlobalData.top_panel = graph_view;
+		F.add( graph_view );
 		F.setVisible( true );
 	}
 

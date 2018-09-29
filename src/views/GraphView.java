@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 
 import controllers.GraphController;
 import graph.*;
+import utility.Box;
 
 public class GraphView extends JPanel {
 
@@ -67,21 +68,22 @@ public class GraphView extends JPanel {
 
 	public void drawNodes( Graphics2D g2D ) {
 		for( Node n : graph_.allNodes_const() ) {
-			g2D.setColor( n.color() );
 			int x = n.x() * grid_size_ + ( grid_size_ / 2 );
 			int y = n.y() * grid_size_ + ( grid_size_ / 2 );
 			int diameter = grid_size_ * node_width_;
 			
 			if( n == graph_.selectedNode() ) {
 				g2D.setColor( Color.black );
-				int selection_width = grid_size_ / 4;
+				int selection_width = grid_size_ / 2;
 				int sx = x-selection_width;
 				int sy = y-selection_width;
 				int sdiameter = diameter + 2*selection_width;
 				g2D.fillOval( sx, sy, sdiameter, sdiameter );
 			}
-			
+
+			g2D.setColor( n.color() );
 			g2D.fillOval( x, y, diameter, diameter );
+			controller_.setBoxForNode( n, new Box( x, y, diameter, diameter ) );
 		}
 	}
 
