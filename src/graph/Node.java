@@ -193,4 +193,19 @@ public class Node {
 		return "stage" + stage() + "_" + title_;
 	}
 
+	public final ArrayList< String > determineAutoFlags(){
+		ArrayList< String > list = new ArrayList< String >();
+		
+		if( upstream_edges_.size() > 0 ) {
+			list.add( "-l input_files" );
+			list.add( "-in:file:srlz 1" );
+		}
+		
+		if( downstream_edges_.size() > 0 ) {
+			list.add( "-out:file:srlz 1" );
+		}
+		
+		return list;
+	}
+	
 }
