@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Stroke;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
 
@@ -41,6 +40,8 @@ public class GraphView extends JPanel {
 		controller_ = new GraphController( graph_ );
 		this.addMouseListener( controller_ );
 		this.addMouseMotionListener( controller_ );
+		this.addKeyListener( controller_ );
+		//this.requestFocus();
 	}
 
 	public void paint( Graphics g ) {

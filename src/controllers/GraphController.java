@@ -12,7 +12,6 @@ import java.util.Map;
 import graph.*;
 import utility.Box;
 import views.GlobalData;
-import views.GraphView;
 
 public class GraphController implements MouseListener, MouseMotionListener, KeyListener {
 
@@ -97,6 +96,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 	@Override
 	public void keyPressed( KeyEvent e ) {
+		System.out.println( e.getKeyCode() );
 		switch ( e.getKeyCode() ) {
 			case KeyEvent.VK_LEFT: {
 				Node sn = graph_.selectedNode();
