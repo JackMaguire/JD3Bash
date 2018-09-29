@@ -9,7 +9,7 @@ public class Graph {
 	private ArrayList< Node > nodes_;
 	private ArrayList< Edge > edges_;
 	private Node selected_node_;
-	
+
 	public Graph() {
 		nodes_ = new ArrayList< Node >();
 		edges_ = new ArrayList< Edge >();
@@ -50,7 +50,7 @@ public class Graph {
 	public Node selectedNode() {
 		return selected_node_;
 	}
-	
+
 	public void setSelectedNode( Node n ) {
 		selected_node_ = n;
 	}

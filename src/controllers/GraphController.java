@@ -16,34 +16,34 @@ public class GraphController implements MouseListener, MouseMotionListener {
 
 	private final Graph graph_;
 	private final HashMap< Node, Box > box_for_node_;
-	
+
 	public GraphController( Graph g ) {
 		graph_ = g;
 		box_for_node_ = new HashMap< Node, Box >();
 	}
-	
-	public HashMap< Node, utility.Box > boxForNode(){
+
+	public HashMap< Node, utility.Box > boxForNode() {
 		return box_for_node_;
 	}
-	
-	public Map< Node, utility.Box > boxForNode_const(){
+
+	public Map< Node, utility.Box > boxForNode_const() {
 		return Collections.unmodifiableMap( box_for_node_ );
 	}
-	
+
 	public void setBoxForNode( Node n, Box b ) {
 		box_for_node_.put( n, b );
 	}
-	
+
 	@Override
 	public void mouseDragged( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseMoved( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -51,7 +51,7 @@ public class GraphController implements MouseListener, MouseMotionListener {
 		// TODO Auto-generated method stub
 		int x = e.getX();
 		int y = e.getY();
-		
+
 		for( Node n : graph_.allNodes_const() ) {
 			if( box_for_node_.get( n ).pointIsInBox( x, y ) ) {
 				graph_.setSelectedNode( n );
@@ -59,32 +59,32 @@ public class GraphController implements MouseListener, MouseMotionListener {
 				return;
 			}
 		}
-		
-		//Potentally Select A Node
+
+		// Potentally Select A Node
 	}
 
 	@Override
 	public void mousePressed( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseReleased( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseEntered( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited( MouseEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
