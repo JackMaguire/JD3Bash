@@ -1,6 +1,8 @@
 package graph;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Graph {
 
@@ -25,8 +27,8 @@ public class Graph {
 		return n;
 	}
 
-	public ArrayList< Node > Nodes() {
-		return nodes_;
+	public List< Node > Nodes() {
+		return Collections.unmodifiableList( nodes_ );
 	}
 
 	public int getNumEdges() {
