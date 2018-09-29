@@ -15,14 +15,14 @@ public class Node {
 	private int x_;
 	private int y_;
 	private Color color_ = Color.black;
-	
+
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
 	private String xml_script_ = "script.xml";
-	
+
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
 	// stage_is_valid_ is meant to prevent other methods from calling getStage() and
@@ -31,7 +31,7 @@ public class Node {
 	private boolean stage_is_valid_ = false;
 
 	private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
-	
+
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -79,15 +79,15 @@ public class Node {
 	public final Color color() {
 		return color_;
 	}
-	
+
 	public final Color getColor() {
 		return color_;
 	}
-	
+
 	public final void setColor( Color setting ) {
 		color_ = setting;
 	}
-	
+
 	public final void setY( int y ) {
 		y_ = y;
 	}
@@ -157,7 +157,7 @@ public class Node {
 	public final void setTitle( String setting ) {
 		title_ = setting;
 	}
-	
+
 	public final String getXMLScript() {
 		return xml_script_;
 	}
@@ -188,16 +188,16 @@ public class Node {
 	public final void addRosettaFlag( String s ) {
 		rosetta_flags_.add( s );
 	}
-	
+
 	public final void setAllRosettaFlags( ArrayList< String > new_flags ) {
 		rosetta_flags_ = new_flags;
 	}
-	
-	public final List< String > getRosettaFlags_const(){
+
+	public final List< String > getRosettaFlags_const() {
 		return Collections.unmodifiableList( rosetta_flags_ );
-		//return rosetta_flags_;
+		// return rosetta_flags_;
 	}
-	
+
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////
@@ -218,21 +218,21 @@ public class Node {
 
 	public final ArrayList< String > determineAutoFlags() {
 		ArrayList< String > list = new ArrayList< String >();
-		
+
 		if( upstream_edges_.size() > 0 ) {
 			list.add( "-l input_files" );
 			list.add( "-in:file:srlz 1" );
 		} else {
 			list.add( "# Don't forget to add input file flags (-s, -l, etc)" );
 		}
-		
+
 		if( downstream_edges_.size() > 0 ) {
 			list.add( "-out:file:srlz 1" );
 		}
-		
+
 		return list;
 	}
-	
+
 	public final static ArrayList< String > commonFlags() {
 		ArrayList< String > list = new ArrayList< String >();
 		list.add( "-linmem_ig 10 # save time and memory during packing" );

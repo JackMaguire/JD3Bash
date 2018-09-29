@@ -25,7 +25,7 @@ public class NodeController implements KeyListener {
 			}
 			case KeyEvent.VK_RIGHT: {
 				int x = node_.x();
-				//TODO do we need to make sure this does not get too large?
+				// TODO do we need to make sure this does not get too large?
 				node_.setX( x + 1 );
 				break;
 			}

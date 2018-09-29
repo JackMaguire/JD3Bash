@@ -25,8 +25,8 @@ public class GraphParsing {
 		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
-		addGlobalVariablesToRunScript(run_script);
-		
+		addGlobalVariablesToRunScript( run_script );
+
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 
 		addGlobalIntroToScript( run_script );
@@ -109,24 +109,25 @@ public class GraphParsing {
 		return false;
 	}
 
-	private static void createSetupInstructionsForNode( Node n,
-			PBRWrapper< String > setup_script ) throws UndefinedValueException {
+	private static void createSetupInstructionsForNode( Node n, PBRWrapper< String > setup_script )
+			throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), setup_script );
 		final String dirname = n.dirname();
-		
+
 		setup_script.value += "mkdir " + dirname + "\n";
 		if( n.numUpstreamEdges() > 0 ) {
 			setup_script.value += "echo '' > " + dirname + "/input_files\n";
 		}
-		
-		//setup_script.value += "echo '' > " + dirname + "/flags\n";
+
+		// setup_script.value += "echo '' > " + dirname + "/flags\n";
 		for( String flag : n.getRosettaFlags_const() ) {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
 	}
-	
-	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script ) throws UndefinedValueException {
+
+	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script )
+			throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), run_script );
 		final String dirname = n.dirname();
@@ -182,5 +183,5 @@ public class GraphParsing {
 	private static void addGlobalVariablesToRunScript( PBRWrapper< String > script ) {
 		script.value += "nproc=TODO\n";
 	}
-	
+
 }

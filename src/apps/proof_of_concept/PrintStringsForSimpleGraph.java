@@ -27,7 +27,7 @@ public class PrintStringsForSimpleGraph {
 		for( Node n : simple_graph.allNodes_const() ) {
 			n.setAllRosettaFlags( n.determineAutoFlags() );
 		}
-		
+
 		Pair< String, String > scripts = null;
 		try {
 			scripts = GraphParsing.parseGraph( simple_graph );
