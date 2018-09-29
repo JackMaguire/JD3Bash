@@ -15,7 +15,7 @@ public class Node {
 	private ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
-	private String command_ = "rosetta_scripts.mpi.linuxgccrelease @ flags";
+	private String command_ = "mpirun -n $nproc rosetta_scripts.mpi.linuxgccrelease @ flags";
 	private String title_;
 
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
@@ -25,6 +25,8 @@ public class Node {
 	private int stage_ = 0;
 	private boolean stage_is_valid_ = false;
 
+	
+	
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;

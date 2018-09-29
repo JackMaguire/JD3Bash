@@ -121,7 +121,8 @@ public class GraphParsing {
 		}
 
 		// Run
-		run_script.value += "cd " + dirname + "\n";
+		addGlobalVariablesToRunScript(run_script);
+		run_script.value += "\ncd " + dirname + "\n";
 		run_script.value += n.command() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
@@ -169,4 +170,8 @@ public class GraphParsing {
 		script.value += "###########\n\n";
 	}
 
+	private static void addGlobalVariablesToRunScript( PBRWrapper< String > script ) {
+		script.value += "nproc=TODO\n";
+	}
+	
 }
