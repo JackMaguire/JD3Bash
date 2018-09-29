@@ -25,6 +25,8 @@ public class GraphParsing {
 		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
+		addGlobalVariablesToRunScript(run_script);
+		
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 
 		addGlobalIntroToScript( run_script );
@@ -39,7 +41,8 @@ public class GraphParsing {
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			Node n = nodes_in_order.get( stage - 1 );// We are 1-indexing the stages
 			try {
-				createInstructionsForNode( n, run_script, setup_script );
+				createSetupInstructionsForNode( n, setup_script );
+				createRunInstructionsForNode( n, run_script );
 			}
 			catch( UndefinedValueException e ) {
 				System.err
@@ -106,22 +109,23 @@ public class GraphParsing {
 		return false;
 	}
 
-	private static void createInstructionsForNode( Node n, PBRWrapper< String > run_script,
+	private static void createSetupInstructionsForNode( Node n,
 			PBRWrapper< String > setup_script ) throws UndefinedValueException {
 
-		addStageIntroToScript( n.stage(), run_script );
 		addStageIntroToScript( n.stage(), setup_script );
-
 		final String dirname = n.dirname();
-
-		// Setup
+		
 		setup_script.value += "mkdir " + dirname + "\n";
 		if( n.numUpstreamEdges() > 0 ) {
 			setup_script.value += "echo '' > " + dirname + "/input_files";
 		}
+	}
+	
+	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script ) throws UndefinedValueException {
 
-		// Run
-		addGlobalVariablesToRunScript(run_script);
+		addStageIntroToScript( n.stage(), run_script );
+		final String dirname = n.dirname();
+
 		run_script.value += "\ncd " + dirname + "\n";
 		run_script.value += n.command() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
