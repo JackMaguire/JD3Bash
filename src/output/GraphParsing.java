@@ -111,7 +111,7 @@ public class GraphParsing {
 		addStageIntroToScript( n.stage(), run_script );
 		addStageIntroToScript( n.stage(), setup_script );
 
-		final String dirname = "stage" + n.stage() + "_" + n.title();
+		final String dirname = n.dirname();
 
 		// Setup
 		setup_script.value += "mkdir " + dirname + "\n";
@@ -125,7 +125,7 @@ public class GraphParsing {
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges() ) {
-				final String path_to_next_stage_directory = "TO/DO";
+				final String name_of_next_stage_directory = de.destinationNode().dirname();
 				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
 				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
@@ -149,7 +149,7 @@ public class GraphParsing {
 				}
 				run_script.value += "# Extract structures that will survive until the next stage\n";
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
-				run_script.value += "echo temp3 >> " + path_to_next_stage_directory + "/input_files\n";
+				run_script.value += "echo temp3 >> ../" + name_of_next_stage_directory + "/input_files\n";
 			}
 
 			run_script.value += "cd ..\n";
