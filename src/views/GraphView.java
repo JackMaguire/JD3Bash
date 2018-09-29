@@ -74,11 +74,12 @@ public class GraphView extends JPanel {
 		g2D.setColor( edge_color_ );
 
 		// Draw main line
-		int offset = ( node_width_ - node_width_ / 2 ) * grid_size_;
-		g2D.drawLine( n_from.x() * grid_size_ + offset, n_from.y() * grid_size_ + offset, n_to.x() * grid_size_ + offset,
-				n_to.y() * grid_size_ + offset );
-		// g2D.drawLine( (int) Bx*grid_size_ + offset, (int) By*grid_size_ + offset, x,
-		// y );
+		final int offset = ( node_width_ - (node_width_ / 2) ) * grid_size_;
+		final int source_x = n_from.x() * grid_size_ + offset;
+		final int source_y = n_from.y() * grid_size_ + offset;
+		final int dest_x = n_to.x() * grid_size_ + offset;
+		final int dest_y = n_to.y() * grid_size_ + offset;
+		g2D.drawLine( source_x, source_y, dest_x, dest_y );
 
 		// Draw Arrow Heads
 		// B is halfway point between two nodes
@@ -88,8 +89,7 @@ public class GraphView extends JPanel {
 		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length, By - arrow_length );
 		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
 
-		final double theta = Math.atan2( ( grid_size_ * n_from.y() + offset ) - By,
-				( grid_size_ * n_from.x() + offset ) - Bx );
+		final double theta = Math.atan2( source_y - By, source_x - Bx );
 		System.out.println( theta );
 		AffineTransform at = AffineTransform.getRotateInstance( theta, line1.getX1(), line1.getY1() );
 
