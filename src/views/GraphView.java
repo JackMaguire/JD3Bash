@@ -71,6 +71,16 @@ public class GraphView extends JPanel {
 			int x = n.x() * grid_size_ + ( grid_size_ / 2 );
 			int y = n.y() * grid_size_ + ( grid_size_ / 2 );
 			int diameter = grid_size_ * node_width_;
+			
+			if( n == graph_.selectedNode() ) {
+				g2D.setColor( Color.black );
+				int selection_width = grid_size_ / 4;
+				int sx = x-selection_width;
+				int sy = y-selection_width;
+				int sdiameter = diameter + 2*selection_width;
+				g2D.fillOval( sx, sy, sdiameter, sdiameter );
+			}
+			
 			g2D.fillOval( x, y, diameter, diameter );
 		}
 	}
@@ -96,7 +106,7 @@ public class GraphView extends JPanel {
 		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
 
 		final double theta = Math.atan2( source_y - By, source_x - Bx );
-		System.out.println( theta );
+		//System.out.println( theta );
 		AffineTransform at = AffineTransform.getRotateInstance( theta, line1.getX1(), line1.getY1() );
 
 		g2D.draw( at.createTransformedShape( line1 ) );
