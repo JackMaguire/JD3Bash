@@ -12,11 +12,12 @@ import java.util.Map;
 import graph.*;
 import utility.Box;
 import views.GlobalData;
+import views.GraphView;
 
 public class GraphController implements MouseListener, MouseMotionListener, KeyListener {
 
 	private final Graph graph_;
-	private final HashMap< Node, Box > box_for_node_;
+	private final GraphView graph_view_;
 
 	private boolean last_mouse_press_was_on_a_node_ = false;
 	private int last_mouse_press_x_ = 0;
@@ -24,19 +25,14 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	
 	public GraphController( Graph g ) {
 		graph_ = g;
-		box_for_node_ = new HashMap< Node, Box >();
+		graph_view_ = new GraphView( g );
+		graph_view_.addMouseListener( this );
+		graph_view_.addMouseMotionListener( this );
+		graph_view_.addKeyListener( this );
 	}
-
-	public HashMap< Node, utility.Box > boxForNode() {
-		return box_for_node_;
-	}
-
-	public Map< Node, utility.Box > boxForNode_const() {
-		return Collections.unmodifiableMap( box_for_node_ );
-	}
-
-	public void setBoxForNode( Node n, Box b ) {
-		box_for_node_.put( n, b );
+	
+	public GraphView view() {
+		return graph_view_;
 	}
 
 	@Override
@@ -66,7 +62,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 		// Potentially Select A Node
 		for( Node n : graph_.allNodes_const() ) {
-			if( box_for_node_.get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+			if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 				graph_.setSelectedNode( n );
 				last_mouse_press_was_on_a_node_ = true;
 				GlobalData.top_panel.repaint();
@@ -85,6 +81,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		if( last_mouse_press_was_on_a_node_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
 				//TODO pick up here!
+				System.out.println( x + " " + last_mouse_press_x_ );
 				GlobalData.top_panel.repaint();
 			}		
 		}

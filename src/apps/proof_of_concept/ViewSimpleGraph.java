@@ -4,11 +4,11 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
+import controllers.GraphController;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
 import views.GlobalData;
-import views.GraphView;
 
 public class ViewSimpleGraph {
 
@@ -39,9 +39,10 @@ public class ViewSimpleGraph {
 		F.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );
 		// F.setUndecorated( true );
-		GraphView graph_view = new GraphView( simple_graph );
-		GlobalData.top_panel = graph_view;
-		F.add( graph_view );
+		//GraphView graph_view = new GraphView( simple_graph );
+		GraphController graph_controller = new GraphController( simple_graph );
+		GlobalData.top_panel = graph_controller.view();
+		F.add( graph_controller.view() );
 		F.setVisible( true );
 	}
 

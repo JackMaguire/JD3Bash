@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Line2D;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JPanel;
 
@@ -21,11 +24,11 @@ public class GraphView extends JPanel {
 	private static final long serialVersionUID = -208575025484602711L;
 
 	private final Graph graph_;
-	private final GraphController controller_;
 
 	private int grid_size_ = 10;
 	private int node_width_ = 3;
 	private boolean view_grid_ = true;
+	private final HashMap< Node, Box > box_for_node_;
 
 	// COLORS:
 	private final Color background_color_ = new Color( 220, 220, 220 );
@@ -37,10 +40,7 @@ public class GraphView extends JPanel {
 
 	public GraphView( Graph g ) {
 		graph_ = g;
-		controller_ = new GraphController( graph_ );
-		this.addMouseListener( controller_ );
-		this.addMouseMotionListener( controller_ );
-		this.addKeyListener( controller_ );
+		box_for_node_ = new HashMap< Node, Box >();
 		//this.requestFocus();
 	}
 
@@ -83,7 +83,7 @@ public class GraphView extends JPanel {
 
 			g2D.setColor( n.color() );
 			g2D.fillOval( x, y, diameter, diameter );
-			controller_.setBoxForNode( n, new Box( x, y, diameter, diameter ) );
+			setBoxForNode( n, new Box( x, y, diameter, diameter ) );
 		}
 	}
 
@@ -114,4 +114,17 @@ public class GraphView extends JPanel {
 		g2D.draw( at.createTransformedShape( line2 ) );
 	}
 
+	public HashMap< Node, utility.Box > boxForNode() {
+		return box_for_node_;
+	}
+
+	public Map< Node, utility.Box > boxForNode_const() {
+		return Collections.unmodifiableMap( box_for_node_ );
+	}
+
+	public void setBoxForNode( Node n, Box b ) {
+		box_for_node_.put( n, b );
+	}
+
+	
 }
