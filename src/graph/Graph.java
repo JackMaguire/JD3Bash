@@ -51,10 +51,16 @@ public class Graph {
 		// Make sure there is not already an edge
 		for( Edge de : source.downstreamEdges_const() ) {
 			if( de.destinationNode() == dest ) {
-				return de;
+				return null;
 			}
 		}
-
+		//Make sure there is no reverse Edge	
+		for( Edge de : dest.downstreamEdges_const() ) {
+			if( de.destinationNode() == source ) {
+				return null;
+			}
+		}
+		
 		Edge new_edge = new Edge( source, dest );
 		source.addDownstreamEdge( new_edge );
 		dest.addUpstreamEdge( new_edge );
