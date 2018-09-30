@@ -41,7 +41,7 @@ public class GraphView extends JPanel {
 	public GraphView( Graph g ) {
 		graph_ = g;
 		box_for_node_ = new HashMap< Node, Box >();
-		//this.requestFocus();
+		// this.requestFocus();
 	}
 
 	public void paint( Graphics g ) {
@@ -126,5 +126,4 @@ public class GraphView extends JPanel {
 		box_for_node_.put( n, b );
 	}
 
-	
 }

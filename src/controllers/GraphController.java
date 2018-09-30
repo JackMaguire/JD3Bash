@@ -22,7 +22,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	private boolean last_mouse_press_was_on_a_node_ = false;
 	private int last_mouse_press_x_ = 0;
 	private int last_mouse_press_y_ = 0;
-	
+
 	public GraphController( Graph g ) {
 		graph_ = g;
 		graph_view_ = new GraphView( g );
@@ -30,7 +30,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		graph_view_.addMouseMotionListener( this );
 		graph_view_.addKeyListener( this );
 	}
-	
+
 	public GraphView view() {
 		return graph_view_;
 	}
@@ -50,8 +50,6 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	@Override
 	public void mouseClicked( MouseEvent e ) {
 
-
-		
 	}
 
 	@Override
@@ -69,7 +67,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 				return;
 			}
 		}
-		
+
 		last_mouse_press_was_on_a_node_ = false;
 	}
 
@@ -80,12 +78,12 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 		if( last_mouse_press_was_on_a_node_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
-				//TODO pick up here!
+				// TODO pick up here!
 				System.out.println( x + " " + last_mouse_press_x_ );
 				GlobalData.top_panel.repaint();
-			}		
+			}
 		}
-		
+
 	}
 
 	@Override
@@ -103,7 +101,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	@Override
 	public void keyTyped( KeyEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -112,8 +110,9 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		switch ( e.getKeyCode() ) {
 			case KeyEvent.VK_LEFT: {
 				Node sn = graph_.selectedNode();
-				if( sn == null ) return;
-				
+				if( sn == null )
+					return;
+
 				int x = sn.x();
 				if( x > 0 ) {
 					sn.setX( x - 1 );
@@ -123,8 +122,9 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			}
 			case KeyEvent.VK_RIGHT: {
 				Node sn = graph_.selectedNode();
-				if( sn == null ) return;
-				
+				if( sn == null )
+					return;
+
 				int x = sn.x();
 				sn.setX( x + 1 );
 				GlobalData.top_panel.repaint();
@@ -136,7 +136,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	@Override
 	public void keyReleased( KeyEvent e ) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
