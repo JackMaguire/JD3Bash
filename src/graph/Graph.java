@@ -9,6 +9,7 @@ public class Graph {
 	private ArrayList< Node > nodes_;
 	private ArrayList< Edge > edges_;
 	private Node selected_node_;
+	private Edge selected_edge_;
 	private int next_id_ = 0;
 
 	private PreliminaryEdge ghost_edge_ = null;// represents edges that are in the middle of being drawn
@@ -76,6 +77,14 @@ public class Graph {
 		selected_node_ = n;
 	}
 
+	public Edge selectedEdge() {
+		return selected_edge_;
+	}
+
+	public void setSelectedEdge( Edge e ) {
+		selected_edge_ = e;
+	}
+	
 	public int getNextNodeID() {
 		return next_id_++;
 	}

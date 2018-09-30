@@ -35,7 +35,6 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 	@Override
 	public void mouseDragged( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		if( node_is_currently_being_dragged_ ) {
 			int x = e.getX();
 			int y = e.getY();
@@ -94,13 +93,22 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			for( Node n : graph_.allNodes_const() ) {
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
-					if( !e.isControlDown() ) {// if control is down, we are creating an edge
-						node_is_currently_being_dragged_ = true;
-					}
+					//if( !e.isControlDown() ) {// if control is down, we are creating an edge
+					node_is_currently_being_dragged_ = true;
+					//}
 					GlobalData.top_panel.repaint();
 					return;
 				}
 			}
+			
+			// Potentially Select An Edge
+			for( Edge edge : graph_.allEdges_const() ) {
+				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox(last_mouse_press_x_, last_mouse_press_y_ ) ) {
+					graph_.setSelectedEdge( edge );
+					GlobalData.top_panel.repaint();
+				}
+			}
+
 		}
 	}
 
@@ -126,7 +134,8 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 				if( n == graph_.selectedNode() )
 					continue;
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( x, y ) ) {
-					graph_.addEdge( graph_.selectedNode(), n );
+					Edge new_edge = graph_.addEdge( graph_.selectedNode(), n );
+					graph_.setSelectedEdge( new_edge );
 					graph_.setSelectedNode( n );
 					GlobalData.top_panel.repaint();
 					return;
