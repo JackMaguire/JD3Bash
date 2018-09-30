@@ -5,12 +5,8 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import graph.*;
-import utility.Box;
 import views.GlobalData;
 import views.GraphView;
 
@@ -46,6 +42,13 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			Node sn = graph_.selectedNode();
 			sn.setX( graph_view_.getClosestPointForPoint( x ) );
 			sn.setY( graph_view_.getClosestPointForPoint( y ) );
+			GlobalData.top_panel.repaint();
+			return;
+		}
+		
+		if ( edge_is_currently_being_created_ ) {
+			graph_.ghostEdge().x = e.getX();
+			graph_.ghostEdge().y = e.getY();
 			GlobalData.top_panel.repaint();
 			return;
 		}
@@ -117,6 +120,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			return;
 		} else if( edge_is_currently_being_created_ ) {
 			edge_is_currently_being_created_ = false;
+			graph_.setGhostEdge( null );
 			// Check to see if xy corresponds to a node
 			for( Node n : graph_.allNodes_const() ) {
 				if( n == graph_.selectedNode() )

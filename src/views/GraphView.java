@@ -12,7 +12,6 @@ import java.util.Map;
 
 import javax.swing.JPanel;
 
-import controllers.GraphController;
 import graph.*;
 import utility.Box;
 
@@ -34,6 +33,7 @@ public class GraphView extends JPanel {
 	private final Color background_color_ = new Color( 220, 220, 220 );
 	private final Color grid_color_ = new Color( 180, 180, 180 );
 	private final Color edge_color_ = Color.BLACK;
+	private final Color ghost_edge_color_ = new Color( 120, 120, 120 );
 
 	// Edge Geometry:
 	private final double arrow_length_coeff_ = 1;
@@ -50,6 +50,12 @@ public class GraphView extends JPanel {
 		for( Edge e : graph_.allEdges_const() ) {
 			drawEdge( g2D, e );
 		}
+		
+		PreliminaryEdge edge_being_drawn = graph_.ghostEdge();
+		if( edge_being_drawn != null ) {
+			drawGhostEdge( g2D, edge_being_drawn );
+		}
+			
 		drawNodes( g2D );
 	}
 
@@ -140,6 +146,18 @@ public class GraphView extends JPanel {
 
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
+	}
+	
+	public void drawGhostEdge( Graphics2D g2D, PreliminaryEdge ghost_edge ) {
+		g2D.setStroke( new BasicStroke( 3 ) );
+		g2D.setColor( ghost_edge_color_ );
+
+		// Draw main line
+		final Node n_from = ghost_edge.source_node;
+		final int offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size_;
+		final int source_x = n_from.x() * grid_size_ + offset;
+		final int source_y = n_from.y() * grid_size_ + offset;
+		g2D.drawLine( source_x, source_y, ghost_edge.x, ghost_edge.y );
 	}
 	
 	public HashMap< Node, utility.Box > boxForNode() {
