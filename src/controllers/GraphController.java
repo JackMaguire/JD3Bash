@@ -79,9 +79,15 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		if( last_mouse_press_was_on_a_node_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
 				// TODO pick up here!
-				System.out.println( x + " " + last_mouse_press_x_ );
+				//System.out.println( x + " " + last_mouse_press_x_ );
 				Node sn = graph_.selectedNode();
-				sn.setX( graph_view_.getClosestPointForPoint( x ) );
+				if( e.isShiftDown() ) {
+					sn.setX( graph_view_.getClosestGridPointForPoint( x ) );
+					sn.setY( graph_view_.getClosestGridPointForPoint( y ) );
+				} else {
+					sn.setX( graph_view_.getClosestPointForPoint( x ) );
+					sn.setY( graph_view_.getClosestPointForPoint( y ) );
+				}
 				GlobalData.top_panel.repaint();
 			}
 		}

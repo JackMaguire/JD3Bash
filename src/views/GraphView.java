@@ -93,7 +93,18 @@ public class GraphView extends JPanel {
 		return (int) Math.rint(new_point);
 	}
 	
-	
+	public int getClosestGridPointForPoint( int point ) {
+		final int offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size_;
+		final double new_point = (point - offset) / ((double) grid_size_);
+		int new_point_int = (int) Math.rint(new_point);
+		int diff_from_grid_size =  new_point_int % grid_size_;
+		if( diff_from_grid_size > grid_size_ / 2 ) {
+			new_point_int = new_point_int + grid_size_ - diff_from_grid_size;
+		} else {
+			new_point_int -= diff_from_grid_size;
+		}
+		return new_point_int;
+	}
 	
 	public void drawEdge( Graphics2D g2D, Node n_from, Node n_to ) {
 		g2D.setStroke( new BasicStroke( 3 ) );
