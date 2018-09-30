@@ -121,7 +121,7 @@ public class GraphView extends JPanel {
 		final Node n_to = e.destinationNode();
 
 		if( e == graph_.selectedEdge() ) {
-			g2D.setStroke( new BasicStroke( 3 ) );
+			g2D.setStroke( new BasicStroke( 4 ) );
 		} else {
 			g2D.setStroke( new BasicStroke( 2 ) );
 		}
@@ -148,7 +148,7 @@ public class GraphView extends JPanel {
 
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
-		box_for_edge_.put( e, new Box( (int) ( Bx - grid_size_ / 2), (int)( By - grid_size_ / 2 ), grid_size_, grid_size_ ) );
+		box_for_edge_.put( e, new Box( (int) ( Bx - grid_size_), (int)( By - grid_size_), grid_size_*2, grid_size_*2 ) );
 	}
 
 	public void drawGhostEdge( Graphics2D g2D, PreliminaryEdge ghost_edge ) {
