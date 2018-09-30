@@ -45,8 +45,8 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			GlobalData.top_panel.repaint();
 			return;
 		}
-		
-		if ( edge_is_currently_being_created_ ) {
+
+		if( edge_is_currently_being_created_ ) {
 			graph_.ghostEdge().x = e.getX();
 			graph_.ghostEdge().y = e.getY();
 			GlobalData.top_panel.repaint();

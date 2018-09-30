@@ -50,12 +50,12 @@ public class GraphView extends JPanel {
 		for( Edge e : graph_.allEdges_const() ) {
 			drawEdge( g2D, e );
 		}
-		
+
 		PreliminaryEdge edge_being_drawn = graph_.ghostEdge();
 		if( edge_being_drawn != null ) {
 			drawGhostEdge( g2D, edge_being_drawn );
 		}
-			
+
 		drawNodes( g2D );
 	}
 
@@ -121,7 +121,7 @@ public class GraphView extends JPanel {
 	}
 
 	public void drawEdge( Graphics2D g2D, Node n_from, int x_to, int y_to ) {
-		
+
 		g2D.setStroke( new BasicStroke( 3 ) );
 		g2D.setColor( edge_color_ );
 
@@ -147,7 +147,7 @@ public class GraphView extends JPanel {
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
 	}
-	
+
 	public void drawGhostEdge( Graphics2D g2D, PreliminaryEdge ghost_edge ) {
 		g2D.setStroke( new BasicStroke( 3 ) );
 		g2D.setColor( ghost_edge_color_ );
@@ -159,7 +159,7 @@ public class GraphView extends JPanel {
 		final int source_y = n_from.y() * grid_size_ + offset;
 		g2D.drawLine( source_x, source_y, ghost_edge.x, ghost_edge.y );
 	}
-	
+
 	public HashMap< Node, utility.Box > boxForNode() {
 		return box_for_node_;
 	}
