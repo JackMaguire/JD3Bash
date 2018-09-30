@@ -23,7 +23,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	private int last_mouse_press_x_ = 0;
 	private int last_mouse_press_y_ = 0;
 	private boolean node_is_currently_being_dragged_ = false;
-	
+
 	public GraphController( Graph g ) {
 		graph_ = g;
 		graph_view_ = new GraphView( g );
@@ -65,16 +65,16 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
 					last_mouse_press_was_on_a_node_ = true;
-					//TODO start creating edge!
+					// TODO start creating edge!
 					GlobalData.top_panel.repaint();
 					return;
 				}
 			}
-			
-			//create new node
+
+			// create new node
 			int x = graph_view_.getClosestPointForPoint( e.getX() );
 			int y = graph_view_.getClosestPointForPoint( e.getY() );
-			Node new_node = new Node( graph_.getNextNodeID(), x ,y );
+			Node new_node = new Node( graph_.getNextNodeID(), x, y );
 			graph_.addNode( new_node );
 			GlobalData.top_panel.repaint();
 			return;
@@ -106,7 +106,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		int x = e.getX();
 		int y = e.getY();
 
-		if( last_mouse_press_was_on_a_node_ ) {//replace with node_is_currently_being_dragged_?
+		if( last_mouse_press_was_on_a_node_ ) {// replace with node_is_currently_being_dragged_?
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
 				Node sn = graph_.selectedNode();
 				/*if( e.isShiftDown() ) {
