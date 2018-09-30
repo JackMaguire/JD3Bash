@@ -10,7 +10,9 @@ public class Graph {
 	private ArrayList< Edge > edges_;
 	private Node selected_node_;
 	private int next_id_ = 0;
-
+	
+	private PreliminaryEdge ghost_edge_ = null;//represents edges that are in the middle of being drawn
+	
 	public Graph() {
 		nodes_ = new ArrayList< Node >();
 		edges_ = new ArrayList< Edge >();
@@ -33,6 +35,10 @@ public class Graph {
 		return Collections.unmodifiableList( nodes_ );
 	}
 
+	public List< Edge > allEdges_const() {
+		return Collections.unmodifiableList( edges_ );
+	}
+	
 	public int getNumEdges() {
 		return edges_.size();
 	}
@@ -42,9 +48,17 @@ public class Graph {
 	}
 
 	public Edge addEdge( Node source, Node dest ) {
+		//Make sure there is not already an edge
+		for( Edge de : source.downstreamEdges_const() ) {
+			if( de.destinationNode() == dest ) {
+				return de;
+			}
+		}
+		
 		Edge new_edge = new Edge( source, dest );
 		source.addDownstreamEdge( new_edge );
 		dest.addUpstreamEdge( new_edge );
+		edges_.add( new_edge );
 		return new_edge;
 	}
 
@@ -58,5 +72,13 @@ public class Graph {
 
 	public int getNextNodeID() {
 		return next_id_++;
+	}
+	
+	public PreliminaryEdge ghostEdge() {
+		return ghost_edge_;
+	}
+	
+	public void setGhostEdge( PreliminaryEdge ge ) {
+		ghost_edge_ = ge;
 	}
 }

@@ -47,8 +47,9 @@ public class GraphView extends JPanel {
 	public void paint( Graphics g ) {
 		Graphics2D g2D = (Graphics2D) g;
 		drawBackground( g2D );
-		drawEdge( g2D, graph_.getNode( 0 ), graph_.getNode( 1 ) );
-		drawEdge( g2D, graph_.getNode( 1 ), graph_.getNode( 2 ) );
+		for( Edge e : graph_.allEdges_const() ) {
+			drawEdge( g2D, e );
+		}
 		drawNodes( g2D );
 	}
 
@@ -107,7 +108,14 @@ public class GraphView extends JPanel {
 		return new_point_int;
 	}
 
-	public void drawEdge( Graphics2D g2D, Node n_from, Node n_to ) {
+	public void drawEdge( Graphics2D g2D, Edge e ) {
+		final Node n_from = e.sourceNode();
+		final Node n_to = e.destinationNode();
+		drawEdge( g2D, n_from, n_to.x(), n_to.y() );
+	}
+
+	public void drawEdge( Graphics2D g2D, Node n_from, int x_to, int y_to ) {
+		
 		g2D.setStroke( new BasicStroke( 3 ) );
 		g2D.setColor( edge_color_ );
 
@@ -115,14 +123,14 @@ public class GraphView extends JPanel {
 		final int offset = ( node_width_ - ( node_width_ / 2 ) ) * grid_size_;
 		final int source_x = n_from.x() * grid_size_ + offset;
 		final int source_y = n_from.y() * grid_size_ + offset;
-		final int dest_x = n_to.x() * grid_size_ + offset;
-		final int dest_y = n_to.y() * grid_size_ + offset;
+		final int dest_x = x_to * grid_size_ + offset;
+		final int dest_y = y_to * grid_size_ + offset;
 		g2D.drawLine( source_x, source_y, dest_x, dest_y );
 
 		// Draw Arrow Heads
 		// B is halfway point between two nodes
-		final double Bx = grid_size_ * ( n_to.x() + n_from.x() ) / 2 + offset;
-		final double By = grid_size_ * ( n_to.y() + n_from.y() ) / 2 + offset;
+		final double Bx = grid_size_ * ( x_to + n_from.x() ) / 2 + offset;
+		final double By = grid_size_ * ( y_to + n_from.y() ) / 2 + offset;
 		final double arrow_length = grid_size_ * arrow_length_coeff_;
 		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length, By - arrow_length );
 		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
@@ -133,7 +141,7 @@ public class GraphView extends JPanel {
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
 	}
-
+	
 	public HashMap< Node, utility.Box > boxForNode() {
 		return box_for_node_;
 	}

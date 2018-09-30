@@ -81,6 +81,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
 					edge_is_currently_being_created_ = true;
+					graph_.setGhostEdge( new PreliminaryEdge( n, last_mouse_press_x_, last_mouse_press_y_ ) );
 					GlobalData.top_panel.repaint();
 					return;
 				}
@@ -104,8 +105,6 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	public void mouseReleased( MouseEvent e ) {
 		int x = e.getX();
 		int y = e.getY();
-
-		System.out.println( node_is_currently_being_dragged_ + " " + edge_is_currently_being_created_ );
 
 		if( node_is_currently_being_dragged_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
