@@ -19,10 +19,11 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	private final Graph graph_;
 	private final GraphView graph_view_;
 
-	private boolean last_mouse_press_was_on_a_node_ = false;
+	// private boolean last_mouse_press_was_on_a_node_ = false;
 	private int last_mouse_press_x_ = 0;
 	private int last_mouse_press_y_ = 0;
 	private boolean node_is_currently_being_dragged_ = false;
+	private boolean edge_is_currently_being_created_ = false;
 
 	public GraphController( Graph g ) {
 		graph_ = g;
@@ -59,18 +60,6 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 	@Override
 	public void mouseClicked( MouseEvent e ) {
 		if( e.isControlDown() ) {
-			last_mouse_press_x_ = e.getX();
-			last_mouse_press_y_ = e.getY();
-			for( Node n : graph_.allNodes_const() ) {
-				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
-					graph_.setSelectedNode( n );
-					last_mouse_press_was_on_a_node_ = true;
-					// TODO start creating edge!
-					GlobalData.top_panel.repaint();
-					return;
-				}
-			}
-
 			// create new node
 			int x = graph_view_.getClosestPointForPoint( e.getX() );
 			int y = graph_view_.getClosestPointForPoint( e.getY() );
@@ -83,22 +72,32 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 	@Override
 	public void mousePressed( MouseEvent e ) {
-		// TODO Auto-generated method stub
 		last_mouse_press_x_ = e.getX();
 		last_mouse_press_y_ = e.getY();
 
-		// Potentially Select A Node
-		for( Node n : graph_.allNodes_const() ) {
-			if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
-				graph_.setSelectedNode( n );
-				last_mouse_press_was_on_a_node_ = true;
-				node_is_currently_being_dragged_ = true;
-				GlobalData.top_panel.repaint();
-				return;
+		if( e.isControlDown() ) {
+			// potentially create an edge
+			for( Node n : graph_.allNodes_const() ) {
+				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+					graph_.setSelectedNode( n );
+					edge_is_currently_being_created_ = true;
+					GlobalData.top_panel.repaint();
+					return;
+				}
+			}
+		} else {
+			// Potentially Select A Node
+			for( Node n : graph_.allNodes_const() ) {
+				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+					graph_.setSelectedNode( n );
+					if( !e.isControlDown() ) {// if control is down, we are creating an edge
+						node_is_currently_being_dragged_ = true;
+					}
+					GlobalData.top_panel.repaint();
+					return;
+				}
 			}
 		}
-
-		last_mouse_press_was_on_a_node_ = false;
 	}
 
 	@Override
@@ -106,21 +105,31 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 		int x = e.getX();
 		int y = e.getY();
 
-		if( last_mouse_press_was_on_a_node_ ) {// replace with node_is_currently_being_dragged_?
+		System.out.println( node_is_currently_being_dragged_ + " " + edge_is_currently_being_created_ );
+
+		if( node_is_currently_being_dragged_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4 || Math.abs( y - last_mouse_press_y_ ) > 4 ) {
 				Node sn = graph_.selectedNode();
-				/*if( e.isShiftDown() ) {
-					sn.setX( graph_view_.getClosestGridPointForPoint( x ) );
-					sn.setY( graph_view_.getClosestGridPointForPoint( y ) );
-				} else {
-					sn.setX( graph_view_.getClosestPointForPoint( x ) );
-					sn.setY( graph_view_.getClosestPointForPoint( y ) );
-				}*/
 				sn.setX( graph_view_.getClosestPointForPoint( x ) );
 				sn.setY( graph_view_.getClosestPointForPoint( y ) );
 				GlobalData.top_panel.repaint();
 			}
 			node_is_currently_being_dragged_ = false;
+			return;
+		} else if( edge_is_currently_being_created_ ) {
+			edge_is_currently_being_created_ = false;
+			// Check to see if xy corresponds to a node
+			for( Node n : graph_.allNodes_const() ) {
+				if( n == graph_.selectedNode() )
+					continue;
+				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( x, y ) ) {
+					graph_.addEdge( graph_.selectedNode(), n );
+					graph_.setSelectedNode( n );
+					GlobalData.top_panel.repaint();
+					return;
+				}
+			}
+			GlobalData.top_panel.repaint();
 			return;
 		}
 
