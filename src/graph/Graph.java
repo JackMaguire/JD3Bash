@@ -9,7 +9,8 @@ public class Graph {
 	private ArrayList< Node > nodes_;
 	private ArrayList< Edge > edges_;
 	private Node selected_node_;
-
+	private int next_id_ = 0;
+	
 	public Graph() {
 		nodes_ = new ArrayList< Node >();
 		edges_ = new ArrayList< Edge >();
@@ -53,5 +54,9 @@ public class Graph {
 
 	public void setSelectedNode( Node n ) {
 		selected_node_ = n;
+	}
+	
+	public int getNextNodeID() {
+		return next_id_++;
 	}
 }
