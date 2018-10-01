@@ -55,13 +55,13 @@ public class Graph {
 				return null;
 			}
 		}
-		//Make sure there is no reverse Edge	
+		// Make sure there is no reverse Edge
 		for( Edge de : dest.downstreamEdges_const() ) {
 			if( de.destinationNode() == source ) {
 				return null;
 			}
 		}
-		
+
 		Edge new_edge = new Edge( source, dest );
 		source.addDownstreamEdge( new_edge );
 		dest.addUpstreamEdge( new_edge );
@@ -84,7 +84,7 @@ public class Graph {
 	public void setSelectedEdge( Edge e ) {
 		selected_edge_ = e;
 	}
-	
+
 	public int getNextNodeID() {
 		return next_id_++;
 	}

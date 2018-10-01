@@ -27,7 +27,7 @@ public class GraphView extends JPanel {
 	private int grid_size_ = 10;
 	private int node_width_ = 3;
 	private boolean view_grid_ = true;
-	
+
 	private final HashMap< Node, Box > box_for_node_;
 	private final HashMap< Edge, Box > box_for_edge_;
 
@@ -148,7 +148,8 @@ public class GraphView extends JPanel {
 
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
-		box_for_edge_.put( e, new Box( (int) ( Bx - grid_size_), (int)( By - grid_size_), grid_size_*2, grid_size_*2 ) );
+		box_for_edge_.put( e,
+				new Box( (int) ( Bx - grid_size_ ), (int) ( By - grid_size_ ), grid_size_ * 2, grid_size_ * 2 ) );
 	}
 
 	public void drawGhostEdge( Graphics2D g2D, PreliminaryEdge ghost_edge ) {
@@ -174,7 +175,7 @@ public class GraphView extends JPanel {
 	public void setBoxForNode( Node n, Box b ) {
 		box_for_node_.put( n, b );
 	}
-	
+
 	public HashMap< Edge, utility.Box > boxForEdge() {
 		return box_for_edge_;
 	}

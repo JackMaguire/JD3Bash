@@ -17,17 +17,17 @@ public class MainView extends JPanel {
 
 	private final Graph graph_;
 	private final GraphView graph_view_;
-	
+
 	private Node selected_node_ = null;
 	private NodeView node_view_ = null;
-	
+
 	private final JSplitPane main_panel_;
-	
+
 	public MainView( Graph g ) {
 		graph_ = g;
-		GraphController graph_controller = new GraphController(g);
+		GraphController graph_controller = new GraphController( g );
 		graph_view_ = graph_controller.view();
-		
+
 		if( graph_.selectedNode() == null ) {
 			if( graph_.getNumNodes() == 0 ) {
 				graph_.addNode( new Node( 0, "First Node" ) );
@@ -36,26 +36,26 @@ public class MainView extends JPanel {
 		}
 		selected_node_ = graph_.selectedNode();
 		node_view_ = new NodeView( selected_node_ );
-		
-		//this.setLayout( mgr );
+
+		// this.setLayout( mgr );
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, node_view_ );
 		main_panel_.setOneTouchExpandable( true );
-		
-		//Look into these:
-		//main_panel_.setAutoscrolls( true );
-		//main_panel_.setContinuousLayout( true );
-		
+
+		// Look into these:
+		// main_panel_.setAutoscrolls( true );
+		// main_panel_.setContinuousLayout( true );
+
 		this.add( main_panel_ );
 	}
-	
+
 	@Override
 	public void repaint() {
-		
+
 		if( graph_.selectedNode() != selected_node_ ) {
 			selected_node_ = graph_.selectedNode();
 		}
-		
+
 		super.repaint();
 	}
-	
+
 }

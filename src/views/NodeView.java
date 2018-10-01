@@ -18,64 +18,61 @@ public class NodeView extends JPanel {
 	private static final long serialVersionUID = 8094662324693569393L;
 
 	private final Node node_;
-	
-	//Segment1
-	private final JLabel title_label_ = new JLabel("Title:");
+
+	// Segment1
+	private final JLabel title_label_ = new JLabel( "Title:" );
 	private final JTextField title_field_;
-	
-	private final JLabel command_label_ = new JLabel("Command:");
+
+	private final JLabel command_label_ = new JLabel( "Command:" );
 	private final JTextField command_field_;
-	
-	private final JLabel script_label_ = new JLabel("Script:");
+
+	private final JLabel script_label_ = new JLabel( "Script:" );
 	private final JTextField script_field_;
-	
-	
-	//Segment 2
+
+	// Segment 2
 	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
-	
-	
-	//Segment 3
+
+	// Segment 3
 	private final JLabel auto_flags_label_ = new JLabel( "Rosetta Flags (Added By Us)" );
 	private final JTextArea auto_flags_area_ = new JTextArea();
-	
-	
-	//Segment 4
+
+	// Segment 4
 	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
-	
+
 	public NodeView( Node n ) {
 		node_ = n;
-		
+
 		title_field_ = new JTextField( node_.title() );
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScript() );
-		
+
 		String user_flag_string = "";
 		for( String s : n.getRosettaFlags_const() ) {
 			user_flag_string += s + "\n";
 		}
 		user_flags_area_.setText( user_flag_string );
-		
+
 		String auto_flag_string = "";
 		for( String s : n.determineAutoFlags() ) {
 			auto_flag_string += s + "\n";
 		}
 		auto_flags_area_.setText( auto_flag_string );
-		
+
 		String recommended_flag_string = "";
 		for( String s : Node.commonFlags() ) {
 			recommended_flag_string += s + "\n";
 		}
 		recommended_flags_area_.setText( recommended_flag_string );
-		
+
 		setupView();
 	}
-	
+
 	private void setupView() {
 		this.setLayout( new GridLayout( 4, 1 ) );
-		
-		JPanel segment1 = new JPanel( new GridLayout(3,2) );
+
+		JPanel segment1 = new JPanel( new GridLayout( 3, 2 ) );
 		segment1.add( title_label_ );
 		segment1.add( title_field_ );
 		segment1.add( command_label_ );
@@ -83,21 +80,21 @@ public class NodeView extends JPanel {
 		segment1.add( script_label_ );
 		segment1.add( script_field_ );
 		this.add( segment1 );
-		
+
 		JPanel segment2 = new JPanel( new BorderLayout() );
 		segment2.add( user_flags_area_, BorderLayout.CENTER );
 		segment2.add( user_flags_label_, BorderLayout.NORTH );
 		this.add( segment2 );
-		
+
 		JPanel segment3 = new JPanel( new BorderLayout() );
 		segment3.add( auto_flags_area_, BorderLayout.CENTER );
 		segment3.add( auto_flags_label_, BorderLayout.NORTH );
 		this.add( segment3 );
-		
+
 		JPanel segment4 = new JPanel( new BorderLayout() );
 		segment4.add( recommended_flags_area_, BorderLayout.CENTER );
 		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
 		this.add( segment4 );
 	}
-	
+
 }

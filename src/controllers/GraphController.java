@@ -93,17 +93,17 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			for( Node n : graph_.allNodes_const() ) {
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
-					//if( !e.isControlDown() ) {// if control is down, we are creating an edge
+					// if( !e.isControlDown() ) {// if control is down, we are creating an edge
 					node_is_currently_being_dragged_ = true;
-					//}
+					// }
 					GlobalData.top_panel.repaint();
 					return;
 				}
 			}
-			
+
 			// Potentially Select An Edge
 			for( Edge edge : graph_.allEdges_const() ) {
-				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox(last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedEdge( edge );
 					GlobalData.top_panel.repaint();
 				}
