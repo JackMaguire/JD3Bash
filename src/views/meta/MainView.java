@@ -8,6 +8,7 @@ import javax.swing.JSplitPane;
 
 import controllers.GraphController;
 import graph.*;
+import views.EdgeView;
 import views.GraphView;
 import views.NodeView;
 
@@ -22,7 +23,9 @@ public class MainView extends JPanel {
 	private final GraphView graph_view_;
 
 	private Node selected_node_;
+	
 	private NodeView node_view_;
+	private EdgeView edge_view_ = null;
 
 	private final JSplitPane main_panel_;
 
@@ -41,15 +44,13 @@ public class MainView extends JPanel {
 		}
 		selected_node_ = graph_.selectedNode();
 		node_view_ = new NodeView( selected_node_ );
-
-		// this.setLayout( mgr );
+		
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, node_view_ );
 		main_panel_.setOneTouchExpandable( true );
-		// main_panel_.setDividerSize( 1 );
-
-		// Look into these:
-		// main_panel_.setAutoscrolls( true );
 		main_panel_.setContinuousLayout( true );
+
+		// Look into this:
+		// main_panel_.setAutoscrolls( true );
 
 		this.setLayout( new GridLayout( 1, 1 ) );
 		this.add( main_panel_ );
@@ -68,14 +69,20 @@ public class MainView extends JPanel {
 			if( currently_selected_node != selected_node_ ) {
 
 				selected_node_ = graph_.selectedNode();
+				int current_divider_loc = main_panel_.getDividerLocation();
+				
 				if( selected_node_ != null ) {
-					int current_divider_loc = main_panel_.getDividerLocation();
-					main_panel_.remove( node_view_ );
+					main_panel_.remove( main_panel_.getRightComponent() );
 					node_view_ = new NodeView( selected_node_ );
-					main_panel_.add( node_view_ );
+					main_panel_.setRightComponent( node_view_ );
 					main_panel_.setDividerLocation( current_divider_loc );
 				} else {
 					// EdgeView
+					main_panel_.remove( main_panel_.getRightComponent() );
+					edge_view_ = new EdgeView( graph_.selectedEdge() );
+					main_panel_.setRightComponent( edge_view_ );
+					main_panel_.setDividerLocation( current_divider_loc );
+					
 				}
 			}
 		}
