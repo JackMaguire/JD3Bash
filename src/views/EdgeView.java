@@ -1,6 +1,13 @@
 package views;
 
+import java.awt.GridLayout;
+
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import graph.Edge;
 
 public class EdgeView extends JPanel {
 
@@ -9,4 +16,29 @@ public class EdgeView extends JPanel {
 	 */
 	private static final long serialVersionUID = -5395763224098285614L;
 
+	private final Edge edge_;
+	
+	private final JLabel column_name_label_ = new JLabel( "Column Name To Sort By:   " );
+	private final JTextField column_name_field_;
+	
+	private final JLabel positive_scores_are_better_label_ = new JLabel( "Positive Scores Are Better" );
+	private final JCheckBox positive_scores_are_better_box_ = new JCheckBox();
+	
+	public EdgeView( Edge e ) {
+		edge_ = e;
+		column_name_field_ = new JTextField( edge_.columnNameToSortBy() );
+		positive_scores_are_better_box_.setText( "Test" );
+		
+		setupView();
+	}
+	
+	private void setupView() {
+		setLayout( new GridLayout(2,2) );
+		add( column_name_label_ );
+		add( column_name_field_ );
+		
+		add( positive_scores_are_better_label_ );
+		add( positive_scores_are_better_box_ );
+	}
+	
 }
