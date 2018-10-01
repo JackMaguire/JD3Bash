@@ -1,5 +1,8 @@
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -28,17 +31,17 @@ public class NodeView extends JPanel {
 	
 	
 	//Segment 2
-	private final JLabel user_flags_label = new JLabel( "Rosetta Flags" );
+	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
 	
 	
 	//Segment 3
-	private final JLabel auto_flags_label = new JLabel( "Rosetta Flags (Added By Us)" );
+	private final JLabel auto_flags_label_ = new JLabel( "Rosetta Flags (Added By Us)" );
 	private final JTextArea auto_flags_area_ = new JTextArea();
 	
 	
 	//Segment 4
-	private final JLabel recommended_flags_label = new JLabel( "Commonly Recommended Flags" );
+	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
 	
 	public NodeView( Node n ) {
@@ -70,7 +73,31 @@ public class NodeView extends JPanel {
 	}
 	
 	private void setupView() {
+		this.setLayout( new GridLayout( 4, 1 ) );
 		
+		JPanel segment1 = new JPanel( new GridLayout(3,2) );
+		segment1.add( title_label_ );
+		segment1.add( title_field_ );
+		segment1.add( command_label_ );
+		segment1.add( command_field_ );
+		segment1.add( script_label_ );
+		segment1.add( script_field_ );
+		this.add( segment1 );
+		
+		JPanel segment2 = new JPanel( new BorderLayout() );
+		segment2.add( user_flags_area_, BorderLayout.CENTER );
+		segment2.add( user_flags_label_, BorderLayout.NORTH );
+		this.add( segment2 );
+		
+		JPanel segment3 = new JPanel( new BorderLayout() );
+		segment3.add( auto_flags_area_, BorderLayout.CENTER );
+		segment3.add( auto_flags_label_, BorderLayout.NORTH );
+		this.add( segment3 );
+		
+		JPanel segment4 = new JPanel( new BorderLayout() );
+		segment4.add( recommended_flags_area_, BorderLayout.CENTER );
+		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
+		this.add( segment4 );
 	}
 	
 }
