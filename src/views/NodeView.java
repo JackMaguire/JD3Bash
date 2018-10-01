@@ -1,6 +1,11 @@
 package views;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
+import graph.Node;
 
 public class NodeView extends JPanel {
 
@@ -9,6 +14,63 @@ public class NodeView extends JPanel {
 	 */
 	private static final long serialVersionUID = 8094662324693569393L;
 
+	private final Node node_;
 	
+	//Segment1
+	private final JLabel title_label_ = new JLabel("Title:");
+	private final JTextField title_field_;
+	
+	private final JLabel command_label_ = new JLabel("Command:");
+	private final JTextField command_field_;
+	
+	private final JLabel script_label_ = new JLabel("Script:");
+	private final JTextField script_field_;
+	
+	
+	//Segment 2
+	private final JLabel user_flags_label = new JLabel( "Rosetta Flags" );
+	private final JTextArea user_flags_area_ = new JTextArea();
+	
+	
+	//Segment 3
+	private final JLabel auto_flags_label = new JLabel( "Rosetta Flags (Added By Us)" );
+	private final JTextArea auto_flags_area_ = new JTextArea();
+	
+	
+	//Segment 4
+	private final JLabel recommended_flags_label = new JLabel( "Commonly Recommended Flags" );
+	private final JTextArea recommended_flags_area_ = new JTextArea();
+	
+	public NodeView( Node n ) {
+		node_ = n;
+		
+		title_field_ = new JTextField( node_.title() );
+		command_field_ = new JTextField( node_.command() );
+		script_field_ = new JTextField( node_.getXMLScript() );
+		
+		String user_flag_string = "";
+		for( String s : n.getRosettaFlags_const() ) {
+			user_flag_string += s + "\n";
+		}
+		user_flags_area_.setText( user_flag_string );
+		
+		String auto_flag_string = "";
+		for( String s : n.determineAutoFlags() ) {
+			auto_flag_string += s + "\n";
+		}
+		auto_flags_area_.setText( auto_flag_string );
+		
+		String recommended_flag_string = "";
+		for( String s : Node.commonFlags() ) {
+			recommended_flag_string += s + "\n";
+		}
+		recommended_flags_area_.setText( recommended_flag_string );
+		
+		setupView();
+	}
+	
+	private void setupView() {
+		
+	}
 	
 }
