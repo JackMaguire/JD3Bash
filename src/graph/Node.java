@@ -31,8 +31,8 @@ public class Node {
 	private boolean stage_is_valid_ = false;
 
 	private ArrayList< String > user_rosetta_flags_ = new ArrayList< String >();
-	//private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
-	
+	// private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
+
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -203,7 +203,7 @@ public class Node {
 	public final void setUserRosettaFlags( ArrayList< String > new_flags ) {
 		user_rosetta_flags_ = new_flags;
 	}
-	
+
 	public final List< String > getUserRosettaFlags() {
 		return Collections.unmodifiableList( user_rosetta_flags_ );
 	}
@@ -215,16 +215,15 @@ public class Node {
 		for( String s : this.determineAutoFlags() ) {
 			all_flags.add( s );
 		}
-		
+
 		all_flags.add( "" );
 		all_flags.add( "# Your Additional Flags:" );
 		for( String s : user_rosetta_flags_ ) {
 			all_flags.add( s );
 		}
-	
+
 		return all_flags;
 	}
-
 
 	///////////////////////////
 	// Graph Parsing Utilities//

@@ -48,7 +48,7 @@ public class NodeView extends JPanel {
 		title_label_.setHorizontalAlignment( JLabel.RIGHT );
 		command_label_.setHorizontalAlignment( JLabel.RIGHT );
 		script_label_.setHorizontalAlignment( JLabel.RIGHT );
-		
+
 		title_field_ = new JTextField( node_.title() );
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScript() );
@@ -70,9 +70,9 @@ public class NodeView extends JPanel {
 			recommended_flag_string += s + "\n";
 		}
 		recommended_flags_area_.setText( recommended_flag_string );
-		
+
 		setFonts( 12 );
-		
+
 		setupView();
 	}
 

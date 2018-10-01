@@ -39,14 +39,14 @@ public class ViewSimpleGraph {
 		JFrame F = new JFrame( "ViewSimpleGraph" );
 		F.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );
-		
+
 		/*
 		GraphController graph_controller = new GraphController( simple_graph );
 		GlobalData.top_panel = graph_controller.view();
 		*/
 		MainView view = new MainView( simple_graph );
 		GlobalData.top_panel = view;
-		
+
 		F.add( GlobalData.top_panel );
 		F.setVisible( true );
 	}
