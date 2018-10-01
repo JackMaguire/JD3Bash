@@ -265,6 +265,7 @@ public class Node {
 		list.add( "-linmem_ig 10                   # save time and memory during packing" );
 		list.add( "-ignore_unrecognized_res true   # false by default" );
 		list.add( "-ignore_waters false            # true by default" );
+		list.add( "-mpi_tracer_to_file mpi_" );
 		return list;
 	}
 }
