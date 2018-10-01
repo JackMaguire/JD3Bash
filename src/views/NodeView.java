@@ -49,7 +49,7 @@ public class NodeView extends JPanel {
 		script_field_ = new JTextField( node_.getXMLScript() );
 
 		String user_flag_string = "";
-		for( String s : n.getRosettaFlags_const() ) {
+		for( String s : n.getRosettaFlags() ) {
 			user_flag_string += s + "\n";
 		}
 		user_flags_area_.setText( user_flag_string );
@@ -70,7 +70,7 @@ public class NodeView extends JPanel {
 	}
 
 	private void setupView() {
-		this.setLayout( new GridLayout( 4, 1 ) );
+		this.setLayout( new GridLayout( 8, 1 ) );
 
 		JPanel segment1 = new JPanel( new GridLayout( 3, 2 ) );
 		segment1.add( title_label_ );

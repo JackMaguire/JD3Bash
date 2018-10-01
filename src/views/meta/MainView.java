@@ -45,7 +45,8 @@ public class MainView extends JPanel {
 		// this.setLayout( mgr );
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, node_view_ );
 		main_panel_.setOneTouchExpandable( true );
-
+		//main_panel_.setDividerSize( 1 );
+		
 		// Look into these:
 		// main_panel_.setAutoscrolls( true );
 		main_panel_.setContinuousLayout( true );

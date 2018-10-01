@@ -33,7 +33,7 @@ public class ViewSimpleGraph {
 		e2.setUsePercentageInsteadOfCount( true );
 
 		for( Node n : simple_graph.allNodes_const() ) {
-			n.setAllRosettaFlags( n.determineAutoFlags() );
+			n.setUserRosettaFlags( n.determineAutoFlags() );
 		}
 
 		JFrame F = new JFrame( "ViewSimpleGraph" );
