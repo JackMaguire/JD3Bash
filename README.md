@@ -6,3 +6,6 @@ and the program will give you two bash files:
 
 - __setup.sh__: Creates directories and files required for the run.
 - __run.sh__: Takes care of everything! Calls Rosetta and pipes the best results from stage to stage.
+
+
+More info to come as the project develops
