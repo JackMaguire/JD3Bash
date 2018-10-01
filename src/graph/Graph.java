@@ -75,6 +75,9 @@ public class Graph {
 
 	public void setSelectedNode( Node n ) {
 		selected_node_ = n;
+		if( n != null ) {
+			selected_edge_ = null;
+		}
 	}
 
 	public Edge selectedEdge() {
@@ -83,6 +86,9 @@ public class Graph {
 
 	public void setSelectedEdge( Edge e ) {
 		selected_edge_ = e;
+		if( e != null ) {
+			selected_node_ = null;
+		}
 	}
 
 	public int getNextNodeID() {

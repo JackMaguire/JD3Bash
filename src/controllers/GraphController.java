@@ -136,7 +136,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( x, y ) ) {
 					Edge new_edge = graph_.addEdge( graph_.selectedNode(), n );
 					graph_.setSelectedEdge( new_edge );
-					graph_.setSelectedNode( n );
+					graph_.setSelectedNode( null );
 					GlobalData.top_panel.repaint();
 					return;
 				}
