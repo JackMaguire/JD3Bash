@@ -23,7 +23,7 @@ public class MainView extends JPanel {
 	private final GraphView graph_view_;
 
 	private Node selected_node_;
-	
+
 	private NodeView node_view_;
 	private EdgeView edge_view_ = null;
 
@@ -44,7 +44,7 @@ public class MainView extends JPanel {
 		}
 		selected_node_ = graph_.selectedNode();
 		node_view_ = new NodeView( selected_node_ );
-		
+
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, node_view_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
@@ -70,7 +70,7 @@ public class MainView extends JPanel {
 
 				selected_node_ = graph_.selectedNode();
 				int current_divider_loc = main_panel_.getDividerLocation();
-				
+
 				if( selected_node_ != null ) {
 					main_panel_.remove( main_panel_.getRightComponent() );
 					node_view_ = new NodeView( selected_node_ );
@@ -82,7 +82,7 @@ public class MainView extends JPanel {
 					edge_view_ = new EdgeView( graph_.selectedEdge() );
 					main_panel_.setRightComponent( edge_view_ );
 					main_panel_.setDividerLocation( current_divider_loc );
-					
+
 				}
 			}
 		}

@@ -42,14 +42,14 @@ public class NodeView extends JPanel {
 	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
 
-	//Segment 5: TODO
+	// Segment 5: TODO
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
-	
-	//Segment 6: TODO
+
+	// Segment 6: TODO
 	private final JLabel help_label_ = new JLabel( "Help" );
 	private final JTextArea help_area_ = new JTextArea();
-	
+
 	public NodeView( Node n ) {
 		node_ = n;
 
@@ -120,12 +120,12 @@ public class NodeView extends JPanel {
 		segment4.add( recommended_flags_area_, BorderLayout.CENTER );
 		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
 		this.add( segment4 );
-		
+
 		JPanel segment5 = new JPanel( new BorderLayout() );
 		segment5.add( notes_area_, BorderLayout.CENTER );
 		segment5.add( notes_label_, BorderLayout.NORTH );
 		this.add( segment5 );
-		
+
 		JPanel segment6 = new JPanel( new BorderLayout() );
 		segment6.add( help_area_, BorderLayout.CENTER );
 		segment6.add( help_label_, BorderLayout.NORTH );
