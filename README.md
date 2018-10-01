@@ -8,4 +8,4 @@ and the program will give you two bash files:
 - __run.sh__: Takes care of everything! Calls Rosetta and pipes the best results from stage to stage.
 
 
-More info to come as the project develops
+_More info to come as the project develops_
