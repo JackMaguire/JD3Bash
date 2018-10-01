@@ -203,6 +203,10 @@ public class Node {
 	public final void setUserRosettaFlags( ArrayList< String > new_flags ) {
 		user_rosetta_flags_ = new_flags;
 	}
+	
+	public final List< String > getUserRosettaFlags() {
+		return Collections.unmodifiableList( user_rosetta_flags_ );
+	}
 
 	public final ArrayList< String > getRosettaFlags() {
 		ArrayList< String > all_flags = new ArrayList< String >();
@@ -220,10 +224,7 @@ public class Node {
 	
 		return all_flags;
 	}
-	
-	public final List< String > getUserRosettaFlags() {
-		return Collections.unmodifiableList( user_rosetta_flags_ );
-	}
+
 
 	///////////////////////////
 	// Graph Parsing Utilities//
@@ -262,9 +263,9 @@ public class Node {
 
 	public final static ArrayList< String > commonFlags() {
 		ArrayList< String > list = new ArrayList< String >();
-		list.add( "-linmem_ig 10 # save time and memory during packing" );
-		list.add( "-ignore_unrecognized_res true # false by default" );
-		list.add( "-ignore_waters false # true by default" );
+		list.add( "-linmem_ig 10                   # save time and memory during packing" );
+		list.add( "-ignore_unrecognized_res true   # false by default" );
+		list.add( "-ignore_waters false            # true by default" );
 		return list;
 	}
 }

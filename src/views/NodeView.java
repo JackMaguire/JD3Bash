@@ -1,6 +1,7 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 
 import javax.swing.JLabel;
@@ -20,13 +21,13 @@ public class NodeView extends JPanel {
 	private final Node node_;
 
 	// Segment1
-	private final JLabel title_label_ = new JLabel( "Title:" );
+	private final JLabel title_label_ = new JLabel( "Title:   " );
 	private final JTextField title_field_;
 
-	private final JLabel command_label_ = new JLabel( "Command:" );
+	private final JLabel command_label_ = new JLabel( "Command:   " );
 	private final JTextField command_field_;
 
-	private final JLabel script_label_ = new JLabel( "Script:" );
+	private final JLabel script_label_ = new JLabel( "Script:   " );
 	private final JTextField script_field_;
 
 	// Segment 2
@@ -44,12 +45,16 @@ public class NodeView extends JPanel {
 	public NodeView( Node n ) {
 		node_ = n;
 
+		title_label_.setHorizontalAlignment( JLabel.RIGHT );
+		command_label_.setHorizontalAlignment( JLabel.RIGHT );
+		script_label_.setHorizontalAlignment( JLabel.RIGHT );
+		
 		title_field_ = new JTextField( node_.title() );
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScript() );
 
 		String user_flag_string = "";
-		for( String s : n.getRosettaFlags() ) {
+		for( String s : n.getUserRosettaFlags() ) {
 			user_flag_string += s + "\n";
 		}
 		user_flags_area_.setText( user_flag_string );
@@ -65,8 +70,20 @@ public class NodeView extends JPanel {
 			recommended_flag_string += s + "\n";
 		}
 		recommended_flags_area_.setText( recommended_flag_string );
-
+		
+		setFonts( 12 );
+		
 		setupView();
+	}
+
+	private void setFonts( int fontsize ) {
+		Font f = new Font( "monospaced", Font.PLAIN, fontsize );
+		title_field_.setFont( f );
+		command_field_.setFont( f );
+		script_field_.setFont( f );
+		user_flags_area_.setFont( f );
+		auto_flags_area_.setFont( f );
+		recommended_flags_area_.setFont( f );
 	}
 
 	private void setupView() {

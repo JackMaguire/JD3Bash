@@ -66,7 +66,17 @@ public class MainView extends JPanel {
 		if( graph_ != null ) {
 			Node currently_selected_node = graph_.selectedNode();
 			if( currently_selected_node != selected_node_ ) {
+				
 				selected_node_ = graph_.selectedNode();
+				if( selected_node_ != null ) {
+					int current_divider_loc = main_panel_.getDividerLocation();
+					main_panel_.remove( node_view_ );
+					node_view_ = new NodeView( selected_node_ );
+					main_panel_.add( node_view_ );
+					main_panel_.setDividerLocation( current_divider_loc );
+				} else {
+					//EdgeView
+				}
 			}
 		}
 		
