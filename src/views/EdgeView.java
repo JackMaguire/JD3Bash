@@ -30,8 +30,8 @@ public class EdgeView extends JPanel {
 	private final JLabel percentage_of_results_to_transfer_label_ = new JLabel( "Percentage Of Results To Transfer:   " );
 	private final JTextField percentage_of_results_to_transfer_field_;
 
-	private final JLabel use_percentage_instead_of_count_label_ = new JLabel( "Use Percentage Instead Of Count" );
-	private final JCheckBox use_percentage_instead_of_count_box_ = new JCheckBox();
+	private final JLabel use_percentage_instead_of_count_label_ = new JLabel( "" );
+	private final JCheckBox use_percentage_instead_of_count_box_ = new JCheckBox( "Use Percentage Instead Of Count" );
 
 	public EdgeView( Edge e ) {
 		edge_ = e;
