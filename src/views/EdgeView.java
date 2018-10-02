@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controllers.EdgeController;
 import graph.Edge;
 
 public class EdgeView extends JPanel {
@@ -17,6 +18,7 @@ public class EdgeView extends JPanel {
 	private static final long serialVersionUID = -5395763224098285614L;
 
 	private final Edge edge_;
+	private final EdgeController edge_controller_;//circular references are okay in Java
 
 	private final JLabel column_name_label_ = new JLabel( "Column Name To Sort By:   " );
 	private final JTextField column_name_field_;
@@ -55,6 +57,10 @@ public class EdgeView extends JPanel {
 		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
 		percentage_of_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
 
+		edge_controller_ = new EdgeController( this );//circular references are okay in Java
+		column_name_field_.addActionListener( edge_controller_ );
+		positive_scores_are_better_box_.addChangeListener( edge_controller_ );
+		
 		setupView();
 	}
 
@@ -79,27 +85,27 @@ public class EdgeView extends JPanel {
 		add( top_view );
 	}
 	
-	public JTextField columnNameField() {
+	public JTextField getColumnNameField() {
 		return column_name_field_;
 	}
 
-	public JCheckBox positiveScoresAreBetterBox() {
+	public JCheckBox getPositiveScoresAreBetterBox() {
 		return positive_scores_are_better_box_;
 	}
 	
-	public JTextField numResultsToTrasnferField(){
+	public JTextField getNumResultsToTrasnferField(){
 		return num_results_to_transfer_field_;
 	}
 	
-	public JTextField percentageOfResultsToTrasnferField(){
+	public JTextField getPercentageOfResultsToTrasnferField(){
 		return percentage_of_results_to_transfer_field_;
 	}
 	
-	public JCheckBox usePercentageInsteadOfCountBox() {
+	public JCheckBox getUsePercentageInsteadOfCountBox() {
 		return use_percentage_instead_of_count_box_;
 	}
 	
-	public Edge edge() {
+	public Edge getEdge() {
 		return edge_;
 	}
 }
