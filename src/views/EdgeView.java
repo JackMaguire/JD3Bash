@@ -41,16 +41,42 @@ public class EdgeView extends JPanel {
 		num_results_to_transfer_field_ = new JTextField( "" + edge_.numResultsToTransfer() );
 		percentage_of_results_to_transfer_field_ = new JTextField( "" + edge_.percentageOfResultsToTransfer() );
 
+		if( e.positiveScoresAreBetter() ) {
+			use_percentage_instead_of_count_box_.setSelected( true );
+			num_results_to_transfer_label_.setEnabled( false );
+			num_results_to_transfer_field_.setEnabled( false );
+		} else {
+			use_percentage_instead_of_count_box_.setSelected( false );
+			percentage_of_results_to_transfer_label_.setEnabled( false );
+			percentage_of_results_to_transfer_field_.setEnabled( false );
+		}
+		
+		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
+		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
+		percentage_of_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
+		
 		setupView();
 	}
 
 	private void setupView() {
-		setLayout( new GridLayout( 2, 2 ) );
-		add( column_name_label_ );
-		add( column_name_field_ );
+		JPanel top_view = new JPanel( new GridLayout( 5, 2 ) );
+		top_view.add( column_name_label_ );
+		top_view.add( column_name_field_ );
 
-		add( positive_scores_are_better_label_ );
-		add( positive_scores_are_better_box_ );
+		top_view.add( positive_scores_are_better_label_ );
+		top_view.add( positive_scores_are_better_box_ );
+		
+		top_view.add( num_results_to_transfer_label_ );
+		top_view.add( num_results_to_transfer_field_ );
+		
+		top_view.add( percentage_of_results_to_transfer_label_ );
+		top_view.add( percentage_of_results_to_transfer_field_ );
+		
+		top_view.add( use_percentage_instead_of_count_label_ );
+		top_view.add( use_percentage_instead_of_count_box_ );
+		
+		setLayout( new GridLayout( 3, 1 ) );
+		add( top_view );
 	}
 
 }
