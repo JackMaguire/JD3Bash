@@ -78,5 +78,28 @@ public class EdgeView extends JPanel {
 		setLayout( new GridLayout( 3, 1 ) );
 		add( top_view );
 	}
+	
+	public JTextField columnNameField() {
+		return column_name_field_;
+	}
 
+	public JCheckBox positiveScoresAreBetterBox() {
+		return positive_scores_are_better_box_;
+	}
+	
+	public JTextField numResultsToTrasnferField(){
+		return num_results_to_transfer_field_;
+	}
+	
+	public JTextField percentageOfResultsToTrasnferField(){
+		return percentage_of_results_to_transfer_field_;
+	}
+	
+	public JCheckBox usePercentageInsteadOfCountBox() {
+		return use_percentage_instead_of_count_box_;
+	}
+	
+	public Edge edge() {
+		return edge_;
+	}
 }
