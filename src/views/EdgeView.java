@@ -41,7 +41,7 @@ public class EdgeView extends JPanel {
 		num_results_to_transfer_field_ = new JTextField( "" + edge_.numResultsToTransfer() );
 		percentage_of_results_to_transfer_field_ = new JTextField( "" + edge_.percentageOfResultsToTransfer() );
 
-		if( e.positiveScoresAreBetter() ) {
+		if( edge_.usePercentageInsteadOfCount() ) {
 			use_percentage_instead_of_count_box_.setSelected( true );
 			num_results_to_transfer_label_.setEnabled( false );
 			num_results_to_transfer_field_.setEnabled( false );

@@ -23,6 +23,7 @@ public class MainView extends JPanel {
 	private final GraphView graph_view_;
 
 	private Node selected_node_;
+	private Edge selected_edge_ = null;
 
 	private NodeView node_view_;
 	private EdgeView edge_view_ = null;
@@ -66,9 +67,12 @@ public class MainView extends JPanel {
 
 		if( graph_ != null ) {
 			Node currently_selected_node = graph_.selectedNode();
-			if( currently_selected_node != selected_node_ ) {
+			Edge currently_selected_edge = graph_.selectedEdge();
+			
+			if( currently_selected_node != selected_node_ || currently_selected_edge != selected_edge_ ) {
 
 				selected_node_ = graph_.selectedNode();
+				selected_edge_ = graph_.selectedEdge();
 				int current_divider_loc = main_panel_.getDividerLocation();
 
 				if( selected_node_ != null ) {
@@ -82,7 +86,6 @@ public class MainView extends JPanel {
 					edge_view_ = new EdgeView( graph_.selectedEdge() );
 					main_panel_.setRightComponent( edge_view_ );
 					main_panel_.setDividerLocation( current_divider_loc );
-
 				}
 			}
 		}
