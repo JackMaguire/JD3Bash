@@ -50,11 +50,11 @@ public class EdgeView extends JPanel {
 			percentage_of_results_to_transfer_label_.setEnabled( false );
 			percentage_of_results_to_transfer_field_.setEnabled( false );
 		}
-		
+
 		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
 		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
 		percentage_of_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
-		
+
 		setupView();
 	}
 
@@ -65,16 +65,16 @@ public class EdgeView extends JPanel {
 
 		top_view.add( positive_scores_are_better_label_ );
 		top_view.add( positive_scores_are_better_box_ );
-		
+
 		top_view.add( num_results_to_transfer_label_ );
 		top_view.add( num_results_to_transfer_field_ );
-		
+
 		top_view.add( percentage_of_results_to_transfer_label_ );
 		top_view.add( percentage_of_results_to_transfer_field_ );
-		
+
 		top_view.add( use_percentage_instead_of_count_label_ );
 		top_view.add( use_percentage_instead_of_count_box_ );
-		
+
 		setLayout( new GridLayout( 3, 1 ) );
 		add( top_view );
 	}

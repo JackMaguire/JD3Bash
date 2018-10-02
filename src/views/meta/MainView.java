@@ -68,7 +68,7 @@ public class MainView extends JPanel {
 		if( graph_ != null ) {
 			Node currently_selected_node = graph_.selectedNode();
 			Edge currently_selected_edge = graph_.selectedEdge();
-			
+
 			if( currently_selected_node != selected_node_ || currently_selected_edge != selected_edge_ ) {
 
 				selected_node_ = graph_.selectedNode();
