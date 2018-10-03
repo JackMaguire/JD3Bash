@@ -152,7 +152,7 @@ public class Graph {
 			if( split[ 0 ].equals( "num_nodes" ) ) {
 				int num_nodes = Integer.parseInt( split[ 1 ] );
 				for( int i = 0; i < num_nodes; ++i ) {
-					addNode( new Node( in ) );
+					nodes_.add( new Node( in ) );
 				}
 				continue;
 			}

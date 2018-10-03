@@ -182,6 +182,19 @@ public class graph_tests {
 		File f = new File( "unit_test.dat" );
 		f.delete();
 
+		if( new_graph.getNumNodes() != 5 ) {
+			System.err.println( "New graph has " + new_graph.getNumNodes() + " nodes instead of 5!" );
+			return false;
+		}
+
+		for( int node = 0; node < 5; ++node ) {
+			Node new_node = new_graph.getNode( node );
+			if( nodes[ node ].id() != new_node.id() ) {
+				System.err.println( "New node " + node + " has id " + new_node.id() + " instead of " + nodes[ node ].id() );
+				success = false;
+			}
+		}
+
 		return success;
 	}
 }
