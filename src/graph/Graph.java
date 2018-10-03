@@ -105,14 +105,14 @@ public class Graph {
 	public void setGhostEdge( PreliminaryEdge ge ) {
 		ghost_edge_ = ge;
 	}
-	
-	//Save/Load
+
+	// Save/Load
 	public void saveSelfNodesAndEdges( BufferedWriter out ) throws IOException {
 		String save_string = "START_GRAPH\n";
 		save_string += "next_node_id " + next_node_id_ + "\n";
 		save_string += "num_nodes " + nodes_.size() + "\n";
 		out.write( save_string );
-		
+
 		for( Node n : nodes_ ) {
 			n.save( out );
 		}
@@ -121,7 +121,7 @@ public class Graph {
 		for( Edge e : edges_ ) {
 			e.save( out );
 		}
-		
+
 		out.write( "END_GRAPH\n" );
 	}
 }

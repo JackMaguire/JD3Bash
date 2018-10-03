@@ -297,8 +297,8 @@ public class Node {
 		list.add( "-mpi_tracer_to_file mpi_" );
 		return list;
 	}
-	
-	///Save/Load
+
+	/// Save/Load
 	public void save( BufferedWriter out ) throws IOException {
 		String save_string = "START_NODE\n";
 		save_string += "id " + id_ + "\n";
@@ -320,9 +320,9 @@ public class Node {
 		save_string += "START_NOTES\n";
 		save_string += notes_ + "\n";
 		save_string += "END_NOTES\n";
-		
+
 		save_string += "END_NODE\n";
 		out.write( save_string );
 	}
-	
+
 }

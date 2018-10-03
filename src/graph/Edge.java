@@ -89,23 +89,23 @@ public class Edge {
 	public final void setNotes( String notes ) {
 		notes_ = notes;
 	}
-	
-	//Save/load
+
+	// Save/load
 	public void save( BufferedWriter out ) throws IOException {
 		String save_string = "START_EDGE\n";
 		save_string += "source " + source_node_.id() + "\n";
 		save_string += "destination " + destination_node_.id() + "\n";
-		save_string += "column " + column_name_to_sort_by_ + "\n"; 
+		save_string += "column " + column_name_to_sort_by_ + "\n";
 		save_string += "pos_is_better " + positive_scores_are_better_ + "\n";
 
 		save_string += "num " + num_results_to_transfer_ + "\n";
 		save_string += "perc " + percentage_of_results_to_transfer_ + "\n";
 		save_string += "use_perc " + use_percentage_instead_of_count_ + "\n";
-		
+
 		save_string += "START_NOTES\n";
 		save_string += notes_ + "\n";
 		save_string += "END_NOTES\n";
-		
+
 		save_string += "END_EDGE\n";
 		out.write( save_string );
 	}
