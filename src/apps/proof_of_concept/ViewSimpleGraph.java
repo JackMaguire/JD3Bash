@@ -31,10 +31,6 @@ public class ViewSimpleGraph {
 		e2.setPercentageOfResultsToTransfer( 0.25 );
 		e2.setUsePercentageInsteadOfCount( true );
 
-		for( Node n : simple_graph.allNodes_const() ) {
-			n.setUserRosettaFlags( n.determineAutoFlags() );
-		}
-
 		JFrame F = new JFrame( "ViewSimpleGraph" );
 		F.setDefaultCloseOperation( JFrame.EXIT_ON_CLOSE );
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );

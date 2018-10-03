@@ -44,7 +44,7 @@ public class MainView extends JPanel {
 
 		if( graph_.selectedNode() == null ) {
 			if( graph_.getNumNodes() == 0 ) {
-				graph_.addNode( new Node( "First Stage" ) );
+				graph_.addNode( new Node( "First Stage", 10, 10 ) );
 			}
 			graph_.setSelectedNode( graph_.getNode( 0 ) );
 		}

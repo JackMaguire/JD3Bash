@@ -198,6 +198,14 @@ public class Node {
 	}
 
 	public final void setUserRosettaFlags( ArrayList< String > new_flags ) {
+		/*int count = 0;
+		for( StackTraceElement[] ste_array : Thread.getAllStackTraces().values() ) {
+			System.out.println( count++ );
+			for( StackTraceElement ste : ste_array ) {
+				System.out.println( ste.toString() );
+			}
+		}
+		System.exit( 0 );*/
 		user_rosetta_flags_ = new_flags;
 	}
 
