@@ -35,8 +35,7 @@ public class Node {
 
 	private String notes_ = "";
 
-	public Node( int id, int x, int y ) {
-		id_ = id;
+	public Node( int x, int y ) {
 		x_ = x;
 		y_ = y;
 		title_ = "[title " + id_ + "]";
@@ -45,8 +44,7 @@ public class Node {
 		downstream_edges_ = new ArrayList< Edge >();
 	}
 
-	public Node( int id, String title ) {
-		id_ = id;
+	public Node( String title ) {
 		x_ = 0;
 		y_ = 0;
 		title_ = title;
@@ -55,8 +53,7 @@ public class Node {
 		downstream_edges_ = new ArrayList< Edge >();
 	}
 
-	public Node( int id, String title, int x, int y ) {
-		id_ = id;
+	public Node( String title, int x, int y ) {
 		x_ = x;
 		y_ = y;
 		title_ = title;
@@ -218,7 +215,7 @@ public class Node {
 		return Collections.unmodifiableList( user_rosetta_flags_ );
 	}
 
-	public final ArrayList< String > getRosettaFlags() {
+	public final ArrayList< String > getAllRosettaFlags() {
 		ArrayList< String > all_flags = new ArrayList< String >();
 
 		all_flags.add( "# Generated Flags:" );

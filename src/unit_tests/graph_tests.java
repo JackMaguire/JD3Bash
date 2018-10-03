@@ -23,9 +23,9 @@ public class graph_tests {
 
 		{// Simple case
 			Graph test_graph = new Graph();
-			Node node0 = new Node( 0, 0, 0 );
-			Node node1 = new Node( 1, 1, 1 );
-			Node node2 = new Node( 2, 2, 2 );
+			Node node0 = new Node( 0, 0 );
+			Node node1 = new Node( 1, 1 );
+			Node node2 = new Node( 2, 2 );
 			test_graph.addNode( node0 );
 			test_graph.addNode( node1 );
 			test_graph.addNode( node2 );

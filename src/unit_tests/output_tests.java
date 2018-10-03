@@ -33,9 +33,9 @@ public class output_tests {
 		{// Simple case
 			Graph test_graph = new Graph();
 			// layout: 2->0->1, should return {2,0,1}
-			test_graph.addNode( new Node( 0, 0, 0 ) );
-			test_graph.addNode( new Node( 1, 0, 0 ) );
-			test_graph.addNode( new Node( 2, 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
 
 			test_graph.addEdge( test_graph.getNode( 2 ), test_graph.getNode( 0 ) );
 			test_graph.addEdge( test_graph.getNode( 0 ), test_graph.getNode( 1 ) );
@@ -60,11 +60,11 @@ public class output_tests {
 		{// simple no cycle
 			Graph test_graph = new Graph();
 			// layout: 2->0->1->3->4
-			test_graph.addNode( new Node( 0, 0, 0 ) );
-			test_graph.addNode( new Node( 1, 0, 0 ) );
-			test_graph.addNode( new Node( 2, 0, 0 ) );
-			test_graph.addNode( new Node( 3, 0, 0 ) );
-			test_graph.addNode( new Node( 4, 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
 
 			test_graph.addEdge( test_graph.getNode( 2 ), test_graph.getNode( 0 ) );
 			test_graph.addEdge( test_graph.getNode( 0 ), test_graph.getNode( 1 ) );
@@ -80,10 +80,10 @@ public class output_tests {
 		{// simple cycle
 			Graph test_graph = new Graph();
 			// layout: 0->1->2->3->1
-			test_graph.addNode( new Node( 0, 0, 0 ) );
-			test_graph.addNode( new Node( 1, 0, 0 ) );
-			test_graph.addNode( new Node( 2, 0, 0 ) );
-			test_graph.addNode( new Node( 3, 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
+			test_graph.addNode( new Node( 0, 0 ) );
 
 			test_graph.addEdge( test_graph.getNode( 0 ), test_graph.getNode( 1 ) );
 			test_graph.addEdge( test_graph.getNode( 1 ), test_graph.getNode( 2 ) );

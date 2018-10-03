@@ -28,6 +28,7 @@ public class Graph {
 	}
 
 	public Node addNode( Node n ) {
+		n.setId( getNextNodeID() );
 		nodes_.add( n );
 		return n;
 	}

@@ -65,7 +65,7 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 			// create new node
 			int x = graph_view_.getClosestPointForPoint( e.getX() );
 			int y = graph_view_.getClosestPointForPoint( e.getY() );
-			Node new_node = new Node( graph_.getNextNodeID(), x, y );
+			Node new_node = new Node( x, y );
 			graph_.addNode( new_node );
 			GlobalData.top_panel.repaint();
 			return;

@@ -121,7 +121,7 @@ public class GraphParsing {
 		}
 
 		// setup_script.value += "echo '' > " + dirname + "/flags\n";
-		for( String flag : n.getRosettaFlags() ) {
+		for( String flag : n.getAllRosettaFlags() ) {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
 	}
