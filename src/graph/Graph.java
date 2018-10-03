@@ -127,9 +127,9 @@ public class Graph {
 
 		out.write( "END_GRAPH\n" );
 	}
-	
+
 	public void loadSelfNodesAndEdges( BufferedReader in ) throws IOException, LoadFailureException {
-		//TODO delete everything!
+		// TODO delete everything!
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_GRAPH" ) ) {
 			throw new LoadFailureException( "Expected 'START_GRAPH' instead of '" + first_line + "'" );
@@ -145,14 +145,14 @@ public class Graph {
 			}
 			if( split[ 0 ].equals( "num_nodes" ) ) {
 				int num_nodes = Integer.parseInt( split[ 1 ] );
-				for( int i=0; i<num_nodes; ++i ) {
+				for( int i = 0; i < num_nodes; ++i ) {
 					addNode( new Node( in ) );
 				}
 				continue;
 			}
 			if( split[ 0 ].equals( "num_edges" ) ) {
 				int num_edges = Integer.parseInt( split[ 1 ] );
-				for( int i=0; i<num_edges; ++i ) {
+				for( int i = 0; i < num_edges; ++i ) {
 					edges_.add( new Edge( in, nodes_ ) );
 				}
 				continue;

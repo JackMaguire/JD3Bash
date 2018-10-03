@@ -138,7 +138,7 @@ public class Node {
 				xml_script_ = split[ 1 ];
 				continue;
 			}
-		}//for string line
+		} // for string line
 		color_ = new Color( r, g, b );
 	}
 

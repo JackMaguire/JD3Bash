@@ -7,8 +7,8 @@ public class LoadFailureException extends Exception {
 	 */
 	private static final long serialVersionUID = -1203678123039695628L;
 
-	public LoadFailureException(String s) {
-		super(s);
+	public LoadFailureException( String s ) {
+		super( s );
 	}
-	
+
 }
