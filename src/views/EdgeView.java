@@ -43,22 +43,24 @@ public class EdgeView extends JPanel {
 		num_results_to_transfer_field_ = new JTextField( "" + edge_.numResultsToTransfer() );
 		percentage_of_results_to_transfer_field_ = new JTextField( "" + edge_.percentageOfResultsToTransfer() );
 
-		if( edge_.usePercentageInsteadOfCount() ) {
-			use_percentage_instead_of_count_box_.setSelected( true );
-			num_results_to_transfer_label_.setEnabled( false );
-			num_results_to_transfer_field_.setEnabled( false );
-		} else {
-			use_percentage_instead_of_count_box_.setSelected( false );
-			percentage_of_results_to_transfer_label_.setEnabled( false );
-			percentage_of_results_to_transfer_field_.setEnabled( false );
-		}
+		//Percent Vs Num
+		final boolean use_perc = edge_.usePercentageInsteadOfCount();
+		use_percentage_instead_of_count_box_.setSelected( use_perc );
+		num_results_to_transfer_label_.setEnabled( !use_perc );
+		num_results_to_transfer_field_.setEnabled( !use_perc );
+		percentage_of_results_to_transfer_label_.setEnabled( use_perc );
+		percentage_of_results_to_transfer_field_.setEnabled( use_perc );
 
+		//Label Formatting
 		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
 		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
 		percentage_of_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
 
+		//Listeners
 		edge_controller_ = new EdgeController( this );//circular references are okay in Java
-		column_name_field_.addActionListener( edge_controller_ );
+		column_name_field_.getDocument().addDocumentListener( edge_controller_ );
+		num_results_to_transfer_field_.getDocument().addDocumentListener( edge_controller_ );
+		percentage_of_results_to_transfer_field_.getDocument().addDocumentListener( edge_controller_ );
 		positive_scores_are_better_box_.addChangeListener( edge_controller_ );
 		use_percentage_instead_of_count_box_.addChangeListener( edge_controller_ );
 		
