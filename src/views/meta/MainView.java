@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
+import javax.swing.JTabbedPane;
 
 import controllers.GraphController;
 import graph.*;
@@ -29,7 +30,8 @@ public class MainView extends JPanel {
 	private EdgeView edge_view_ = null;
 
 	private final JSplitPane main_panel_;
-
+	private JTabbedPane tabs_;
+	
 	public MainView( Graph g ) {
 		graph_ = g;
 		GraphController graph_controller = new GraphController( g );
@@ -46,7 +48,10 @@ public class MainView extends JPanel {
 		selected_node_ = graph_.selectedNode();
 		node_view_ = new NodeView( selected_node_ );
 
-		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, node_view_ );
+		tabs_ = new JTabbedPane();
+		tabs_.addTab( "Edit", node_view_ );
+
+		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
 
@@ -73,19 +78,23 @@ public class MainView extends JPanel {
 
 				selected_node_ = graph_.selectedNode();
 				selected_edge_ = graph_.selectedEdge();
-				int current_divider_loc = main_panel_.getDividerLocation();
-
+				
+				if( node_view_ != null ) {
+					tabs_.remove( node_view_ );
+				} else if( edge_view_ != null ) {
+					tabs_.remove( edge_view_ );
+				}
+				
 				if( selected_node_ != null ) {
-					main_panel_.remove( main_panel_.getRightComponent() );
+					//Node View
 					node_view_ = new NodeView( selected_node_ );
-					main_panel_.setRightComponent( node_view_ );
-					main_panel_.setDividerLocation( current_divider_loc );
+					edge_view_ = null;
+					tabs_.addTab( "Edit", node_view_ );
 				} else {
 					// EdgeView
-					main_panel_.remove( main_panel_.getRightComponent() );
 					edge_view_ = new EdgeView( graph_.selectedEdge() );
-					main_panel_.setRightComponent( edge_view_ );
-					main_panel_.setDividerLocation( current_divider_loc );
+					node_view_ = null;
+					tabs_.addTab( "Edit", edge_view_ );
 				}
 			}
 		}
