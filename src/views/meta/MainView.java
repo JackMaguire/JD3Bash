@@ -31,7 +31,7 @@ public class MainView extends JPanel {
 
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
-	
+
 	public MainView( Graph g ) {
 		graph_ = g;
 		GraphController graph_controller = new GraphController( g );
@@ -78,15 +78,15 @@ public class MainView extends JPanel {
 
 				selected_node_ = graph_.selectedNode();
 				selected_edge_ = graph_.selectedEdge();
-				
+
 				if( node_view_ != null ) {
 					tabs_.remove( node_view_ );
 				} else if( edge_view_ != null ) {
 					tabs_.remove( edge_view_ );
 				}
-				
+
 				if( selected_node_ != null ) {
-					//Node View
+					// Node View
 					node_view_ = new NodeView( selected_node_ );
 					edge_view_ = null;
 					tabs_.addTab( "Edit", node_view_ );
