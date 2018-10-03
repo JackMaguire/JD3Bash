@@ -1,7 +1,14 @@
 package unit_tests;
 
 import java.awt.Color;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
+import exceptions.LoadFailureException;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
@@ -88,7 +95,7 @@ public class graph_tests {
 		// 2->4
 
 		final Graph original_graph = new Graph();
-		final Node[] nodes = new Node[ 4 ];
+		final Node[] nodes = new Node[ 5 ];
 		for( int i = 0; i < nodes.length; ++i ) {
 			nodes[ i ] = new Node( i, i );
 			original_graph.addNode( nodes[ i ] );
@@ -115,6 +122,62 @@ public class graph_tests {
 		nodes[ 1 ].setX( 100 );
 		nodes[ 1 ].setY( 200 );
 
+		BufferedWriter out = null;
+		try {
+			 out = new BufferedWriter( new FileWriter("unit_test.dat"));
+		}
+		catch( IOException e ) {
+			System.err.println( "Cannot create unit_test.dat" );
+			return false;
+		}
+		
+		try {
+			original_graph.saveSelfNodesAndEdges( out );
+		}
+		catch( IOException e ) {
+			System.err.println( "IOException While Saving Graph:\n" + e.getMessage() );
+			return false;
+		}
+
+		try {
+			out.close();
+		}
+		catch( IOException e ) {
+			System.err.println( "Cannot close unit_test.dat" );
+			return false;
+		}
+		
+		final Graph new_graph = new Graph();
+		
+		BufferedReader in;
+		try {
+			in = new BufferedReader( new FileReader( "unit_test.dat" ));
+		}
+		catch( FileNotFoundException e ) {
+			System.err.println( "Cannot read unit_test.dat" );
+			return false;
+		}
+		
+		try {
+			new_graph.loadSelfNodesAndEdges( in );
+		}
+		catch( IOException e ) {
+			System.err.println( "IO Exception While Loading: " + e.getMessage() );
+			return false;
+		}
+		catch( LoadFailureException e ) {
+			System.err.println( "LoadFailureException While Loading: " + e.getMessage() );
+			return false;
+		}
+		
+		try {
+			in.close();
+		}
+		catch( IOException e ) {
+			System.err.println( "Cannot close unit_test.dat while reading" );
+			return false;
+		}
+		
 		return success;
 	}
 }
