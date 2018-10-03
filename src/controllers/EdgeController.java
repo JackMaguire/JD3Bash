@@ -27,7 +27,7 @@ public class EdgeController implements ActionListener, ChangeListener {
 	public void stateChanged( ChangeEvent e ) {
 		if( e.getSource() == edge_view_.getPositiveScoresAreBetterBox() ) {
 			edge_view_.getEdge().setPositiveScoresAreBetter( edge_view_.getPositiveScoresAreBetterBox().isSelected() );
-			GlobalData.top_panel.repaint();
+			//GlobalData.top_panel.repaint();
 		}
 	}
 	
