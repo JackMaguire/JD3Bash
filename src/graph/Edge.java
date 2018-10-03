@@ -30,15 +30,19 @@ public class Edge {
 		destination_node_ = dest_node;
 	}
 
-	public Edge( BufferedReader in, ArrayList< Node > nodes ) throws IOException, LoadFailureException {
+	public Edge( BufferedReader in, ArrayList< Node > nodes )
+			throws IOException, LoadFailureException {
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_EDGE" ) ) {
-			throw new LoadFailureException( "Expected 'START_EDGE' instead of '" + first_line + "'" );
+			throw new LoadFailureException(
+					"Expected 'START_EDGE' instead of '" + first_line + "'" );
 		}
 
-		for( String line = in.readLine(); !line.equals( "END_EDGE" ); line = in.readLine() ) {
+		for( String line = in.readLine(); !line.equals( "END_EDGE" ); line = in
+				.readLine() ) {
 			if( line.equals( "START_NOTES" ) ) {
-				for( String line2 = in.readLine(); !line2.equals( "END_NOTES" ); line2 = in.readLine() ) {
+				for( String line2 = in.readLine(); !line2
+						.equals( "END_NOTES" ); line2 = in.readLine() ) {
 					notes_ += line2 + "\n";
 				}
 				continue;

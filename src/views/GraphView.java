@@ -140,16 +140,19 @@ public class GraphView extends JPanel {
 		final double Bx = grid_size_ * ( n_to.x() + n_from.x() ) / 2 + offset;
 		final double By = grid_size_ * ( n_to.y() + n_from.y() ) / 2 + offset;
 		final double arrow_length = grid_size_ * arrow_length_coeff_;
-		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length, By - arrow_length );
-		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length, By + arrow_length );
+		Line2D line1 = new Line2D.Double( Bx, By, Bx + arrow_length,
+				By - arrow_length );
+		Line2D line2 = new Line2D.Double( Bx, By, Bx + arrow_length,
+				By + arrow_length );
 
 		final double theta = Math.atan2( source_y - By, source_x - Bx );
-		AffineTransform at = AffineTransform.getRotateInstance( theta, line1.getX1(), line1.getY1() );
+		AffineTransform at = AffineTransform.getRotateInstance( theta,
+				line1.getX1(), line1.getY1() );
 
 		g2D.draw( at.createTransformedShape( line1 ) );
 		g2D.draw( at.createTransformedShape( line2 ) );
-		box_for_edge_.put( e,
-				new Box( (int) ( Bx - grid_size_ ), (int) ( By - grid_size_ ), grid_size_ * 2, grid_size_ * 2 ) );
+		box_for_edge_.put( e, new Box( (int) ( Bx - grid_size_ ),
+				(int) ( By - grid_size_ ), grid_size_ * 2, grid_size_ * 2 ) );
 	}
 
 	public void drawGhostEdge( Graphics2D g2D, PreliminaryEdge ghost_edge ) {

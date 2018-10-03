@@ -18,9 +18,12 @@ public class EdgeController implements ChangeListener, DocumentListener {
 	@Override
 	public void stateChanged( ChangeEvent e ) {
 		if( e.getSource() == edge_view_.getPositiveScoresAreBetterBox() ) {
-			edge_view_.getEdge().setPositiveScoresAreBetter( edge_view_.getPositiveScoresAreBetterBox().isSelected() );
-		} else if( e.getSource() == edge_view_.getUsePercentageInsteadOfCountBox() ) {
-			final boolean use_perc = edge_view_.getUsePercentageInsteadOfCountBox().isSelected();
+			edge_view_.getEdge().setPositiveScoresAreBetter(
+					edge_view_.getPositiveScoresAreBetterBox().isSelected() );
+		} else if( e.getSource() == edge_view_
+				.getUsePercentageInsteadOfCountBox() ) {
+			final boolean use_perc = edge_view_.getUsePercentageInsteadOfCountBox()
+					.isSelected();
 			edge_view_.getEdge().setUsePercentageInsteadOfCount( use_perc );
 			edge_view_.getPercentageOfResultsToTransferField().setEnabled( use_perc );
 			edge_view_.getPercentageOfResultsToTransferLabel().setEnabled( use_perc );
@@ -46,17 +49,22 @@ public class EdgeController implements ChangeListener, DocumentListener {
 
 	private void processDocumentChange( DocumentEvent e ) {
 		if( e.getDocument() == edge_view_.getColumnNameField().getDocument() ) {
-			edge_view_.getEdge().setColumnNameToSortBy( edge_view_.getColumnNameField().getText() );
-		} else if( e.getDocument() == edge_view_.getNumResultsToTransferField().getDocument() ) {
+			edge_view_.getEdge()
+					.setColumnNameToSortBy( edge_view_.getColumnNameField().getText() );
+		} else if( e.getDocument() == edge_view_.getNumResultsToTransferField()
+				.getDocument() ) {
 			try {
-				int setting = Integer.parseInt( edge_view_.getNumResultsToTransferField().getText() );
+				int setting = Integer
+						.parseInt( edge_view_.getNumResultsToTransferField().getText() );
 				edge_view_.getEdge().setNumResultsToTransfer( setting );
 			}
 			catch( Exception X ) {
 			}
-		} else if( e.getDocument() == edge_view_.getPercentageOfResultsToTransferField().getDocument() ) {
+		} else if( e.getDocument() == edge_view_
+				.getPercentageOfResultsToTransferField().getDocument() ) {
 			try {
-				double setting = Double.parseDouble( edge_view_.getPercentageOfResultsToTransferField().getText() );
+				double setting = Double.parseDouble(
+						edge_view_.getPercentageOfResultsToTransferField().getText() );
 				edge_view_.getEdge().setPercentageOfResultsToTransfer( setting );
 			}
 			catch( Exception X ) {

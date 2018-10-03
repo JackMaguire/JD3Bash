@@ -17,7 +17,8 @@ public class Graph {
 	private Edge selected_edge_;
 	private int next_node_id_ = 0;
 
-	private PreliminaryEdge ghost_edge_ = null;// represents edges that are in the middle of being drawn
+	private PreliminaryEdge ghost_edge_ = null;// represents edges that are in the
+																							// middle of being drawn
 
 	public Graph() {
 		nodes_ = new ArrayList< Node >();
@@ -128,7 +129,8 @@ public class Graph {
 		out.write( "END_GRAPH\n" );
 	}
 
-	public void loadSelfNodesAndEdges( BufferedReader in ) throws IOException, LoadFailureException {
+	public void loadSelfNodesAndEdges( BufferedReader in )
+			throws IOException, LoadFailureException {
 		// First, Delete everything!
 		selected_node_ = null;
 		selected_edge_ = null;
@@ -138,10 +140,12 @@ public class Graph {
 
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_GRAPH" ) ) {
-			throw new LoadFailureException( "Expected 'START_GRAPH' instead of '" + first_line + "'" );
+			throw new LoadFailureException(
+					"Expected 'START_GRAPH' instead of '" + first_line + "'" );
 		}
 
-		for( String line = in.readLine(); !line.equals( "END_GRAPH" ); line = in.readLine() ) {
+		for( String line = in.readLine(); !line.equals( "END_GRAPH" ); line = in
+				.readLine() ) {
 			String[] split = line.split( "\\s+" );
 			if( split.length == 0 )
 				continue;

@@ -54,32 +54,38 @@ public class graph_tests {
 			test_graph.addEdge( node0, node1 );
 
 			if( node0.numUpstreamEdges() != 1 ) {
-				System.err.println( "node0.numUpstreamEdges() == " + node0.numUpstreamEdges() + " instead of 1" );
+				System.err.println( "node0.numUpstreamEdges() == "
+						+ node0.numUpstreamEdges() + " instead of 1" );
 				success = false;
 			}
 
 			if( node0.numDownstreamEdges() != 1 ) {
-				System.err.println( "node0.numDownstreamEdges() == " + node0.numDownstreamEdges() + " instead of 1" );
+				System.err.println( "node0.numDownstreamEdges() == "
+						+ node0.numDownstreamEdges() + " instead of 1" );
 				success = false;
 			}
 
 			if( node1.numUpstreamEdges() != 1 ) {
-				System.err.println( "node1.numUpstreamEdges() == " + node1.numUpstreamEdges() + " instead of 1" );
+				System.err.println( "node1.numUpstreamEdges() == "
+						+ node1.numUpstreamEdges() + " instead of 1" );
 				success = false;
 			}
 
 			if( node1.numDownstreamEdges() != 0 ) {
-				System.err.println( "node1.numDownstreamEdges() == " + node1.numDownstreamEdges() + " instead of 0" );
+				System.err.println( "node1.numDownstreamEdges() == "
+						+ node1.numDownstreamEdges() + " instead of 0" );
 				success = false;
 			}
 
 			if( node2.numUpstreamEdges() != 0 ) {
-				System.err.println( "node2.numUpstreamEdges() == " + node2.numUpstreamEdges() + " instead of 0" );
+				System.err.println( "node2.numUpstreamEdges() == "
+						+ node2.numUpstreamEdges() + " instead of 0" );
 				success = false;
 			}
 
 			if( node2.numDownstreamEdges() != 1 ) {
-				System.err.println( "node2.numDownstreamEdges() == " + node2.numDownstreamEdges() + " instead of 1" );
+				System.err.println( "node2.numDownstreamEdges() == "
+						+ node2.numDownstreamEdges() + " instead of 1" );
 				success = false;
 			}
 		}
@@ -136,7 +142,8 @@ public class graph_tests {
 			original_graph.saveSelfNodesAndEdges( out );
 		}
 		catch( IOException e ) {
-			System.err.println( "IOException While Saving Graph:\n" + e.getMessage() );
+			System.err
+					.println( "IOException While Saving Graph:\n" + e.getMessage() );
 			return false;
 		}
 
@@ -167,7 +174,8 @@ public class graph_tests {
 			return false;
 		}
 		catch( LoadFailureException e ) {
-			System.err.println( "LoadFailureException While Loading: " + e.getMessage() );
+			System.err
+					.println( "LoadFailureException While Loading: " + e.getMessage() );
 			return false;
 		}
 
@@ -183,14 +191,16 @@ public class graph_tests {
 		f.delete();
 
 		if( new_graph.getNumNodes() != 5 ) {
-			System.err.println( "New graph has " + new_graph.getNumNodes() + " nodes instead of 5!" );
+			System.err.println(
+					"New graph has " + new_graph.getNumNodes() + " nodes instead of 5!" );
 			return false;
 		}
 
 		for( int node = 0; node < 5; ++node ) {
 			Node new_node = new_graph.getNode( node );
 			if( nodes[ node ].id() != new_node.id() ) {
-				System.err.println( "New node " + node + " has id " + new_node.id() + " instead of " + nodes[ node ].id() );
+				System.err.println( "New node " + node + " has id " + new_node.id()
+						+ " instead of " + nodes[ node ].id() );
 				success = false;
 			}
 		}

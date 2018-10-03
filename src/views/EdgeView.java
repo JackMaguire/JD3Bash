@@ -21,22 +21,28 @@ public class EdgeView extends JPanel {
 	private static final long serialVersionUID = -5395763224098285614L;
 
 	private final Edge edge_;
-	private final EdgeController edge_controller_;// circular references are okay in Java
+	private final EdgeController edge_controller_;// circular references are okay
+																								// in Java
 
-	private final JLabel column_name_label_ = new JLabel( "Column Name To Sort By:   " );
+	private final JLabel column_name_label_ = new JLabel(
+			"Column Name To Sort By:   " );
 	private final JTextField column_name_field_;
 
 	private final JLabel positive_scores_are_better_label_ = new JLabel( "" );
 	private final JCheckBox positive_scores_are_better_box_ = new JCheckBox();
 
-	private final JLabel num_results_to_transfer_label_ = new JLabel( "Num Results To Transfer:   " );
+	private final JLabel num_results_to_transfer_label_ = new JLabel(
+			"Num Results To Transfer:   " );
 	private final JTextField num_results_to_transfer_field_;
 
-	private final JLabel percentage_of_results_to_transfer_label_ = new JLabel( "Percentage Of Results To Transfer:   " );
+	private final JLabel percentage_of_results_to_transfer_label_ = new JLabel(
+			"Percentage Of Results To Transfer:   " );
 	private final JTextField percentage_of_results_to_transfer_field_;
 
-	private final JLabel use_percentage_instead_of_count_label_ = new JLabel( "" );
-	private final JCheckBox use_percentage_instead_of_count_box_ = new JCheckBox( "Use Percentage Instead Of Count" );
+	private final JLabel use_percentage_instead_of_count_label_ = new JLabel(
+			"" );
+	private final JCheckBox use_percentage_instead_of_count_box_ = new JCheckBox(
+			"Use Percentage Instead Of Count" );
 
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
@@ -52,8 +58,10 @@ public class EdgeView extends JPanel {
 		positive_scores_are_better_box_.setText( "Positive Scores Are Better" );
 		notes_area_.setText( e.getNotes() );
 
-		num_results_to_transfer_field_ = new JTextField( "" + edge_.numResultsToTransfer() );
-		percentage_of_results_to_transfer_field_ = new JTextField( "" + edge_.percentageOfResultsToTransfer() );
+		num_results_to_transfer_field_ = new JTextField(
+				"" + edge_.numResultsToTransfer() );
+		percentage_of_results_to_transfer_field_ = new JTextField(
+				"" + edge_.percentageOfResultsToTransfer() );
 
 		// Percent Vs Num
 		final boolean use_perc = edge_.usePercentageInsteadOfCount();
@@ -66,13 +74,17 @@ public class EdgeView extends JPanel {
 		// Label Formatting
 		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
 		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
-		percentage_of_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
+		percentage_of_results_to_transfer_label_
+				.setHorizontalAlignment( JLabel.RIGHT );
 
 		// Listeners
-		edge_controller_ = new EdgeController( this );// circular references are okay in Java
+		edge_controller_ = new EdgeController( this );// circular references are
+																									// okay in Java
 		column_name_field_.getDocument().addDocumentListener( edge_controller_ );
-		num_results_to_transfer_field_.getDocument().addDocumentListener( edge_controller_ );
-		percentage_of_results_to_transfer_field_.getDocument().addDocumentListener( edge_controller_ );
+		num_results_to_transfer_field_.getDocument()
+				.addDocumentListener( edge_controller_ );
+		percentage_of_results_to_transfer_field_.getDocument()
+				.addDocumentListener( edge_controller_ );
 		positive_scores_are_better_box_.addChangeListener( edge_controller_ );
 		use_percentage_instead_of_count_box_.addChangeListener( edge_controller_ );
 		notes_area_.getDocument().addDocumentListener( edge_controller_ );

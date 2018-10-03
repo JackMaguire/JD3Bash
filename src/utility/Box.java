@@ -14,6 +14,7 @@ public class Box {
 	}
 
 	public boolean pointIsInBox( int x, int y ) {
-		return ( x >= x_begin ) && ( x < x_end ) && ( y >= y_begin ) && ( y < y_end );
+		return ( x >= x_begin ) && ( x < x_end ) && ( y >= y_begin )
+				&& ( y < y_end );
 	}
 }

@@ -39,7 +39,8 @@ public class MainView extends JPanel {
 		graph_ = g;
 		GraphController graph_controller = new GraphController( g );
 		graph_view_ = graph_controller.view();
-		Dimension minimum_size_for_graph_view = new Dimension( 500, getHeight() / 2 );
+		Dimension minimum_size_for_graph_view = new Dimension( 500,
+				getHeight() / 2 );
 		graph_view_.setMinimumSize( minimum_size_for_graph_view );
 
 		if( graph_.selectedNode() == null ) {
@@ -57,7 +58,8 @@ public class MainView extends JPanel {
 		tabs_.addTab( "Edit", node_view_ );
 		tabs_.add( "Compile", compile_view_ );
 
-		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, tabs_ );
+		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_,
+				tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
 
@@ -69,7 +71,8 @@ public class MainView extends JPanel {
 	public void repaint() {
 
 		if( graph_view_ != null ) {
-			Dimension minimum_size_for_graph_view = new Dimension( getWidth() / 4, getHeight() / 2 );
+			Dimension minimum_size_for_graph_view = new Dimension( getWidth() / 4,
+					getHeight() / 2 );
 			graph_view_.setMinimumSize( minimum_size_for_graph_view );
 		}
 
@@ -77,7 +80,8 @@ public class MainView extends JPanel {
 			Node currently_selected_node = graph_.selectedNode();
 			Edge currently_selected_edge = graph_.selectedEdge();
 
-			if( currently_selected_node != selected_node_ || currently_selected_edge != selected_edge_ ) {
+			if( currently_selected_node != selected_node_
+					|| currently_selected_edge != selected_edge_ ) {
 
 				selected_node_ = graph_.selectedNode();
 				selected_edge_ = graph_.selectedEdge();

@@ -23,7 +23,8 @@ public class utility_tests {
 		PBRWrapper< String > string_pbrw = new PBRWrapper< String >( "1" );
 		test_PBRWrapper_helper1( string_pbrw );
 		if( !string_pbrw.value.equals( "12" ) ) {
-			System.err.println( "string_pbrw gave " + string_pbrw.value + " instead of 12" );
+			System.err.println(
+					"string_pbrw gave " + string_pbrw.value + " instead of 12" );
 			success = false;
 		}
 
@@ -37,11 +38,13 @@ public class utility_tests {
 		return success;
 	}
 
-	private final static void test_PBRWrapper_helper1( PBRWrapper< String > string_pbrw ) {
+	private final static void test_PBRWrapper_helper1(
+			PBRWrapper< String > string_pbrw ) {
 		string_pbrw.value += "2";
 	}
 
-	private final static void test_PBRWrapper_helper2( PBRWrapper< Integer > string_pbrw ) {
+	private final static void test_PBRWrapper_helper2(
+			PBRWrapper< Integer > string_pbrw ) {
 		string_pbrw.value += 2;
 	}
 

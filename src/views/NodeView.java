@@ -21,7 +21,8 @@ public class NodeView extends JPanel {
 	private static final long serialVersionUID = 8094662324693569393L;
 
 	private final Node node_;
-	private final NodeController node_controller_;// circular references are okay in Java
+	private final NodeController node_controller_;// circular references are okay
+																								// in Java
 
 	// Segment1
 	private final JLabel title_label_ = new JLabel( "Title:   " );
@@ -36,17 +37,22 @@ public class NodeView extends JPanel {
 	// Segment 2
 	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
-	private final JScrollPane user_flags_scroll_pane_ = new JScrollPane( user_flags_area_ );
+	private final JScrollPane user_flags_scroll_pane_ = new JScrollPane(
+			user_flags_area_ );
 
 	// Segment 3
-	private final JLabel auto_flags_label_ = new JLabel( "Rosetta Flags (Added By Us)" );
+	private final JLabel auto_flags_label_ = new JLabel(
+			"Rosetta Flags (Added By Us)" );
 	private final JTextArea auto_flags_area_ = new JTextArea();
-	private final JScrollPane auto_flags_scroll_pane_ = new JScrollPane( auto_flags_area_ );
+	private final JScrollPane auto_flags_scroll_pane_ = new JScrollPane(
+			auto_flags_area_ );
 
 	// Segment 4
-	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
+	private final JLabel recommended_flags_label_ = new JLabel(
+			"Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
-	private final JScrollPane recommended_flags_scroll_pane_ = new JScrollPane( recommended_flags_area_ );
+	private final JScrollPane recommended_flags_scroll_pane_ = new JScrollPane(
+			recommended_flags_area_ );
 
 	// Segment 5: TODO
 	private final JLabel notes_label_ = new JLabel( "Notes" );

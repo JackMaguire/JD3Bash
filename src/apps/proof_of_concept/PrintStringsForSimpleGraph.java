@@ -35,7 +35,8 @@ public class PrintStringsForSimpleGraph {
 			scripts = GraphParsing.parseGraph( simple_graph, options );
 		}
 		catch( InvalidGraphException e ) {
-			System.err.println( "PrintStringsForSimpleGraph seems to be out of date. Its toy graph is unparsable" );
+			System.err.println(
+					"PrintStringsForSimpleGraph seems to be out of date. Its toy graph is unparsable" );
 			e.printStackTrace();
 			return;
 		}

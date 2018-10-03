@@ -29,7 +29,8 @@ public class CompileView extends JPanel implements ActionListener {
 
 	private final JButton compile_button_ = new JButton( "Compile" );
 
-	private final JCheckBox serialize_poses_box_ = new JCheckBox( "Serialize Intermediate Poses" );
+	private final JCheckBox serialize_poses_box_ = new JCheckBox(
+			"Serialize Intermediate Poses" );
 
 	private final JTextArea setup_area_ = new JTextArea();
 	private final JScrollPane setup_scroll_pane_ = new JScrollPane( setup_area_ );
@@ -71,7 +72,8 @@ public class CompileView extends JPanel implements ActionListener {
 		try {
 			GraphParsingOptions options = new GraphParsingOptions();
 			options.serialize_intermediate_poses = serialize_poses_box_.isSelected();
-			Pair< String, String > run_and_setup = GraphParsing.parseGraph( graph_, options );
+			Pair< String, String > run_and_setup = GraphParsing.parseGraph( graph_,
+					options );
 			String run_script = run_and_setup.first;
 			String setup_script = run_and_setup.second;
 			setup_area_.setText( setup_script );

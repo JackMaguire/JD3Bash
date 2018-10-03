@@ -41,8 +41,10 @@ public class output_tests {
 			test_graph.addEdge( test_graph.getNode( 0 ), test_graph.getNode( 1 ) );
 
 			ArrayList< Node > list = GraphParsing.determineOrderOfNodes( test_graph );
-			if( list.get( 0 ).id() != 2 || list.get( 1 ).id() != 0 || list.get( 2 ).id() != 1 ) {
-				System.err.print( "test_determineOrderOfNodes Simple Case failed. Order given is" );
+			if( list.get( 0 ).id() != 2 || list.get( 1 ).id() != 0
+					|| list.get( 2 ).id() != 1 ) {
+				System.err.print(
+						"test_determineOrderOfNodes Simple Case failed. Order given is" );
 				for( Node n : list ) {
 					System.err.print( " " + n.id() );
 				}

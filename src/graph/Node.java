@@ -20,8 +20,10 @@ public class Node {
 	private int y_;
 	private Color color_ = Color.gray;
 
-	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
-	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
+	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that
+																									// occur before this node
+	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that
+																										// occur after this node
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
 	private String title_;
@@ -29,7 +31,8 @@ public class Node {
 
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
-	// stage_is_valid_ is meant to prevent other methods from calling getStage() and
+	// stage_is_valid_ is meant to prevent other methods from calling getStage()
+	// and
 	// assuming it is the current stage when it is in fact unassigned
 	private int stage_ = 0;
 	private boolean stage_is_valid_ = false;
@@ -65,19 +68,23 @@ public class Node {
 
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_NODE" ) ) {
-			throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
+			throw new LoadFailureException(
+					"Expected 'START_NODE' instead of '" + first_line + "'" );
 		}
 
-		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in.readLine() ) {
+		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in
+				.readLine() ) {
 			if( line.equals( "START_FLAGS" ) ) {
-				for( String line2 = in.readLine(); !line2.equals( "END_FLAGS" ); line2 = in.readLine() ) {
+				for( String line2 = in.readLine(); !line2
+						.equals( "END_FLAGS" ); line2 = in.readLine() ) {
 					user_rosetta_flags_.add( line2 );
 				}
 				continue;
 			}
 
 			if( line.equals( "START_NOTES" ) ) {
-				for( String line2 = in.readLine(); !line2.equals( "END_NOTES" ); line2 = in.readLine() ) {
+				for( String line2 = in.readLine(); !line2
+						.equals( "END_NOTES" ); line2 = in.readLine() ) {
 					notes_ += line2 + "\n";
 				}
 				continue;
@@ -143,8 +150,10 @@ public class Node {
 	}
 
 	private void init() {
-		user_rosetta_flags_.add( "# Keep in mind that all commands will be run one directory deeper." );
-		user_rosetta_flags_.add( "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
+		user_rosetta_flags_.add(
+				"# Keep in mind that all commands will be run one directory deeper." );
+		user_rosetta_flags_.add(
+				"# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
 		user_rosetta_flags_.add( "" );
 		user_rosetta_flags_.add( "# -nstruct 1" );
 	}
@@ -280,7 +289,8 @@ public class Node {
 
 	public final int stage() throws UndefinedValueException {
 		if( !stage_is_valid_ ) {
-			throw new UndefinedValueException( "Node is prompted for stage_ which is in an undefined state" );
+			throw new UndefinedValueException(
+					"Node is prompted for stage_ which is in an undefined state" );
 		}
 		return stage_;
 	}
@@ -341,7 +351,8 @@ public class Node {
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////
-	public final int inDegreeIgnoringTheseNodes( ArrayList< Node > nodes_to_ignore ) {
+	public final int inDegreeIgnoringTheseNodes(
+			ArrayList< Node > nodes_to_ignore ) {
 		int degree = 0;
 		for( Edge e : upstream_edges_ ) {
 			Node upstream_node = e.sourceNode();
@@ -368,7 +379,8 @@ public class Node {
 		}
 
 		if( downstream_edges_.size() > 0 ) {
-			// list.add( "# -out:file:srlz 1 # Activate this by checking the 'Serialize
+			// list.add( "# -out:file:srlz 1 # Activate this by checking the
+			// 'Serialize
 			// Intermediate Poses' box in the compile tab" );
 		}
 
@@ -379,7 +391,8 @@ public class Node {
 
 	public final static ArrayList< String > commonFlags() {
 		ArrayList< String > list = new ArrayList< String >();
-		list.add( "-linmem_ig 10                   # save time and memory during packing" );
+		list.add(
+				"-linmem_ig 10                   # save time and memory during packing" );
 		list.add( "-ignore_unrecognized_res true   # false by default" );
 		list.add( "-ignore_waters false            # true by default" );
 		list.add( "-mpi_tracer_to_file mpi_" );
