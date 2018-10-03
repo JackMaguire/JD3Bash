@@ -3,6 +3,7 @@ package unit_tests;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -177,6 +178,9 @@ public class graph_tests {
 			System.err.println( "Cannot close unit_test.dat while reading" );
 			return false;
 		}
+		
+		File f = new File( "unit_test.dat" );
+		f.delete();
 		
 		return success;
 	}
