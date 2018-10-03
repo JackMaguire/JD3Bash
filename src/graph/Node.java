@@ -37,7 +37,7 @@ public class Node {
 	public Node( int x, int y ) {
 		x_ = x;
 		y_ = y;
-		title_ = "[title " + id_ + "]";
+		title_ = "Node_" + id_;
 
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
@@ -62,6 +62,9 @@ public class Node {
 
 	public final void setId( int id ) {
 		id_ = id;
+		if( title_.equals( "Node_0" ) ) {
+			title_ = "Node_" + id_;
+		}
 	}
 
 	public final int x() {

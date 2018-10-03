@@ -25,11 +25,10 @@ public class GraphParsing {
 		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
+		addGlobalIntroToScript( run_script );
 		addGlobalVariablesToRunScript( run_script );
 
 		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
-
-		addGlobalIntroToScript( run_script );
 		addGlobalIntroToScript( setup_script );
 
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
@@ -173,14 +172,16 @@ public class GraphParsing {
 				run_script.value += "echo temp3 >> ../" + name_of_next_stage_directory + "/input_files\n";
 			}
 
-			run_script.value += "cd ..\n";
 		}
+		
+		run_script.value += "cd ..\n";
+		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}
 
 	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {
 		script.value += "# Script was created using JD3BASH\n";
 		script.value += "# Version number: " + VersionInfo.current_version + "\n";
-		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n";
+		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
 	}
 
 	private static void addStageIntroToScript( int stage, PBRWrapper< String > script ) {
