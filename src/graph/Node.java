@@ -58,7 +58,7 @@ public class Node {
 		user_rosetta_flags_.add( "" );
 		user_rosetta_flags_.add( "# -nstruct 1" );
 	}
-	
+
 	///////////////////////
 	// Getters and Setters//
 	///////////////////////
@@ -283,7 +283,7 @@ public class Node {
 		}
 
 		list.add( "-parser:protocol ../" + xml_script_ );
-		
+
 		return list;
 	}
 
