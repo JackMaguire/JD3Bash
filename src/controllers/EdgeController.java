@@ -61,6 +61,8 @@ public class EdgeController implements ChangeListener, DocumentListener {
 			}
 			catch( Exception X ) {
 			}
+		} else if( e.getDocument() == edge_view_.getNotesArea().getDocument() ) {
+			edge_view_.getEdge().setNotes( edge_view_.getNotesArea().getText() );
 		}
 	}
 
