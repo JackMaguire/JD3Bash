@@ -55,6 +55,8 @@ public class Node {
 	private void init() {
 		user_rosetta_flags_.add( "# Keep in mind that all commands will be run one directory deeper." );
 		user_rosetta_flags_.add( "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
+		user_rosetta_flags_.add( "" );
+		user_rosetta_flags_.add( "# -nstruct 1" );
 	}
 	
 	///////////////////////
