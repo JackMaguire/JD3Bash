@@ -26,10 +26,10 @@ public class CompileView extends JPanel implements ActionListener {
 	private final Graph graph_;
 
 	private final JButton compile_button_ = new JButton( "Compile" );
-	
+
 	private final JTextArea setup_area_ = new JTextArea();
 	private final JScrollPane setup_scroll_pane_ = new JScrollPane( setup_area_ );
-	
+
 	private final JTextArea run_area_ = new JTextArea();
 	private final JScrollPane run_scroll_pane_ = new JScrollPane( run_area_ );
 

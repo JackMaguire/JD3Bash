@@ -55,8 +55,6 @@ public class GraphController implements MouseListener, MouseMotionListener, KeyL
 
 	@Override
 	public void mouseMoved( MouseEvent e ) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
