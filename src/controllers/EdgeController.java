@@ -1,8 +1,5 @@
 package controllers;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.DocumentEvent;
@@ -10,17 +7,12 @@ import javax.swing.event.DocumentListener;
 
 import views.EdgeView;
 
-public class EdgeController implements ActionListener, ChangeListener, DocumentListener {
+public class EdgeController implements ChangeListener, DocumentListener {
 
 	private final EdgeView edge_view_;// circular references are okay in Java
 
 	public EdgeController( EdgeView ev ) {
 		edge_view_ = ev;
-	}
-
-	@Override
-	public void actionPerformed( ActionEvent e ) {
-
 	}
 
 	@Override
