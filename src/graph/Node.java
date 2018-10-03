@@ -1,6 +1,8 @@
 package graph;
 
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -295,4 +297,32 @@ public class Node {
 		list.add( "-mpi_tracer_to_file mpi_" );
 		return list;
 	}
+	
+	///Save/Load
+	public void save( BufferedWriter out ) throws IOException {
+		String save_string = "START_NODE\n";
+		save_string += "id " + id_ + "\n";
+		save_string += "x " + x_ + "\n";
+		save_string += "y " + y_ + "\n";
+		save_string += "r " + color_.getRed() + "\n";
+		save_string += "g " + color_.getGreen() + "\n";
+		save_string += "b " + color_.getBlue() + "\n";
+		save_string += "command " + command_ + "\n";
+		save_string += "title " + title_ + "\n";
+		save_string += "script " + xml_script_ + "\n";
+
+		save_string += "START_FLAGS\n";
+		for( String flag : user_rosetta_flags_ ) {
+			save_string += flag + "\n";
+		}
+		save_string += "END_FLAGS\n";
+
+		save_string += "START_NOTES\n";
+		save_string += notes_ + "\n";
+		save_string += "END_NOTES\n";
+		
+		save_string += "END_NODE\n";
+		out.write( save_string );
+	}
+	
 }
