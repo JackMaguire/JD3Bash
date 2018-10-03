@@ -6,6 +6,7 @@ import java.awt.GridLayout;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -35,23 +36,28 @@ public class NodeView extends JPanel {
 	// Segment 2
 	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
-
+	private final JScrollPane user_flags_scroll_pane_ = new JScrollPane( user_flags_area_ );
+	
 	// Segment 3
 	private final JLabel auto_flags_label_ = new JLabel( "Rosetta Flags (Added By Us)" );
 	private final JTextArea auto_flags_area_ = new JTextArea();
-
+	private final JScrollPane auto_flags_scroll_pane_ = new JScrollPane( auto_flags_area_ );
+	
 	// Segment 4
 	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
-
+	private final JScrollPane recommended_flags_scroll_pane_ = new JScrollPane( recommended_flags_area_ );
+	
 	// Segment 5: TODO
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
-
+	private final JScrollPane notes_scroll_pane_ = new JScrollPane( notes_area_ );
+	
 	// Segment 6: TODO
 	private final JLabel help_label_ = new JLabel( "Help" );
 	private final JTextArea help_area_ = new JTextArea();
-
+	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
+	
 	public NodeView( Node n ) {
 		node_ = n;
 
@@ -93,6 +99,10 @@ public class NodeView extends JPanel {
 		user_flags_area_.getDocument().addDocumentListener( node_controller_ );
 		notes_area_.getDocument().addDocumentListener( node_controller_ );
 
+		auto_flags_area_.setEditable( false );
+		recommended_flags_area_.setEditable( false );
+		help_area_.setEditable( false );
+		
 		setupView();
 	}
 
@@ -119,27 +129,27 @@ public class NodeView extends JPanel {
 		this.add( segment1 );
 
 		JPanel segment2 = new JPanel( new BorderLayout() );
-		segment2.add( user_flags_area_, BorderLayout.CENTER );
+		segment2.add( user_flags_scroll_pane_, BorderLayout.CENTER );
 		segment2.add( user_flags_label_, BorderLayout.NORTH );
 		this.add( segment2 );
 
 		JPanel segment3 = new JPanel( new BorderLayout() );
-		segment3.add( auto_flags_area_, BorderLayout.CENTER );
+		segment3.add( auto_flags_scroll_pane_, BorderLayout.CENTER );
 		segment3.add( auto_flags_label_, BorderLayout.NORTH );
 		this.add( segment3 );
 
 		JPanel segment4 = new JPanel( new BorderLayout() );
-		segment4.add( recommended_flags_area_, BorderLayout.CENTER );
+		segment4.add( recommended_flags_scroll_pane_, BorderLayout.CENTER );
 		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
 		this.add( segment4 );
 
 		JPanel segment5 = new JPanel( new BorderLayout() );
-		segment5.add( notes_area_, BorderLayout.CENTER );
+		segment5.add( notes_scroll_pane_, BorderLayout.CENTER );
 		segment5.add( notes_label_, BorderLayout.NORTH );
 		this.add( segment5 );
 
 		JPanel segment6 = new JPanel( new BorderLayout() );
-		segment6.add( help_area_, BorderLayout.CENTER );
+		segment6.add( help_scroll_pane_, BorderLayout.CENTER );
 		segment6.add( help_label_, BorderLayout.NORTH );
 		this.add( segment6 );
 	}
