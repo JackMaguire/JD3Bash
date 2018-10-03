@@ -19,7 +19,7 @@ public class GraphParsing {
 
 	// First string is the "run" script, second string is the "setup" script
 	// This can return null if an error occurs!
-	public static Pair< String, String > parseGraph( Graph g ) throws InvalidGraphException {
+	public static Pair< String, String > parseGraph( Graph g, GraphParsingOptions options ) throws InvalidGraphException {
 		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
@@ -41,8 +41,8 @@ public class GraphParsing {
 		for( int stage = 1; stage <= nodes_in_order.size(); ++stage ) {
 			Node n = nodes_in_order.get( stage - 1 );// We are 1-indexing the stages
 			try {
-				createSetupInstructionsForNode( n, setup_script );
-				createRunInstructionsForNode( n, run_script );
+				createSetupInstructionsForNode( n, setup_script, options );
+				createRunInstructionsForNode( n, run_script, options );
 			}
 			catch( UndefinedValueException e ) {
 				System.err
@@ -109,7 +109,7 @@ public class GraphParsing {
 		return false;
 	}
 
-	private static void createSetupInstructionsForNode( Node n, PBRWrapper< String > setup_script )
+	private static void createSetupInstructionsForNode( Node n, PBRWrapper< String > setup_script, GraphParsingOptions options )
 			throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), setup_script );
@@ -120,13 +120,22 @@ public class GraphParsing {
 			setup_script.value += "echo '' > " + dirname + "/input_files\n";
 		}
 
-		// setup_script.value += "echo '' > " + dirname + "/flags\n";
 		for( String flag : n.getAllRosettaFlags() ) {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
+		
+		if( options.serialize_intermediate_poses ) {
+			if( n.numUpstreamEdges() > 0 ) {
+				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname + "/flags\n";
+			}
+
+			if( n.numDownstreamEdges() > 0 ) {
+				setup_script.value += "echo \"-out:file:srlz 1\" >> " + dirname + "/flags\n";
+			}
+		}
 	}
 
-	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script )
+	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script, GraphParsingOptions options )
 			throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), run_script );

@@ -261,13 +261,13 @@ public class Node {
 
 		if( upstream_edges_.size() > 0 ) {
 			list.add( "-l input_files" );
-			list.add( "-in:file:srlz 1" );
+			//list.add( "# -in:file:srlz 1 # Activate this by checking the 'Serialize Intermediate Poses' box in the compile tab" );
 		} else {
 			list.add( "# Don't forget to add input file flags (-s, -l, etc)" );
 		}
 
 		if( downstream_edges_.size() > 0 ) {
-			list.add( "-out:file:srlz 1" );
+			//list.add( "# -out:file:srlz 1 # Activate this by checking the 'Serialize Intermediate Poses' box in the compile tab" );
 		}
 
 		return list;

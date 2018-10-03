@@ -3,6 +3,7 @@ package apps.proof_of_concept;
 import exceptions.InvalidGraphException;
 import graph.*;
 import output.GraphParsing;
+import output.GraphParsingOptions;
 import utility.Pair;
 
 public class PrintStringsForSimpleGraph {
@@ -30,7 +31,8 @@ public class PrintStringsForSimpleGraph {
 
 		Pair< String, String > scripts = null;
 		try {
-			scripts = GraphParsing.parseGraph( simple_graph );
+			GraphParsingOptions options = new GraphParsingOptions();
+			scripts = GraphParsing.parseGraph( simple_graph, options );
 		}
 		catch( InvalidGraphException e ) {
 			System.err.println( "PrintStringsForSimpleGraph seems to be out of date. Its toy graph is unparsable" );
