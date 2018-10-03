@@ -17,7 +17,7 @@ public class graph_tests {
 		} else {
 			System.out.println( "\ttest_SimpleGeometry() passed" );
 		}
-		
+
 		if( !test_SaveAndLoad() ) {
 			System.err.println( "\ttest_SaveAndLoad() failed" );
 			success = false;
@@ -79,34 +79,33 @@ public class graph_tests {
 		return success;
 	}// test_SimpleGeometry
 
-	
 	private final static boolean test_SaveAndLoad() {
 		boolean success = true;
-		
+
 		// 0->2
 		// 1->2
 		// 2->3
 		// 2->4
-		
+
 		final Graph original_graph = new Graph();
 		final Node[] nodes = new Node[ 4 ];
-		for( int i=0; i< nodes.length; ++i ) {
+		for( int i = 0; i < nodes.length; ++i ) {
 			nodes[ i ] = new Node( i, i );
 			original_graph.addNode( nodes[ i ] );
 		}
-		
+
 		final Edge edge02 = original_graph.addEdge( nodes[ 0 ], nodes[ 2 ] );
 		final Edge edge12 = original_graph.addEdge( nodes[ 1 ], nodes[ 2 ] );
 		final Edge edge23 = original_graph.addEdge( nodes[ 2 ], nodes[ 3 ] );
 		final Edge edge24 = original_graph.addEdge( nodes[ 2 ], nodes[ 4 ] );
-		
+
 		edge02.setColumnNameToSortBy( "UNIT_TEST" );
 		edge12.setNotes( "UNIT\nTEST" );
 		edge23.setNumResultsToTransfer( 23 );
 		edge23.setPositiveScoresAreBetter( true );
 		edge24.setPercentageOfResultsToTransfer( 0.25 );
 		edge24.setUsePercentageInsteadOfCount( true );
-		
+
 		nodes[ 0 ].setColor( new Color( 1, 2, 3 ) );
 		nodes[ 1 ].setCommand( "../unit_test.sh" );
 		nodes[ 2 ].setNotes( "UNIT TEST" );
@@ -115,7 +114,7 @@ public class graph_tests {
 		nodes[ 0 ].addUserRosettaFlag( "-unit test" );
 		nodes[ 1 ].setX( 100 );
 		nodes[ 1 ].setY( 200 );
-		
+
 		return success;
 	}
 }
