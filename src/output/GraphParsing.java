@@ -116,7 +116,7 @@ public class GraphParsing {
 
 		setup_script.value += "mkdir " + dirname + "\n";
 		if( n.numUpstreamEdges() > 0 ) {
-			setup_script.value += "echo '' > " + dirname + "/input_files\n";
+			setup_script.value += "touch > " + dirname + "/input_files\n";
 		}
 
 		for( String flag : n.getAllRosettaFlags() ) {
@@ -169,7 +169,7 @@ public class GraphParsing {
 				}
 				run_script.value += "# Extract structures that will survive until the next stage\n";
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
-				run_script.value += "echo temp3 >> ../" + name_of_next_stage_directory + "/input_files\n";
+				run_script.value += "cat temp3 >> ../" + name_of_next_stage_directory + "/input_files\n";
 			}
 
 		}
