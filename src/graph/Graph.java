@@ -129,7 +129,13 @@ public class Graph {
 	}
 
 	public void loadSelfNodesAndEdges( BufferedReader in ) throws IOException, LoadFailureException {
-		// TODO delete everything!
+		//First, Delete everything!
+		selected_node_ = null;
+		selected_edge_ = null;
+		next_node_id_ = 0;
+		nodes_.clear();
+		edges_.clear();
+		
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_GRAPH" ) ) {
 			throw new LoadFailureException( "Expected 'START_GRAPH' instead of '" + first_line + "'" );
@@ -157,6 +163,11 @@ public class Graph {
 				}
 				continue;
 			}
+		}//for string line
+		
+		if( nodes_.isEmpty() ) {
+			throw new LoadFailureException( "No Nodes Were Loaded" );
 		}
-	}
+		selected_node_ = nodes_.get( 0 );
+	}//load self
 }
