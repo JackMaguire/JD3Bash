@@ -1,7 +1,11 @@
 package graph;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+
+import exceptions.LoadFailureException;
 
 public class Edge {
 
@@ -24,6 +28,71 @@ public class Edge {
 	public Edge( Node source_node, Node dest_node ) {
 		source_node_ = source_node;
 		destination_node_ = dest_node;
+	}
+
+	public Edge( BufferedReader in, ArrayList< Node > nodes ) throws IOException, LoadFailureException {
+		final String first_line = in.readLine();
+		if( !first_line.equals( "START_EDGE" ) ) {
+			throw new LoadFailureException( "Expected 'START_EDGE' instead of '" + first_line + "'" );
+		}
+		
+		for( String line = in.readLine(); !line.equals( "END_EDGE" ); line = in.readLine() ) {
+			if( line.equals( "START_NOTES" ) ) {
+				for( String line2 = in.readLine(); !line2.equals( "END_NOTES" ); line2 = in.readLine() ) {
+					notes_ += line2 + "\n";
+				}
+				continue;
+			}
+			
+			String[] split = line.split( "\\s+" );
+			
+			if( split[ 0 ].equals( "source" ) ) {
+				int node_id = Integer.parseInt( split[ 1 ] );
+				for( Node n : nodes ) {
+					if( n.id() == node_id ) {
+						source_node_ = n;
+						break;
+					}
+				}
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "destination" ) ) {
+				int node_id = Integer.parseInt( split[ 1 ] );
+				for( Node n : nodes ) {
+					if( n.id() == node_id ) {
+						destination_node_ = n;
+						break;
+					}
+				}
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "column" ) ) {
+				column_name_to_sort_by_ = split[ 1 ];
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "pos_is_better" ) ) {
+				positive_scores_are_better_ = Boolean.parseBoolean( split[ 1 ] );
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "num" ) ) {
+				num_results_to_transfer_ = Integer.parseInt( split[ 1 ] );
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "perc" ) ) {
+				percentage_of_results_to_transfer_ = Double.parseDouble( split[ 1 ] );
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "use_perc" ) ) {
+				use_percentage_instead_of_count_ = Boolean.parseBoolean( split[ 1 ] );
+				continue;
+			}
+		}
 	}
 
 	public final Node sourceNode() {
