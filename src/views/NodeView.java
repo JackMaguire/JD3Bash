@@ -37,27 +37,27 @@ public class NodeView extends JPanel {
 	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
 	private final JScrollPane user_flags_scroll_pane_ = new JScrollPane( user_flags_area_ );
-	
+
 	// Segment 3
 	private final JLabel auto_flags_label_ = new JLabel( "Rosetta Flags (Added By Us)" );
 	private final JTextArea auto_flags_area_ = new JTextArea();
 	private final JScrollPane auto_flags_scroll_pane_ = new JScrollPane( auto_flags_area_ );
-	
+
 	// Segment 4
 	private final JLabel recommended_flags_label_ = new JLabel( "Commonly Recommended Flags" );
 	private final JTextArea recommended_flags_area_ = new JTextArea();
 	private final JScrollPane recommended_flags_scroll_pane_ = new JScrollPane( recommended_flags_area_ );
-	
+
 	// Segment 5: TODO
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
 	private final JScrollPane notes_scroll_pane_ = new JScrollPane( notes_area_ );
-	
+
 	// Segment 6: TODO
 	private final JLabel help_label_ = new JLabel( "Help" );
 	private final JTextArea help_area_ = new JTextArea();
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
-	
+
 	public NodeView( Node n ) {
 		node_ = n;
 
@@ -102,7 +102,7 @@ public class NodeView extends JPanel {
 		auto_flags_area_.setEditable( false );
 		recommended_flags_area_.setEditable( false );
 		help_area_.setEditable( false );
-		
+
 		setupView();
 	}
 

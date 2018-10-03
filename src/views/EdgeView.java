@@ -41,17 +41,17 @@ public class EdgeView extends JPanel {
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
 	private final JScrollPane notes_scroll_pane_ = new JScrollPane( notes_area_ );
-	
+
 	private final JLabel help_label_ = new JLabel( "Help" );
 	private final JTextArea help_area_ = new JTextArea();
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
-	
+
 	public EdgeView( Edge e ) {
 		edge_ = e;
 		column_name_field_ = new JTextField( edge_.columnNameToSortBy() );
 		positive_scores_are_better_box_.setText( "Positive Scores Are Better" );
 		notes_area_.setText( e.getNotes() );
-		
+
 		num_results_to_transfer_field_ = new JTextField( "" + edge_.numResultsToTransfer() );
 		percentage_of_results_to_transfer_field_ = new JTextField( "" + edge_.percentageOfResultsToTransfer() );
 
@@ -77,9 +77,9 @@ public class EdgeView extends JPanel {
 		use_percentage_instead_of_count_box_.addChangeListener( edge_controller_ );
 		notes_area_.getDocument().addDocumentListener( edge_controller_ );
 
-		//TextAreas
+		// TextAreas
 		help_area_.setEditable( false );
-		
+
 		setupView();
 	}
 
@@ -103,11 +103,11 @@ public class EdgeView extends JPanel {
 		JPanel notes_panel = new JPanel( new BorderLayout() );
 		notes_panel.add( notes_scroll_pane_, BorderLayout.CENTER );
 		notes_panel.add( notes_label_, BorderLayout.NORTH );
-		
+
 		JPanel help_panel = new JPanel( new BorderLayout() );
 		help_panel.add( help_scroll_pane_, BorderLayout.CENTER );
 		help_panel.add( help_label_, BorderLayout.NORTH );
-		
+
 		setLayout( new GridLayout( 3, 1 ) );
 		add( top_view );
 		add( notes_panel );
@@ -145,7 +145,7 @@ public class EdgeView extends JPanel {
 	public Edge getEdge() {
 		return edge_;
 	}
-	
+
 	public JTextArea getNotesArea() {
 		return notes_area_;
 	}

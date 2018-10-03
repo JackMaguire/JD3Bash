@@ -12,8 +12,8 @@ public class Edge {
 	private double percentage_of_results_to_transfer_;
 	private boolean use_percentage_instead_of_count_ = false;
 
-	private String notes_="";
-	
+	private String notes_ = "";
+
 	public Edge() {
 
 	}
@@ -78,11 +78,11 @@ public class Edge {
 	public final void setUsePercentageInsteadOfCount( boolean setting ) {
 		use_percentage_instead_of_count_ = setting;
 	}
-	
+
 	public final String getNotes() {
 		return notes_;
 	}
-	
+
 	public final void setNotes( String notes ) {
 		notes_ = notes;
 	}

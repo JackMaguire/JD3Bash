@@ -108,8 +108,8 @@ public class GraphParsing {
 		return false;
 	}
 
-	private static void createSetupInstructionsForNode( Node n, PBRWrapper< String > setup_script, GraphParsingOptions options )
-			throws UndefinedValueException {
+	private static void createSetupInstructionsForNode( Node n, PBRWrapper< String > setup_script,
+			GraphParsingOptions options ) throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), setup_script );
 		final String dirname = n.dirname();
@@ -122,7 +122,7 @@ public class GraphParsing {
 		for( String flag : n.getAllRosettaFlags() ) {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
-		
+
 		if( options.serialize_intermediate_poses ) {
 			if( n.numUpstreamEdges() > 0 ) {
 				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname + "/flags\n";
@@ -134,8 +134,8 @@ public class GraphParsing {
 		}
 	}
 
-	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script, GraphParsingOptions options )
-			throws UndefinedValueException {
+	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script,
+			GraphParsingOptions options ) throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), run_script );
 		final String dirname = n.dirname();
@@ -173,7 +173,7 @@ public class GraphParsing {
 			}
 
 		}
-		
+
 		run_script.value += "cd ..\n";
 		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}

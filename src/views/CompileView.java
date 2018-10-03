@@ -30,7 +30,7 @@ public class CompileView extends JPanel implements ActionListener {
 	private final JButton compile_button_ = new JButton( "Compile" );
 
 	private final JCheckBox serialize_poses_box_ = new JCheckBox( "Serialize Intermediate Poses" );
-	
+
 	private final JTextArea setup_area_ = new JTextArea();
 	private final JScrollPane setup_scroll_pane_ = new JScrollPane( setup_area_ );
 
@@ -57,10 +57,10 @@ public class CompileView extends JPanel implements ActionListener {
 		center_panel.add( top_center_panel );
 		center_panel.add( bottom_center_panel );
 
-		final JPanel topmost_panel = new JPanel( new GridLayout( 2,1 ) );
+		final JPanel topmost_panel = new JPanel( new GridLayout( 2, 1 ) );
 		topmost_panel.add( compile_button_ );
 		topmost_panel.add( serialize_poses_box_ );
-		
+
 		setLayout( new BorderLayout() );
 		add( center_panel, BorderLayout.CENTER );
 		add( topmost_panel, BorderLayout.NORTH );
