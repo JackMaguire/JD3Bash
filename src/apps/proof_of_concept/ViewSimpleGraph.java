@@ -4,7 +4,6 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 
-import controllers.GraphController;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
