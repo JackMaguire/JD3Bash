@@ -31,7 +31,6 @@ public class Node {
 	private boolean stage_is_valid_ = false;
 
 	private ArrayList< String > user_rosetta_flags_ = new ArrayList< String >();
-	// private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
 
 	private String notes_ = "";
 
@@ -39,15 +38,6 @@ public class Node {
 		x_ = x;
 		y_ = y;
 		title_ = "[title " + id_ + "]";
-
-		upstream_edges_ = new ArrayList< Edge >();
-		downstream_edges_ = new ArrayList< Edge >();
-	}
-
-	public Node( String title ) {
-		x_ = 0;
-		y_ = 0;
-		title_ = title;
 
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
@@ -115,7 +105,7 @@ public class Node {
 	}
 
 	public final Edge getUpstreamEdge( int i ) {
-		// ArrayList does error handling so we don't have to
+		// ArrayList does bounds checking so we don't have to
 		return upstream_edges_.get( i );
 	}
 

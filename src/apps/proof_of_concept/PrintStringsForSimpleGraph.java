@@ -9,9 +9,9 @@ public class PrintStringsForSimpleGraph {
 
 	public static void main( String[] args ) {
 		Graph simple_graph = new Graph();
-		Node n0 = simple_graph.addNode( new Node( "Dock" ) );
-		Node n1 = simple_graph.addNode( new Node( "HBNet" ) );
-		Node n2 = simple_graph.addNode( new Node( "Design" ) );
+		Node n0 = simple_graph.addNode( new Node( "Dock", 0, 0 ) );
+		Node n1 = simple_graph.addNode( new Node( "HBNet", 10, 10 ) );
+		Node n2 = simple_graph.addNode( new Node( "Design", 20, 20 ) );
 
 		Edge e1 = simple_graph.addEdge( n0, n1 );
 		Edge e2 = simple_graph.addEdge( n1, n2 );
