@@ -28,7 +28,7 @@ public class CompileView extends JPanel implements ActionListener {
 		compile_button_.addActionListener( this );
 		setup_area_.setEditable( false );
 		run_area_.setEditable( false );
-		
+
 		JPanel top_center_panel = new JPanel( new BorderLayout() );
 		JLabel top_center_title = new JLabel( "Setup Script" );
 		top_center_panel.add( top_center_title, BorderLayout.NORTH );
@@ -58,7 +58,7 @@ public class CompileView extends JPanel implements ActionListener {
 			run_area_.setText( run_script );
 		}
 		catch( InvalidGraphException e1 ) {
-			//e1.printStackTrace();
+			// e1.printStackTrace();
 			setup_area_.setText( "Can not compile! Error:\n" + e1.getMessage() );
 			run_area_.setText( "Can not compile! Error:\n" + e1.getMessage() );
 		}
