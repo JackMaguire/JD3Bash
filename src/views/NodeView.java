@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controllers.NodeController;
 import graph.Node;
 
 public class NodeView extends JPanel {
@@ -19,7 +20,8 @@ public class NodeView extends JPanel {
 	private static final long serialVersionUID = 8094662324693569393L;
 
 	private final Node node_;
-
+	private final NodeController node_controller_;// circular references are okay in Java
+	
 	// Segment1
 	private final JLabel title_label_ = new JLabel( "Title:   " );
 	private final JTextField title_field_;
@@ -81,6 +83,14 @@ public class NodeView extends JPanel {
 
 		setFonts( 12 );
 
+		//Controller
+		node_controller_ = new NodeController( this );
+		title_field_.getDocument().addDocumentListener( node_controller_ );
+		command_field_.getDocument().addDocumentListener( node_controller_ );
+		script_field_.getDocument().addDocumentListener( node_controller_ );
+		user_flags_area_.getDocument().addDocumentListener( node_controller_ );
+		notes_area_.getDocument().addDocumentListener( node_controller_ );
+		
 		setupView();
 	}
 
@@ -132,4 +142,28 @@ public class NodeView extends JPanel {
 		this.add( segment6 );
 	}
 
+	public Node getNode() {
+		return node_;
+	}
+	
+	public JTextField getTitleField() {
+		return title_field_;
+	}
+	
+	public JTextField getCommandField() {
+		return command_field_;
+	}
+	
+	public JTextField getScriptField() {
+		return script_field_;
+	}
+
+	public JTextArea getUserFlagsArea() {
+		return user_flags_area_;
+	}
+	
+	public JTextArea getNotesArea() {
+		return notes_area_;
+	}
+	
 }
