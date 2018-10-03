@@ -125,13 +125,13 @@ public class graph_tests {
 
 		BufferedWriter out = null;
 		try {
-			 out = new BufferedWriter( new FileWriter("unit_test.dat"));
+			out = new BufferedWriter( new FileWriter( "unit_test.dat" ) );
 		}
 		catch( IOException e ) {
 			System.err.println( "Cannot create unit_test.dat" );
 			return false;
 		}
-		
+
 		try {
 			original_graph.saveSelfNodesAndEdges( out );
 		}
@@ -147,18 +147,18 @@ public class graph_tests {
 			System.err.println( "Cannot close unit_test.dat" );
 			return false;
 		}
-		
+
 		final Graph new_graph = new Graph();
-		
+
 		BufferedReader in;
 		try {
-			in = new BufferedReader( new FileReader( "unit_test.dat" ));
+			in = new BufferedReader( new FileReader( "unit_test.dat" ) );
 		}
 		catch( FileNotFoundException e ) {
 			System.err.println( "Cannot read unit_test.dat" );
 			return false;
 		}
-		
+
 		try {
 			new_graph.loadSelfNodesAndEdges( in );
 		}
@@ -170,7 +170,7 @@ public class graph_tests {
 			System.err.println( "LoadFailureException While Loading: " + e.getMessage() );
 			return false;
 		}
-		
+
 		try {
 			in.close();
 		}
@@ -178,10 +178,10 @@ public class graph_tests {
 			System.err.println( "Cannot close unit_test.dat while reading" );
 			return false;
 		}
-		
+
 		File f = new File( "unit_test.dat" );
 		f.delete();
-		
+
 		return success;
 	}
 }
