@@ -1,5 +1,7 @@
 package graph;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -10,7 +12,7 @@ public class Graph {
 	private ArrayList< Edge > edges_;
 	private Node selected_node_;
 	private Edge selected_edge_;
-	private int next_id_ = 0;
+	private int next_node_id_ = 0;
 
 	private PreliminaryEdge ghost_edge_ = null;// represents edges that are in the middle of being drawn
 
@@ -93,7 +95,7 @@ public class Graph {
 	}
 
 	public int getNextNodeID() {
-		return next_id_++;
+		return next_node_id_++;
 	}
 
 	public PreliminaryEdge ghostEdge() {
@@ -102,5 +104,24 @@ public class Graph {
 
 	public void setGhostEdge( PreliminaryEdge ge ) {
 		ghost_edge_ = ge;
+	}
+	
+	//Save/Load
+	public void saveSelfNodesAndEdges( BufferedWriter out ) throws IOException {
+		String save_string = "START_GRAPH\n";
+		save_string += "next_node_id " + next_node_id_ + "\n";
+		save_string += "num_nodes " + nodes_.size() + "\n";
+		out.write( save_string );
+		
+		for( Node n : nodes_ ) {
+			n.save( out );
+		}
+
+		out.write( "num_edges " + edges_.size() + "\n" );
+		for( Edge e : edges_ ) {
+			e.save( out );
+		}
+		
+		out.write( "END_GRAPH\n" );
 	}
 }
