@@ -55,19 +55,19 @@ public class Node {
 		downstream_edges_ = new ArrayList< Edge >();
 		init();
 	}
-	
-	//Load Ctor
+
+	// Load Ctor
 	protected Node( BufferedReader in ) throws LoadFailureException, IOException {
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
-		
+
 		int r, g, b;
-		
+
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_NODE" ) ) {
 			throw new LoadFailureException( "Expected 'START_NODE' instead of '" + first_line + "'" );
 		}
-		
+
 		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in.readLine() ) {
 			if( line.equals( "START_FLAGS" ) ) {
 				for( String line2 = in.readLine(); !line2.equals( "END_FLAGS" ); line2 = in.readLine() ) {
@@ -75,65 +75,65 @@ public class Node {
 				}
 				continue;
 			}
-			
+
 			if( line.equals( "START_NOTES" ) ) {
 				for( String line2 = in.readLine(); !line2.equals( "END_NOTES" ); line2 = in.readLine() ) {
 					notes_ += line2 + "\n";
 				}
 				continue;
 			}
-			
+
 			String[] split = line.split( "\\s+" );
 			/*if( split.length != 2 ) {
 				throw new LoadFailureException( "No match for this line in Node: " + line );
 			}*/
-			
+
 			if( split[ 0 ].equals( "id" ) ) {
 				id_ = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "x" ) ) {
 				x_ = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "y" ) ) {
 				y_ = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "r" ) ) {
 				r = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "g" ) ) {
 				g = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "b" ) ) {
 				b = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "command" ) ) {
 				command_ = "";
-				for( int i=1; i<split.length; ++i ) {
+				for( int i = 1; i < split.length; ++i ) {
 					command_ += split[ i ];
-					if( i != split.length -1 ) {
+					if( i != split.length - 1 ) {
 						command_ += " ";
 					}
 				}
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "title" ) ) {
 				title_ = split[ 1 ];
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "script" ) ) {
 				xml_script_ = split[ 1 ];
 				continue;
