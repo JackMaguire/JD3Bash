@@ -63,6 +63,8 @@ public class NodeView extends JPanel {
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScript() );
 
+		notes_area_.setText( n.getNotes() );
+		
 		String user_flag_string = "";
 		for( String s : n.getUserRosettaFlags() ) {
 			user_flag_string += s + "\n";

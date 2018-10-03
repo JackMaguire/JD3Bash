@@ -33,6 +33,8 @@ public class Node {
 	private ArrayList< String > user_rosetta_flags_ = new ArrayList< String >();
 	// private ArrayList< String > rosetta_flags_ = new ArrayList< String >();
 
+	private String notes_ = "";
+	
 	public Node( int id, int x, int y ) {
 		id_ = id;
 		x_ = x;
@@ -166,6 +168,7 @@ public class Node {
 	}
 
 	public final void setTitle( String setting ) {
+		System.out.print( "!" );
 		title_ = setting;
 	}
 
@@ -173,7 +176,15 @@ public class Node {
 		return xml_script_;
 	}
 
+	public final String getScript() {
+		return xml_script_;
+	}
+	
 	public final void setXMLScript( String setting ) {
+		xml_script_ = setting;
+	}
+
+	public final void setScript( String setting ) {
 		xml_script_ = setting;
 	}
 
@@ -225,6 +236,14 @@ public class Node {
 		return all_flags;
 	}
 
+	public String getNotes() {
+		return notes_;
+	}
+	
+	public void setNotes( String notes ) {
+		notes_ = notes;
+	}
+	
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////

@@ -1,5 +1,7 @@
 package controllers;
 
+import java.util.ArrayList;
+
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -32,7 +34,34 @@ public class NodeController implements DocumentListener {
 	}
 
 	private void processDocumentChange( DocumentEvent e ) {
-
+		if( e.getDocument() == node_view_.getTitleField().getDocument() ) {
+			node_.setTitle( node_view_.getTitleField().getText() );
+			return;
+		}
+		
+		if( e.getDocument() == node_view_.getCommandField().getDocument() ) {
+			node_.setCommand( node_view_.getCommandField().getText() );
+			return;
+		}
+		
+		if( e.getDocument() == node_view_.getScriptField().getDocument() ) {
+			node_.setXMLScript( node_view_.getScriptField().getText() );
+			return;
+		}
+		
+		if( e.getDocument() == node_view_.getUserFlagsArea().getDocument() ) {
+			ArrayList< String > new_flags = new ArrayList< String >();
+			String[] split = node_view_.getUserFlagsArea().getText().split( "\n" );
+			for( String flag : split ) {
+				new_flags.add( flag );
+			}
+			return;
+		}
+		
+		if( e.getDocument() == node_view_.getNotesArea().getDocument() ) {
+			node_.setNotes( node_view_.getNotesArea().getText() );
+			return;
+		}
 	}
 	
 }
