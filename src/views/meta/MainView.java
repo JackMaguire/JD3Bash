@@ -9,6 +9,7 @@ import javax.swing.JTabbedPane;
 
 import controllers.GraphController;
 import graph.*;
+import views.CompileView;
 import views.EdgeView;
 import views.GraphView;
 import views.NodeView;
@@ -29,6 +30,8 @@ public class MainView extends JPanel {
 	private NodeView node_view_;
 	private EdgeView edge_view_ = null;
 
+	private final CompileView compile_view_;
+	
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
 
@@ -48,9 +51,12 @@ public class MainView extends JPanel {
 		selected_node_ = graph_.selectedNode();
 		node_view_ = new NodeView( selected_node_ );
 
+		compile_view_ = new CompileView( graph_ );
+		
 		tabs_ = new JTabbedPane();
 		tabs_.addTab( "Edit", node_view_ );
-
+		tabs_.add( "Compile", compile_view_ );
+		
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_, tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
@@ -75,7 +81,8 @@ public class MainView extends JPanel {
 
 				selected_node_ = graph_.selectedNode();
 				selected_edge_ = graph_.selectedEdge();
-
+				final int selected_index = tabs_.getSelectedIndex();
+				
 				if( node_view_ != null ) {
 					tabs_.remove( node_view_ );
 				} else if( edge_view_ != null ) {
@@ -86,13 +93,15 @@ public class MainView extends JPanel {
 					// Node View
 					node_view_ = new NodeView( selected_node_ );
 					edge_view_ = null;
-					tabs_.addTab( "Edit", node_view_ );
+					tabs_.insertTab( "Edit", null, node_view_, "", 0 );
 				} else {
 					// EdgeView
 					edge_view_ = new EdgeView( graph_.selectedEdge() );
 					node_view_ = null;
-					tabs_.addTab( "Edit", edge_view_ );
+					tabs_.insertTab( "Edit", null, edge_view_, "", 0 );
 				}
+				
+				tabs_.setSelectedIndex( selected_index );
 			}
 		}
 
