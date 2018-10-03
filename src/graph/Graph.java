@@ -1,10 +1,13 @@
 package graph;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import exceptions.LoadFailureException;
 
 public class Graph {
 
@@ -123,5 +126,37 @@ public class Graph {
 		}
 
 		out.write( "END_GRAPH\n" );
+	}
+	
+	public void loadSelfNodesAndEdges( BufferedReader in ) throws IOException, LoadFailureException {
+		//TODO delete everything!
+		final String first_line = in.readLine();
+		if( !first_line.equals( "START_GRAPH" ) ) {
+			throw new LoadFailureException( "Expected 'START_GRAPH' instead of '" + first_line + "'" );
+		}
+
+		for( String line = in.readLine(); !line.equals( "END_GRAPH" ); line = in.readLine() ) {
+			String[] split = line.split( "\\s+" );
+			if( split.length == 0 )
+				continue;
+			if( split[ 0 ].equals( "next_node_id" ) ) {
+				next_node_id_ = Integer.parseInt( split[ 1 ] );
+				continue;
+			}
+			if( split[ 0 ].equals( "num_nodes" ) ) {
+				int num_nodes = Integer.parseInt( split[ 1 ] );
+				for( int i=0; i<num_nodes; ++i ) {
+					addNode( new Node( in ) );
+				}
+				continue;
+			}
+			if( split[ 0 ].equals( "num_edges" ) ) {
+				int num_edges = Integer.parseInt( split[ 1 ] );
+				for( int i=0; i<num_edges; ++i ) {
+					edges_.add( new Edge( in, nodes_ ) );
+				}
+				continue;
+			}
+		}
 	}
 }

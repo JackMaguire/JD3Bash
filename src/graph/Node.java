@@ -61,7 +61,7 @@ public class Node {
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
 
-		int r, g, b;
+		int r = 50, g = 50, b = 50;
 
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_NODE" ) ) {
@@ -138,7 +138,8 @@ public class Node {
 				xml_script_ = split[ 1 ];
 				continue;
 			}
-		}
+		}//for string line
+		color_ = new Color( r, g, b );
 	}
 
 	private void init() {
