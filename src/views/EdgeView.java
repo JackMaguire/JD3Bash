@@ -60,6 +60,7 @@ public class EdgeView extends JPanel {
 		edge_controller_ = new EdgeController( this );//circular references are okay in Java
 		column_name_field_.addActionListener( edge_controller_ );
 		positive_scores_are_better_box_.addChangeListener( edge_controller_ );
+		use_percentage_instead_of_count_box_.addChangeListener( edge_controller_ );
 		
 		setupView();
 	}
@@ -93,12 +94,20 @@ public class EdgeView extends JPanel {
 		return positive_scores_are_better_box_;
 	}
 	
-	public JTextField getNumResultsToTrasnferField(){
+	public JTextField getNumResultsToTransferField(){
 		return num_results_to_transfer_field_;
 	}
 	
-	public JTextField getPercentageOfResultsToTrasnferField(){
+	public JLabel getNumResultsToTransferLabel(){
+		return num_results_to_transfer_label_;
+	}
+	
+	public JTextField getPercentageOfResultsToTransferField(){
 		return percentage_of_results_to_transfer_field_;
+	}
+	
+	public JLabel getPercentageOfResultsToTransferLabel(){
+		return percentage_of_results_to_transfer_label_;
 	}
 	
 	public JCheckBox getUsePercentageInsteadOfCountBox() {

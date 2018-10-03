@@ -27,7 +27,14 @@ public class EdgeController implements ActionListener, ChangeListener {
 	public void stateChanged( ChangeEvent e ) {
 		if( e.getSource() == edge_view_.getPositiveScoresAreBetterBox() ) {
 			edge_view_.getEdge().setPositiveScoresAreBetter( edge_view_.getPositiveScoresAreBetterBox().isSelected() );
-			//GlobalData.top_panel.repaint();
+		}
+		else if( e.getSource() == edge_view_.getUsePercentageInsteadOfCountBox() ) {
+			final boolean use_perc = edge_view_.getUsePercentageInsteadOfCountBox().isSelected();
+			edge_view_.getEdge().setUsePercentageInsteadOfCount( use_perc );
+			edge_view_.getPercentageOfResultsToTransferField().setEnabled( use_perc );
+			edge_view_.getPercentageOfResultsToTransferLabel().setEnabled( use_perc );
+			edge_view_.getNumResultsToTransferField().setEnabled( !use_perc );
+			edge_view_.getNumResultsToTransferLabel().setEnabled( !use_perc );
 		}
 	}
 	
