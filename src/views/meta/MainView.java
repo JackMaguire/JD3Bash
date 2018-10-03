@@ -55,9 +55,6 @@ public class MainView extends JPanel {
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
 
-		// Look into this:
-		// main_panel_.setAutoscrolls( true );
-
 		this.setLayout( new GridLayout( 1, 1 ) );
 		this.add( main_panel_ );
 	}
