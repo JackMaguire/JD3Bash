@@ -38,20 +38,25 @@ public class Node {
 		x_ = x;
 		y_ = y;
 		title_ = "Node_" + id_;
-
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
+		init();
 	}
 
 	public Node( String title, int x, int y ) {
 		x_ = x;
 		y_ = y;
 		title_ = title;
-
 		upstream_edges_ = new ArrayList< Edge >();
 		downstream_edges_ = new ArrayList< Edge >();
+		init();
 	}
 
+	private void init() {
+		user_rosetta_flags_.add( "# Keep in mind that all commands will be run one directory deeper." );
+		user_rosetta_flags_.add( "# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
+	}
+	
 	///////////////////////
 	// Getters and Setters//
 	///////////////////////
@@ -275,6 +280,8 @@ public class Node {
 			// Intermediate Poses' box in the compile tab" );
 		}
 
+		list.add( "-parser:protocol ../" + xml_script_ );
+		
 		return list;
 	}
 
