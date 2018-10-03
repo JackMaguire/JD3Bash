@@ -55,6 +55,7 @@ public class NodeController implements DocumentListener {
 			for( String flag : split ) {
 				new_flags.add( flag );
 			}
+			node_.setUserRosettaFlags( new_flags );
 			return;
 		}
 
