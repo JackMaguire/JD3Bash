@@ -20,20 +20,20 @@ public class Node {
 	private int y_;
 	private Color color_ = Color.gray;
 
-	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that
-																									// occur before this node
-	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that
-																										// occur after this node
+	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
+	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
 	private String title_;
+	
+	private boolean use_script_file_ = false;
 	private String xml_script_filename_ = "script.xml";
-
+	private String xml_script_ = "<ROSETTASCRIPTS>\n<ROSETTASCRIPTS>\n";
+	
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
 	// stage_is_valid_ is meant to prevent other methods from calling getStage()
-	// and
-	// assuming it is the current stage when it is in fact unassigned
+	// and assuming it is the current stage when it is in fact unassigned
 	private int stage_ = 0;
 	private boolean stage_is_valid_ = false;
 
@@ -89,11 +89,17 @@ public class Node {
 				}
 				continue;
 			}
+			
+			if( line.equals( "START_SCRIPT" ) ) {
+				xml_script_ = "";
+				for( String line2 = in.readLine(); !line2
+						.equals( "END_SCRIPT" ); line2 = in.readLine() ) {
+					xml_script_ += line2 + "\n";
+				}
+				continue;
+			}
 
 			String[] split = line.split( "\\s+" );
-			/*if( split.length != 2 ) {
-				throw new LoadFailureException( "No match for this line in Node: " + line );
-			}*/
 
 			if( split[ 0 ].equals( "id" ) ) {
 				id_ = Integer.parseInt( split[ 1 ] );
@@ -283,6 +289,30 @@ public class Node {
 		xml_script_filename_ = setting;
 	}
 
+	public final String getXMLScript() {
+		return xml_script_;
+	}
+
+	public final String getScript() {
+		return xml_script_;
+	}
+
+	public final void setXMLScript( String setting ) {
+		xml_script_ = setting;
+	}
+
+	public final void setScript( String setting ) {
+		xml_script_ = setting;
+	}
+	
+	public final boolean getUseScriptFile() {
+		return use_script_file_;
+	}
+	
+	public final void setUseScriptFile( boolean setting ) {
+		use_script_file_ = setting;
+	}
+	
 	public final int getStage() throws UndefinedValueException {
 		return stage();
 	}
@@ -420,8 +450,18 @@ public class Node {
 
 		save_string += "START_NOTES\n";
 		save_string += notes_;
+		if( ! notes_.endsWith( "\n" ) ) {
+			save_string += "\n";
+		}
 		save_string += "END_NOTES\n";
 
+		save_string += "START_SCRIPT\n";
+		save_string += xml_script_;
+		if( ! xml_script_.endsWith( "\n" ) ) {
+			save_string += "\n";
+		}
+		save_string += "END_SCRIPT\n";
+		
 		save_string += "END_NODE\n";
 		out.write( save_string );
 	}
