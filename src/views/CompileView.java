@@ -11,11 +11,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import compiler.GraphParsing;
+import compiler.GraphParsingOptions;
 import exceptions.InvalidGraphException;
 import global_data.GlobalViewData;
 import graph.Graph;
-import output.GraphParsing;
-import output.GraphParsingOptions;
 import utility.Pair;
 
 public class CompileView extends JPanel implements ActionListener {

@@ -1,9 +1,9 @@
 package apps.proof_of_concept;
 
+import compiler.GraphParsing;
+import compiler.GraphParsingOptions;
 import exceptions.InvalidGraphException;
 import graph.*;
-import output.GraphParsing;
-import output.GraphParsingOptions;
 import utility.Pair;
 
 public class PrintStringsForSimpleGraph {

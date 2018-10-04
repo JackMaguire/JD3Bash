@@ -2,8 +2,8 @@ package unit_tests;
 
 import java.util.ArrayList;
 
+import compiler.*;
 import graph.*;
-import output.*;
 
 public class output_tests {
 

@@ -1,4 +1,4 @@
-package output;
+package compiler;
 
 import graph.*;
 import info.VersionInfo;
@@ -10,6 +10,7 @@ import java.util.HashSet;
 
 import exceptions.InvalidGraphException;
 import exceptions.UndefinedValueException;
+import global_data.Options;
 
 /*  This can be as slow as we want it to be.
  *  Let's focus more on clarity and correctness than speed here.
@@ -208,7 +209,7 @@ public class GraphParsing {
 
 	private static void addGlobalVariablesToRunScript(
 			PBRWrapper< String > script ) {
-		script.value += "nproc=TODO\n";
+		script.value += "nproc=" + Options.getNumProcessors() + "\n";
 	}
 
 }
