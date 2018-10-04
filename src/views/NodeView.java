@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JCheckBox;
 import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -66,6 +67,7 @@ public class NodeView extends JPanel {
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
 	//XML: look into this: http://java-sl.com/xml_editor_kit.html
+	private final JCheckBox use_script_from_disk_ = new JCheckBox( "Use existing script instead of script below" );
 	private final JEditorPane editor_pane_ = new JEditorPane( );
 	
 	public NodeView( Node n ) {
@@ -172,9 +174,12 @@ public class NodeView extends JPanel {
 		upper_half.add( segments56 );
 		
 		this.add( upper_half );
+		
 		//xml
-		//editor_pane_.setContentType( "html" );
-		this.add( editor_pane_ );
+		JPanel bottom_half = new JPanel( new BorderLayout() );
+		bottom_half.add( editor_pane_, BorderLayout.CENTER );
+		bottom_half.add( use_script_from_disk_, BorderLayout.NORTH );
+		this.add( bottom_half );
 	}
 
 	public Node getNode() {

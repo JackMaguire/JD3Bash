@@ -151,6 +151,11 @@ public class Node {
 				xml_script_filename_ = split[ 1 ];
 				continue;
 			}
+			
+			if( split[ 0 ].equals( "use_script_file" ) ) {
+				use_script_file_ = Boolean.parseBoolean( split[ 1 ] );
+				continue;
+			}
 		} // for string line
 		color_ = new Color( r, g, b );
 	}
@@ -441,7 +446,8 @@ public class Node {
 		save_string += "command " + command_ + "\n";
 		save_string += "title " + title_ + "\n";
 		save_string += "script " + xml_script_filename_ + "\n";
-
+		save_string += "use_script_file " + use_script_file_ + "\n";
+		
 		save_string += "START_FLAGS\n";
 		for( String flag : user_rosetta_flags_ ) {
 			save_string += flag + "\n";
