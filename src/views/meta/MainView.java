@@ -11,6 +11,7 @@ import controllers.GraphController;
 import graph.*;
 import views.CompileView;
 import views.EdgeView;
+import views.GlobalOptionsView;
 import views.GraphView;
 import views.NodeView;
 import views.SaveLoadView;
@@ -33,7 +34,8 @@ public class MainView extends JPanel {
 
 	private final CompileView compile_view_;
 	private final SaveLoadView save_load_view_;
-
+	private final GlobalOptionsView options_view_ = new GlobalOptionsView();
+	
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
 
@@ -59,6 +61,7 @@ public class MainView extends JPanel {
 
 		tabs_ = new JTabbedPane();
 		tabs_.addTab( "Edit", node_view_ );
+		tabs_.add( "Options", options_view_ );
 		tabs_.add( "Compile", compile_view_ );
 		tabs_.add( "Save/Load", save_load_view_ );
 
