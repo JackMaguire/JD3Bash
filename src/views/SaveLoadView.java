@@ -6,11 +6,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+
+import exceptions.LoadFailureException;
+import graph.Graph;
 
 public class SaveLoadView extends JPanel
 		implements ActionListener, PropertyChangeListener {
@@ -20,43 +29,79 @@ public class SaveLoadView extends JPanel
 	 */
 	private static final long serialVersionUID = -9088179087599621175L;
 
+	private final Graph graph_;
+	
 	private final JFileChooser file_chooser_ = new JFileChooser();
-	private final JTextField load_path_field_ = new JTextField();
-	private final JTextField load_filename_field_ = new JTextField(
+	private final JTextField save_path_field_ = new JTextField();
+	private final JTextField save_filename_field_ = new JTextField(
 			"pipeline.dat" );
 	private final JButton save_button_ = new JButton( "Save" );
+	
+	
+	public SaveLoadView( Graph g ) {
+		graph_ = g;
 
-	public SaveLoadView() {
-
-		setLayout( new BorderLayout() );
-
+		save_button_.addActionListener( this );
+		
 		file_chooser_.setApproveButtonText( "Load" );
 		file_chooser_.addActionListener( this );
 
 		file_chooser_.addPropertyChangeListener( this );
-		load_path_field_.setText( file_chooser_.getCurrentDirectory().getName() );
-		load_path_field_.setEditable( false );
+		save_path_field_.setText( file_chooser_.getCurrentDirectory().getName() );
+		save_path_field_.setEditable( false );
 
 		JPanel bottom_panel = new JPanel( new GridLayout( 1, 3 ) );
-		bottom_panel.add( load_path_field_ );
-		bottom_panel.add( load_filename_field_ );
+		bottom_panel.add( save_path_field_ );
+		bottom_panel.add( save_filename_field_ );
 		bottom_panel.add( save_button_ );
 
+		setLayout( new BorderLayout() );
 		add( file_chooser_, BorderLayout.CENTER );
 		add( bottom_panel, BorderLayout.SOUTH );
 	}
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
+		
+		if( e.getSource() == save_button_ ) {
+			
+			return;
+		}
+		
 		if( e.getActionCommand()
 				.equals( javax.swing.JFileChooser.APPROVE_SELECTION ) ) {
-			System.out.println( "approve selection" );
-		}
+			final String file_to_load_from = file_chooser_.getSelectedFile().getPath();
+			BufferedReader in = null;
+			try {
+				in = new BufferedReader( new FileReader( file_to_load_from ) );
+				graph_.loadSelfNodesAndEdges( in );
+			}
+			catch( FileNotFoundException e1 ) {
+				utility.PopupMessages.send( "File " + file_to_load_from + " not found!" );
+			}
+			catch( IOException e1 ) {
+				utility.PopupMessages.send( "Problem loading file " + file_to_load_from + "!\n" + e1.getMessage() );
+			}
+			catch( LoadFailureException e1 ) {
+				utility.PopupMessages.send( "Problem loading importing graph from " + file_to_load_from + "!\n" + e1.getMessage() );
+			}
+			finally {
+				if( in != null ) {
+					try {
+						in.close();
+					}
+					catch( IOException e1 ) {
+						e1.printStackTrace();
+					}
+				}
+			}//finally
+		}//load
+		GlobalData.top_panel.repaint();
 	}
 
 	@Override
 	public void propertyChange( PropertyChangeEvent evt ) {
-		load_path_field_
+		save_path_field_
 				.setText( file_chooser_.getCurrentDirectory().getPath() + "/" );
 	}
 
