@@ -121,10 +121,8 @@ public class GraphController
 		int y = e.getY();
 
 		if( shift_was_down_when_most_recent_object_was_selected_ && e.isShiftDown() ) {
-			System.out.println( "!" );
 			if( graph_.selectedNode() != null ) {
 				if( graph_.getNumNodes() > 1 ) {//Don't want an empty graph
-					System.out.println( "?" );
 					shift_was_down_when_most_recent_object_was_selected_ = false;
 					if( graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y ) ) {
 						graph_.removeNodeAndDeleteItsEdges( graph_.selectedNode() );
