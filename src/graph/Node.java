@@ -10,6 +10,7 @@ import java.util.List;
 
 import exceptions.LoadFailureException;
 import exceptions.UndefinedValueException;
+import global_data.Options;
 
 public class Node {
 
@@ -24,7 +25,7 @@ public class Node {
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this
 																										// node
 
-	private String command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
+	private String command_;
 	private String title_;
 
 	private boolean use_script_file_ = false;
@@ -182,6 +183,8 @@ public class Node {
 				"# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
 		user_rosetta_flags_.add( "" );
 		user_rosetta_flags_.add( "# -nstruct 1" );
+		
+		command_ = Options.getDefaultRunCommand();
 	}
 
 	///////////////////////

@@ -8,8 +8,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 import controllers.GlobalOptionsController;
+import global_data.Options;
 
 public class GlobalOptionsView extends JPanel {
 
@@ -30,6 +32,10 @@ public class GlobalOptionsView extends JPanel {
 	private final JScrollPane serialize_intermediate_poses_explanation_scroll_pane_ = new JScrollPane(
 			serialize_intermediate_poses_explanation_ );
 
+	private final JLabel run_options_label_ = new JLabel( "Run" );
+	private final JLabel n_proc_label_ = new JLabel( "Num Processors:" );
+	private final JTextField n_proc_field_ = new JTextField( Options.getNumProcessors() + "" );
+	
 	private final GlobalOptionsController controller_;
 
 	public GlobalOptionsView() {
