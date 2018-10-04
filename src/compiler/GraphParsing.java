@@ -173,7 +173,16 @@ public class GraphParsing {
 		final String dirname = n.dirname();
 
 		run_script.value += "\ncd " + dirname + "\n";
-		run_script.value += n.getEffectiveCommand() + "\n";
+
+		//THE COMMAND
+
+		run_script.value += "if " + n.getEffectiveCommand() + " ;then \n"
+				+ "    echo \"Done running " + dirname + "\" >> ../JD3BASH_runlog.txt\n"
+				+ "else\n"
+				+ "    echo \"Failed to run " + dirname + "\" >> ../JD3BASH_runlog.txt\n"
+				+ "    exit 1\n"
+				+ "fi\n";
+
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges_const() ) {
@@ -208,7 +217,7 @@ public class GraphParsing {
 
 		}
 
-		run_script.value += "cd ..\n";
+		run_script.value += "\ncd ..\n";
 		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}
 
