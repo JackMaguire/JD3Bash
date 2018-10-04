@@ -26,13 +26,11 @@ public class GraphParsing {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
 
-		PBRWrapper< String > run_script = new PBRWrapper< String >(
-				"#!/bin/bash\n\n" );
+		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		addGlobalIntroToScript( run_script );
 		addGlobalVariablesToRunScript( run_script );
 
-		PBRWrapper< String > setup_script = new PBRWrapper< String >(
-				"#!/bin/bash\n\n" );
+		PBRWrapper< String > setup_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		addGlobalIntroToScript( setup_script );
 
 		ArrayList< Node > nodes_in_order = determineOrderOfNodes( g );
@@ -132,13 +130,11 @@ public class GraphParsing {
 
 		if( options.serialize_intermediate_poses ) {
 			if( n.numUpstreamEdges() > 0 ) {
-				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname
-						+ "/flags\n";
+				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname + "/flags\n";
 			}
 
 			if( n.numDownstreamEdges() > 0 ) {
-				setup_script.value += "echo \"-out:file:srlz 1\" >> " + dirname
-						+ "/flags\n";
+				setup_script.value += "echo \"-out:file:srlz 1\" >> " + dirname + "/flags\n";
 			}
 		}
 	}
@@ -155,12 +151,10 @@ public class GraphParsing {
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges_const() ) {
-				final String name_of_next_stage_directory = de.destinationNode()
-						.dirname();
+				final String name_of_next_stage_directory = de.destinationNode().dirname();
 				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
-				run_script.value += "# Extract the best results for stage "
-						+ de.destinationNode().getTitle() + "\n";
+				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
 				run_script.value += "# This awk command prints the data for the column with header "
 						+ sort_column + " along with the title for each result\n";
 				run_script.value += "awk -v c1=\"" + sort_column
@@ -174,12 +168,10 @@ public class GraphParsing {
 
 				run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
 				if( de.usePercentageInsteadOfCount() ) {
-					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer()
-							+ "\"\n";
+					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer()	+ "\"\n";
 					run_script.value += "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
 				} else {
-					run_script.value += "nresults=\"" + de.numResultsToTransfer()
-							+ "\"\n";
+					run_script.value += "nresults=\"" + de.numResultsToTransfer() 	+ "\"\n";
 				}
 				run_script.value += "# Extract structures that will survive until the next stage\n";
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
@@ -190,8 +182,7 @@ public class GraphParsing {
 		}
 
 		run_script.value += "cd ..\n";
-		run_script.value += "echo \"Done With " + dirname
-				+ "\" >> JD3BASH_runlog.txt\n";
+		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}
 
 	private static void addGlobalIntroToScript( PBRWrapper< String > script ) {
@@ -200,15 +191,13 @@ public class GraphParsing {
 		script.value += "# Visit github.com/JackMaguire/JD3Bash for details\n\n";
 	}
 
-	private static void addStageIntroToScript( int stage,
-			PBRWrapper< String > script ) {
+	private static void addStageIntroToScript( int stage, PBRWrapper< String > script ) {
 		script.value += "\n###########\n";
 		script.value += "# STAGE " + stage + " #\n";
 		script.value += "###########\n\n";
 	}
 
-	private static void addGlobalVariablesToRunScript(
-			PBRWrapper< String > script ) {
+	private static void addGlobalVariablesToRunScript( PBRWrapper< String > script ) {
 		script.value += "nproc=" + Options.getNumProcessors() + "\n";
 	}
 
