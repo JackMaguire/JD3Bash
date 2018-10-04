@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 import exceptions.InvalidGraphException;
+import global_data.GlobalViewData;
 import graph.Graph;
 import output.GraphParsing;
 import output.GraphParsingOptions;
@@ -83,7 +84,7 @@ public class CompileView extends JPanel implements ActionListener {
 			setup_area_.setText( "Can not compile! Error:\n" + e1.getMessage() );
 			run_area_.setText( "Can not compile! Error:\n" + e1.getMessage() );
 		}
-		GlobalData.top_panel.repaint();
+		GlobalViewData.top_panel.repaint();
 	}
 
 }

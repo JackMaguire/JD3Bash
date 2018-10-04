@@ -6,8 +6,8 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import global_data.GlobalViewData;
 import graph.*;
-import views.GlobalData;
 import views.GraphView;
 
 public class GraphController
@@ -42,14 +42,14 @@ public class GraphController
 			Node sn = graph_.selectedNode();
 			sn.setX( graph_view_.getClosestPointForPoint( x ) );
 			sn.setY( graph_view_.getClosestPointForPoint( y ) );
-			GlobalData.top_panel.repaint();
+			GlobalViewData.top_panel.repaint();
 			return;
 		}
 
 		if( edge_is_currently_being_created_ ) {
 			graph_.ghostEdge().x = e.getX();
 			graph_.ghostEdge().y = e.getY();
-			GlobalData.top_panel.repaint();
+			GlobalViewData.top_panel.repaint();
 			return;
 		}
 	}
@@ -66,7 +66,7 @@ public class GraphController
 			int y = graph_view_.getClosestPointForPoint( e.getY() );
 			Node new_node = new Node( x, y );
 			graph_.addNode( new_node );
-			GlobalData.top_panel.repaint();
+			GlobalViewData.top_panel.repaint();
 			return;
 		}
 	}
@@ -85,7 +85,7 @@ public class GraphController
 					edge_is_currently_being_created_ = true;
 					graph_.setGhostEdge( new PreliminaryEdge( n, last_mouse_press_x_,
 							last_mouse_press_y_ ) );
-					GlobalData.top_panel.repaint();
+					GlobalViewData.top_panel.repaint();
 					return;
 				}
 			}
@@ -99,7 +99,7 @@ public class GraphController
 					// edge
 					node_is_currently_being_dragged_ = true;
 					// }
-					GlobalData.top_panel.repaint();
+					GlobalViewData.top_panel.repaint();
 					return;
 				}
 			}
@@ -109,7 +109,7 @@ public class GraphController
 				if( graph_view_.boxForEdge_const().get( edge )
 						.pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedEdge( edge );
-					GlobalData.top_panel.repaint();
+					GlobalViewData.top_panel.repaint();
 				}
 			}
 
@@ -127,7 +127,7 @@ public class GraphController
 				Node sn = graph_.selectedNode();
 				sn.setX( graph_view_.getClosestPointForPoint( x ) );
 				sn.setY( graph_view_.getClosestPointForPoint( y ) );
-				GlobalData.top_panel.repaint();
+				GlobalViewData.top_panel.repaint();
 			}
 			node_is_currently_being_dragged_ = false;
 			return;
@@ -142,11 +142,11 @@ public class GraphController
 					Edge new_edge = graph_.addEdge( graph_.selectedNode(), n );
 					graph_.setSelectedEdge( new_edge );
 					graph_.setSelectedNode( null );
-					GlobalData.top_panel.repaint();
+					GlobalViewData.top_panel.repaint();
 					return;
 				}
 			}
-			GlobalData.top_panel.repaint();
+			GlobalViewData.top_panel.repaint();
 			return;
 		}
 
@@ -182,7 +182,7 @@ public class GraphController
 				int x = sn.x();
 				if( x > 0 ) {
 					sn.setX( x - 1 );
-					GlobalData.top_panel.repaint();
+					GlobalViewData.top_panel.repaint();
 				}
 				break;
 			}
@@ -193,7 +193,7 @@ public class GraphController
 
 				int x = sn.x();
 				sn.setX( x + 1 );
-				GlobalData.top_panel.repaint();
+				GlobalViewData.top_panel.repaint();
 				break;
 			}
 		}

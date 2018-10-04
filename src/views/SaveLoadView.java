@@ -22,6 +22,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import exceptions.LoadFailureException;
+import global_data.GlobalViewData;
 import graph.Graph;
 
 public class SaveLoadView extends JPanel
@@ -141,7 +142,7 @@ public class SaveLoadView extends JPanel
 				}
 			} // finally
 		} // load
-		GlobalData.top_panel.repaint();
+		GlobalViewData.top_panel.repaint();
 	}
 
 	@Override

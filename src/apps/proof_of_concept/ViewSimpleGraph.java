@@ -2,10 +2,10 @@ package apps.proof_of_concept;
 
 import javax.swing.JFrame;
 
+import global_data.GlobalViewData;
 import graph.Edge;
 import graph.Graph;
 import graph.Node;
-import views.GlobalData;
 import views.meta.MainView;
 
 public class ViewSimpleGraph {
@@ -25,9 +25,9 @@ public class ViewSimpleGraph {
 		F.setExtendedState( JFrame.MAXIMIZED_BOTH );
 
 		MainView view = new MainView( simple_graph );
-		GlobalData.top_panel = view;
+		GlobalViewData.top_panel = view;
 
-		F.add( GlobalData.top_panel );
+		F.add( GlobalViewData.top_panel );
 		F.setVisible( true );
 	}
 
