@@ -220,6 +220,7 @@ public class graph_tests {
 				success = false;
 			}
 
+			///@formatter:off
 			// Red
 			if( nodes[ node ].getColor().getRed() != new_node.getColor().getRed() ) {
 				System.err.println(
@@ -229,8 +230,8 @@ public class graph_tests {
 			}
 
 			// Green
-			if( nodes[ node ].getColor().getGreen() != new_node.getColor()
-					.getGreen() ) {
+			if( nodes[ node ].getColor().getGreen() !=
+					new_node.getColor().getGreen() ) {
 				System.err.println(
 						"New node " + node + " has Green " + new_node.getColor().getGreen()
 								+ " instead of " + nodes[ node ].getColor().getGreen() );
@@ -238,14 +239,14 @@ public class graph_tests {
 			}
 
 			// Blue
-			if( nodes[ node ].getColor().getBlue() != new_node.getColor()
-					.getBlue() ) {
+			if( nodes[ node ].getColor().getBlue() !=
+					new_node.getColor().getBlue() ) {
 				System.err.println(
 						"New node " + node + " has Blue " + new_node.getColor().getBlue()
 								+ " instead of " + nodes[ node ].getColor().getBlue() );
 				success = false;
 			}
-
+			///@formatter:on
 			// Notes: Hard to test because of whitespace changes
 			/*if( ! nodes[ node ].getNotes().equals( new_node.getNotes() + "\n" ) ) {
 				System.err.println( "New node " + node + " has notes " + new_node.getNotes()
