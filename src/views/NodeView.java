@@ -200,6 +200,14 @@ public class NodeView extends JPanel {
 		// xml
 		this.add( editor_scroll_pane_ );
 	}
+	
+	public void redetermineAutoFlags() {
+		String auto_flag_string = "";
+		for( String s : node_.determineAutoFlags() ) {
+			auto_flag_string += s + "\n";
+		}
+		auto_flags_area_.setText( auto_flag_string );
+	}
 
 	public Node getNode() {
 		return node_;

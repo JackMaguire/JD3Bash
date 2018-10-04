@@ -82,6 +82,7 @@ public class NodeController implements DocumentListener, ActionListener {
 					.setEnabled( !node_view_.getUseScriptFromDiskCheckbox().isSelected() );
 			node_view_.getScriptField()
 					.setEnabled( node_view_.getUseScriptFromDiskCheckbox().isSelected() );
+			node_view_.redetermineAutoFlags();
 			return;
 		}
 		
