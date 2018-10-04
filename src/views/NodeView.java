@@ -115,7 +115,7 @@ public class NodeView extends JPanel {
 		script_field_.getDocument().addDocumentListener( node_controller_ );
 		user_flags_area_.getDocument().addDocumentListener( node_controller_ );
 		notes_area_.getDocument().addDocumentListener( node_controller_ );
-
+		editor_pane_.getDocument().addDocumentListener( node_controller_ );
 		use_script_from_disk_.addActionListener( node_controller_ );
 
 		auto_flags_area_.setEditable( false );
@@ -123,6 +123,9 @@ public class NodeView extends JPanel {
 		help_area_.setEditable( false );
 
 		setupView();
+		
+		editor_pane_.setEnabled( !use_script_from_disk_.isSelected() );
+		script_field_.setEnabled( use_script_from_disk_.isSelected() );
 	}
 
 	private void setFonts( int fontsize ) {

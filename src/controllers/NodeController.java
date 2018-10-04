@@ -65,6 +65,11 @@ public class NodeController implements DocumentListener, ActionListener {
 			node_.setNotes( node_view_.getNotesArea().getText() );
 			return;
 		}
+		
+		if( e.getDocument() == node_view_.getEditorPane().getDocument() ) {
+			node_.setScript( node_view_.getEditorPane().getText() );
+			return;
+		}
 	}
 
 	@Override
@@ -73,6 +78,7 @@ public class NodeController implements DocumentListener, ActionListener {
 			node_.setUseScriptFile( node_view_.getUseScriptFromDiskCheckbox().isSelected() );
 			node_view_.getEditorPane()
 					.setEnabled( !node_view_.getUseScriptFromDiskCheckbox().isSelected() );
+			node_view_.getScriptField().setEnabled( node_view_.getUseScriptFromDiskCheckbox().isSelected() );
 		}
 	}
 
