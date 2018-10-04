@@ -183,7 +183,7 @@ public class Node {
 				"# You would need to pass '-s ../pose.pdb' instead of '-s pose.pdb'" );
 		user_rosetta_flags_.add( "" );
 		user_rosetta_flags_.add( "# -nstruct 1" );
-		
+
 		command_ = Options.getDefaultRunCommand();
 	}
 

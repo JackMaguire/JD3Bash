@@ -54,17 +54,18 @@ public class GlobalOptionsController implements ActionListener, DocumentListener
 	public void changedUpdate( DocumentEvent e ) {
 		docUpdate( e );
 	}
-	
+
 	private void docUpdate( DocumentEvent e ) {
 		if( e.getDocument() == view_.getNumProcessorField().getDocument() ) {
-			try{
+			try {
 				int setting = Integer.parseInt( view_.getNumProcessorField().getText() );
 				Options.setNumProcessors( setting );
-			} catch ( NumberFormatException nfe ) {
+			}
+			catch( NumberFormatException nfe ) {
 			}
 			return;
 		}
-		
+
 		if( e.getDocument() == view_.getDefaultCommandField().getDocument() ) {
 			Options.setDefaultRunCommand( view_.getDefaultCommandField().getText() );
 			return;

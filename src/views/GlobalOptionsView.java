@@ -36,9 +36,9 @@ public class GlobalOptionsView extends JPanel {
 	private final JLabel n_proc_label_ = new JLabel( "Num Processors:" );
 	private final JTextField n_proc_field_ = new JTextField( Options.getNumProcessors() + "" );
 	private final JLabel default_command_label_ = new JLabel( "Default Run Command:" );
-	private final JTextField default_command_field_ = new JTextField( Options.getDefaultRunCommand() );
-	
-	
+	private final JTextField default_command_field_ = new JTextField(
+			Options.getDefaultRunCommand() );
+
 	private final GlobalOptionsController controller_;
 
 	public GlobalOptionsView() {
@@ -63,7 +63,7 @@ public class GlobalOptionsView extends JPanel {
 		compile_options_panel.add( compile_options_label_, BorderLayout.NORTH );
 		compile_options_panel.add( inner_compile_options_panel, BorderLayout.CENTER );
 
-		//Run
+		// Run
 		final JPanel inner_run_options_panel = new JPanel( new GridLayout( 1, 4 ) );
 		inner_run_options_panel.add( n_proc_label_ );
 		inner_run_options_panel.add( n_proc_field_ );
@@ -74,8 +74,8 @@ public class GlobalOptionsView extends JPanel {
 		run_options_label_.setHorizontalAlignment( JLabel.CENTER );
 		run_options_panel.add( run_options_label_, BorderLayout.NORTH );
 		run_options_panel.add( inner_run_options_panel, BorderLayout.CENTER );
-		
-		//Main
+
+		// Main
 		setLayout( new GridLayout( 10, 1 ) );
 		add( view_options_panel );
 		add( compile_options_panel );
@@ -85,7 +85,7 @@ public class GlobalOptionsView extends JPanel {
 		show_node_titles_checkbox_.addActionListener( controller_ );
 		put_node_titles_to_side_checkbox_.addActionListener( controller_ );
 		serialize_intermediate_poses_checkbox_.addActionListener( controller_ );
-		
+
 		n_proc_field_.getDocument().addDocumentListener( controller_ );
 		default_command_field_.getDocument().addDocumentListener( controller_ );
 	}
@@ -101,11 +101,11 @@ public class GlobalOptionsView extends JPanel {
 	public final JCheckBox getSerializeIntermediatePosesCheckbox() {
 		return serialize_intermediate_poses_checkbox_;
 	}
-	
+
 	public final JTextField getNumProcessorField() {
 		return n_proc_field_;
 	}
-	
+
 	public final JTextField getDefaultCommandField() {
 		return default_command_field_;
 	}

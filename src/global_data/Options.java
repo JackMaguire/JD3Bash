@@ -37,7 +37,7 @@ public class Options {
 	}
 
 	//////////////
-	//Run Options
+	// Run Options
 	private static int num_processors_ = 0;
 
 	public static int getNumProcessors() {
@@ -47,13 +47,13 @@ public class Options {
 	public static void setNumProcessors( int nproc ) {
 		num_processors_ = nproc;
 	}
-	
+
 	private static String default_run_command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
-	
+
 	public static String getDefaultRunCommand() {
 		return default_run_command_;
 	}
-	
+
 	public static void setDefaultRunCommand( String setting ) {
 		default_run_command_ = setting;
 	}

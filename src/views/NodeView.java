@@ -123,7 +123,7 @@ public class NodeView extends JPanel {
 		help_area_.setEditable( false );
 
 		setupView();
-		
+
 		editor_pane_.setEnabled( !use_script_from_disk_.isSelected() );
 		script_field_.setEnabled( use_script_from_disk_.isSelected() );
 	}
