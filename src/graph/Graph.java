@@ -109,6 +109,24 @@ public class Graph {
 	public void setGhostEdge( PreliminaryEdge ge ) {
 		ghost_edge_ = ge;
 	}
+	
+	public void removeNodeAndDeleteItsEdges( Node n ) {
+		for( Edge e : n.upstreamEdges_const() ) {
+			removeEdgeAndNotifyItsNodes( e );
+		}
+		
+		for( Edge e : n.downstreamEdges_const() ) {
+			removeEdgeAndNotifyItsNodes( e );
+		}
+		
+		nodes_.remove( n );
+	}
+	
+	public void removeEdgeAndNotifyItsNodes( Edge e ) {
+		e.destinationNode().removeUpstreamEdge( e );
+		e.sourceNode().removeDownstreamEdge( e );
+		edges_.remove( e );
+	}
 
 	// Save/Load
 	public void saveSelfNodesAndEdges( BufferedWriter out ) throws IOException {

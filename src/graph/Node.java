@@ -423,6 +423,10 @@ public class Node {
 		use_default_command_ = setting;
 	}
 
+	/*public void removeUpstreamEdge( Edge e ) {
+		upstream_edges_.remove( e );
+	}*/
+	
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////

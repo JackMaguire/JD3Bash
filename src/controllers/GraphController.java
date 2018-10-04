@@ -21,6 +21,7 @@ public class GraphController
 	private int last_mouse_press_y_ = 0;
 	private boolean node_is_currently_being_dragged_ = false;
 	private boolean edge_is_currently_being_created_ = false;
+	private boolean shift_was_down_when_most_recent_object_was_selected_ = false;
 
 	public GraphController( Graph g ) {
 		graph_ = g;
@@ -75,6 +76,7 @@ public class GraphController
 	public void mousePressed( MouseEvent e ) {
 		last_mouse_press_x_ = e.getX();
 		last_mouse_press_y_ = e.getY();
+		shift_was_down_when_most_recent_object_was_selected_ = false;
 
 		if( e.isControlDown() ) {
 			// potentially create an edge
@@ -92,13 +94,10 @@ public class GraphController
 		} else {
 			// Potentially Select A Node
 			for( Node n : graph_.allNodes_const() ) {
-				if( graph_view_.boxForNode_const().get( n )
-						.pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
-					// if( !e.isControlDown() ) {// if control is down, we are creating an
-					// edge
+					shift_was_down_when_most_recent_object_was_selected_ = e.isShiftDown();
 					node_is_currently_being_dragged_ = true;
-					// }
 					GlobalViewData.top_panel.repaint();
 					return;
 				}
@@ -106,9 +105,9 @@ public class GraphController
 
 			// Potentially Select An Edge
 			for( Edge edge : graph_.allEdges_const() ) {
-				if( graph_view_.boxForEdge_const().get( edge )
-						.pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
 					graph_.setSelectedEdge( edge );
+					shift_was_down_when_most_recent_object_was_selected_ = e.isShiftDown();
 					GlobalViewData.top_panel.repaint();
 				}
 			}
@@ -146,6 +145,27 @@ public class GraphController
 					return;
 				}
 			}
+			
+			if( shift_was_down_when_most_recent_object_was_selected_ && e.isShiftDown() ) {
+				if( graph_.selectedNode() != null ) {
+					if( graph_.getNumNodes() < 2 ) {//Don't want an empty graph
+						shift_was_down_when_most_recent_object_was_selected_ = false;
+						graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y );
+						graph_.removeNodeAndDeleteItsEdges( graph_.selectedNode() );
+						graph_.setSelectedNode( graph_.getNode( 0 ) );
+						GlobalViewData.top_panel.repaint();
+						return;
+					}
+				} else if( graph_.selectedEdge() != null ) {
+					shift_was_down_when_most_recent_object_was_selected_ = false;
+					if( graph_view_.boxForEdge_const().get( graph_.selectedEdge() ).pointIsInBox( x, y ) ) {
+						graph_.removeEdgeAndNotifyItsNodes( graph_.selectedEdge() );
+						graph_.setSelectedNode( graph_.getNode( 0 ) );
+						GlobalViewData.top_panel.repaint();
+					}
+				}
+			}
+			
 			GlobalViewData.top_panel.repaint();
 			return;
 		}
