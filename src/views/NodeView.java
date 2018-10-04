@@ -81,6 +81,9 @@ public class NodeView extends JPanel {
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScriptFilename() );
 
+		use_script_from_disk_.setEnabled( n.getUseScriptFile() );
+		editor_pane_.setText( n.getScript() );
+		
 		notes_area_.setText( n.getNotes() );
 
 		String user_flag_string = "";

@@ -28,7 +28,21 @@ public class Node {
 	
 	private boolean use_script_file_ = false;
 	private String xml_script_filename_ = "script.xml";
-	private String xml_script_ = "<ROSETTASCRIPTS>\n<ROSETTASCRIPTS>\n";
+	private String xml_script_ = "<ROSETTASCRIPTS>\n" + 
+			"    <SCOREFXNS>\n" + 
+			"    </SCOREFXNS>\n" + 
+			"    <RESIDUE_SELECTORS>\n" + 
+			"    </RESIDUE_SELECTORS>\n" + 
+			"    <TASKOPERATIONS>\n" + 
+			"    </TASKOPERATIONS>\n" + 
+			"    <FILTERS>\n" + 
+			"    </FILTERS>\n" + 
+			"    <MOVERS>\n" + 
+			"    </MOVERS>\n" + 
+			"    <PROTOCOLS>\n" + 
+			"    </PROTOCOLS>\n" + 
+			"    <OUTPUT />\n" + 
+			"</ROSETTASCRIPTS>\n";
 	
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
