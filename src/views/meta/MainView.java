@@ -33,7 +33,7 @@ public class MainView extends JPanel {
 
 	private final CompileView compile_view_;
 	private final SaveLoadView save_load_view_;
-	
+
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
 
@@ -44,7 +44,7 @@ public class MainView extends JPanel {
 		Dimension minimum_size_for_graph_view = new Dimension( 500,
 				getHeight() / 2 );
 		graph_view_.setMinimumSize( minimum_size_for_graph_view );
-		
+
 		if( graph_.selectedNode() == null ) {
 			if( graph_.getNumNodes() == 0 ) {
 				graph_.addNode( new Node( "First Stage", 10, 10 ) );
@@ -56,18 +56,17 @@ public class MainView extends JPanel {
 
 		compile_view_ = new CompileView( graph_ );
 		save_load_view_ = new SaveLoadView( graph_ );
-		
+
 		tabs_ = new JTabbedPane();
 		tabs_.addTab( "Edit", node_view_ );
 		tabs_.add( "Compile", compile_view_ );
 		tabs_.add( "Save/Load", save_load_view_ );
-		
+
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_,
 				tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
 
-		
 		this.setLayout( new GridLayout( 1, 1 ) );
 		this.add( main_panel_ );
 	}

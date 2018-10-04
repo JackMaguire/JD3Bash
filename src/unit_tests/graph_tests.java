@@ -247,7 +247,7 @@ public class graph_tests {
 				success = false;
 			}
 			///@formatter:on
-			
+
 			// Notes: Hard to test because of whitespace changes
 			/*if( ! nodes[ node ].getNotes().equals( new_node.getNotes() + "\n" ) ) {
 				System.err.println( "New node " + node + " has notes " + new_node.getNotes()

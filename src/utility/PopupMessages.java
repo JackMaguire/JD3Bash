@@ -8,5 +8,5 @@ public class PopupMessages {
 	public static void send( String s ) {
 		JOptionPane.showMessageDialog( new JFrame(), s );
 	}
-	
+
 }
