@@ -26,7 +26,7 @@ public class NodeView extends JPanel {
 	private final NodeController node_controller_;// circular references are okay
 																								// in Java
 
-	// Segment1
+	// Segment1 3x3
 	private final JLabel title_label_ = new JLabel( "Title:   " );
 	private final JTextField title_field_;
 	private final JLabel dummy_ = new JLabel("");
@@ -161,6 +161,7 @@ public class NodeView extends JPanel {
 		
 		segment1.add( script_label_ );
 		segment1.add( script_field_ );
+		segment1.add( use_script_from_disk_ );
 		upper_half.add( segment1 );
 
 		JPanel segment2 = new JPanel( new BorderLayout() );
