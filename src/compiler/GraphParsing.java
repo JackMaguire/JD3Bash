@@ -22,6 +22,8 @@ public class GraphParsing {
 	// This can return null if an error occurs!
 	public static Pair< String, String > parseGraph( Graph g,
 			GraphParsingOptions options ) throws InvalidGraphException {
+		
+		//Check for easy things
 		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
