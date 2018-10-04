@@ -4,7 +4,7 @@ public class Options {
 
 	//////////////
 	// View Options
-	private static boolean show_node_titles_ = false;
+	private static boolean show_node_titles_ = true;
 
 	public static boolean getShowNodeTitles() {
 		return show_node_titles_;
@@ -14,7 +14,7 @@ public class Options {
 		show_node_titles_ = show_node_titles;
 	}
 
-	private static boolean put_node_titles_to_side_ = false;
+	private static boolean put_node_titles_to_side_ = true;
 
 	public static boolean getPutNodeTitlesToSide() {
 		return put_node_titles_to_side_;
