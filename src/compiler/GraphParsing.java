@@ -128,6 +128,14 @@ public class GraphParsing {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
 
+		if( ! n.getUseScriptFile() ) {
+			//Write out custom file
+			String[] split = n.getScript().split( "\n" );
+			for( String s : split ) {
+				setup_script.value += "echo \"" + s + "\" >> " + dirname + "/script.xml\n";
+			}
+		}
+		
 		if( options.serialize_intermediate_poses ) {
 			if( n.numUpstreamEdges() > 0 ) {
 				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname + "/flags\n";

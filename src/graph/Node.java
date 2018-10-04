@@ -173,7 +173,6 @@ public class Node {
 			}
 			
 			if( split[ 0 ].equals( "use_default_command" ) ) {
-				use_default_command_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
 			}
 		} // for string line
@@ -457,7 +456,12 @@ public class Node {
 			// Intermediate Poses' box in the compile tab" );
 		}
 
-		list.add( "-parser:protocol ../" + xml_script_filename_ );
+		if( use_script_file_ ) {
+			list.add( "-parser:protocol ../" + xml_script_filename_ );
+		} else {
+			list.add( "-parser:protocol script.xml" );
+		}
+		
 
 		return list;
 	}
