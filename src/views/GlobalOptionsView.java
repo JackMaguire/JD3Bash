@@ -22,26 +22,26 @@ public class GlobalOptionsView extends JPanel {
 
 	private final JLabel view_options_label_ = new JLabel( "View" );
 	private final JCheckBox show_node_titles_checkbox_ = new JCheckBox( "Show node titles" );
-	private final JCheckBox put_node_titles_to_side_checkbox_ = new JCheckBox(
-			"Move node titles to side" );
+	private final JCheckBox put_node_titles_to_side_checkbox_ = new JCheckBox( "Move node titles to side" );
 
 	private final JLabel compile_options_label_ = new JLabel( "Compile" );
-	private final JCheckBox serialize_intermediate_poses_checkbox_ = new JCheckBox(
-			"Serialize Intermediate Poses" );
+	private final JCheckBox serialize_intermediate_poses_checkbox_ = new JCheckBox( "Serialize Intermediate Poses" );
 	private final JTextArea serialize_intermediate_poses_explanation_ = new JTextArea( "TODO" );
-	private final JScrollPane serialize_intermediate_poses_explanation_scroll_pane_ = new JScrollPane(
-			serialize_intermediate_poses_explanation_ );
+	private final JScrollPane serialize_intermediate_poses_explanation_scroll_pane_ = new JScrollPane( serialize_intermediate_poses_explanation_ );
 
 	private final JLabel run_options_label_ = new JLabel( "Run" );
 	private final JLabel n_proc_label_ = new JLabel( "Num Processors:" );
 	private final JTextField n_proc_field_ = new JTextField( Options.getNumProcessors() + "" );
 	private final JLabel default_command_label_ = new JLabel( "Default Run Command:" );
-	private final JTextField default_command_field_ = new JTextField(
-			Options.getDefaultRunCommand() );
+	private final JTextField default_command_field_ = new JTextField( 	Options.getDefaultRunCommand() );
 
 	private final GlobalOptionsController controller_;
 
 	public GlobalOptionsView() {
+		show_node_titles_checkbox_.setSelected( Options.getShowNodeTitles() );
+		put_node_titles_to_side_checkbox_.setSelected( Options.getPutNodeTitlesToSide() );
+		serialize_intermediate_poses_checkbox_.setSelected( Options.getSerializeIntermediatePoses() );
+		
 		// View
 		final JPanel inner_view_options_panel = new JPanel( new GridLayout( 1, 4 ) );
 		inner_view_options_panel.add( show_node_titles_checkbox_ );
