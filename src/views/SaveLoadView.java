@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 
 import exceptions.LoadFailureException;
 import global_data.GlobalViewData;
+import global_data.Options;
 import graph.Graph;
 
 public class SaveLoadView extends JPanel
@@ -91,6 +92,7 @@ public class SaveLoadView extends JPanel
 			try {
 				out = new BufferedWriter( new FileWriter( f ) );
 				graph_.saveSelfNodesAndEdges( out );
+				Options.save( out );
 			}
 			catch( IOException e1 ) {
 				utility.PopupMessages.send(
@@ -115,6 +117,7 @@ public class SaveLoadView extends JPanel
 			try {
 				in = new BufferedReader( new FileReader( file_to_load_from ) );
 				graph_.loadSelfNodesAndEdges( in );
+				Options.load( in );
 				utility.PopupMessages.send( "Load Successful!" );
 			}
 			catch( FileNotFoundException e1 ) {
