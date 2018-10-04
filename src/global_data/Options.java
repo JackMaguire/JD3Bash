@@ -8,7 +8,7 @@ public class Options {
 	public static boolean getShowNodeTitles() {
 		return show_node_titles_;
 	}
-	protected static void setShowNodeTitles( boolean show_node_titles ) {
+	public static void setShowNodeTitles( boolean show_node_titles ) {
 		show_node_titles_ = show_node_titles;
 	}
 	
@@ -16,7 +16,7 @@ public class Options {
 	public static boolean getPutNodeTitlesToSide() {
 		return put_node_titles_to_side_;
 	}
-	protected static void setPutNodeTitlesToSide( boolean put_node_titles_to_side ) {
+	public static void setPutNodeTitlesToSide( boolean put_node_titles_to_side ) {
 		put_node_titles_to_side_ = put_node_titles_to_side;
 	}
 	
@@ -27,7 +27,7 @@ public class Options {
 	public static boolean getSerializeIntermediatePoses() {
 		return serialize_intermediate_poses_;
 	}
-	protected static void setSerializeIntermediatePoses( boolean serialize_intermediate_poses ) {
+	public static void setSerializeIntermediatePoses( boolean serialize_intermediate_poses ) {
 		serialize_intermediate_poses_ = serialize_intermediate_poses;
 	}
 }

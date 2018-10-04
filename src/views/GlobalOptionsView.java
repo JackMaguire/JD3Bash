@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import global_data.Options;
+import controllers.GlobalOptionsController;
 
 public class GlobalOptionsView extends JPanel {
 
@@ -27,7 +27,9 @@ public class GlobalOptionsView extends JPanel {
 	private final JTextArea serialize_intermediate_poses_explanation_ = new JTextArea( "TODO" );
 	private final JScrollPane serialize_intermediate_poses_explanation_scroll_pane_ = new JScrollPane( serialize_intermediate_poses_explanation_ );
 	
-	public GlobalOptionsView(  ) {
+	private final GlobalOptionsController controller_;
+	
+	public GlobalOptionsView(  ) {		
 		//View
 		final JPanel inner_view_options_panel = new JPanel( new GridLayout(1,4) );
 		inner_view_options_panel.add( show_node_titles_checkbox_ );
@@ -40,6 +42,7 @@ public class GlobalOptionsView extends JPanel {
 		
 		//Compile
 		final JPanel inner_compile_options_panel = new JPanel( new GridLayout(1,2) );
+		serialize_intermediate_poses_explanation_.setEditable( false );
 		inner_compile_options_panel.add( serialize_intermediate_poses_checkbox_ );
 		inner_compile_options_panel.add( serialize_intermediate_poses_explanation_scroll_pane_ );
 		
@@ -51,6 +54,23 @@ public class GlobalOptionsView extends JPanel {
 		setLayout( new GridLayout(2, 1) );
 		add( view_options_panel );
 		add( compile_options_panel );
+		
+		controller_ = new GlobalOptionsController( this );
+		show_node_titles_checkbox_.addActionListener( controller_ );
+		put_node_titles_to_side_checkbox_.addActionListener( controller_ );
+		serialize_intermediate_poses_checkbox_.addActionListener( controller_ );
+	}
+	
+	public JCheckBox getShowNodeTitlesCheckbox() {
+		return show_node_titles_checkbox_;
+	}
+	
+	public JCheckBox getPutNodeTitlesToSideCheckBox() {
+		return put_node_titles_to_side_checkbox_;
+	}
+
+	public JCheckBox getSerializeIntermediatePosesCheckbox() {
+		return serialize_intermediate_poses_checkbox_;
 	}
 	
 }
