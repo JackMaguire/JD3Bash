@@ -179,8 +179,8 @@ public class GraphParsing {
 				final String name_of_next_stage_directory = de.destinationNode().dirname();
 				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
-				run_script.value += "# Extract the best results for stage "
-						+ de.destinationNode().getTitle() + "\n";
+				run_script.value += "# Extract the best results for stage \""
+						+ de.destinationNode().getTitle() + "\"\n";
 				run_script.value += "# This awk command prints the data for the column with header "
 						+ sort_column + " along with the title for each result\n";
 				run_script.value += "awk -v c1=\"" + sort_column
