@@ -25,6 +25,15 @@ public class GraphParsing {
 		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
+		
+		if( Options.getNumProcessors() == 0 ) {
+			throw new InvalidGraphException( "Number of processors is not set. Please go to the 'Options' tab and select a number larger than 0" );
+		}
+		
+		if( Options.getNumProcessors() < 0 ) {
+			throw new InvalidGraphException( "Number of processors is less than zero: " + Options.getNumProcessors()
+				+ ". Please go to the 'Options' tab and select a number larger than 0" );
+		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
 		addGlobalIntroToScript( run_script );
