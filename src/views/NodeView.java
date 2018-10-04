@@ -73,7 +73,7 @@ public class NodeView extends JPanel {
 
 		title_field_ = new JTextField( node_.title() );
 		command_field_ = new JTextField( node_.command() );
-		script_field_ = new JTextField( node_.getXMLScript() );
+		script_field_ = new JTextField( node_.getXMLScriptFilename() );
 
 		notes_area_.setText( n.getNotes() );
 

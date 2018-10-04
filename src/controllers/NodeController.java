@@ -45,7 +45,7 @@ public class NodeController implements DocumentListener {
 		}
 
 		if( e.getDocument() == node_view_.getScriptField().getDocument() ) {
-			node_.setXMLScript( node_view_.getScriptField().getText() );
+			node_.setXMLScriptFilename( node_view_.getScriptField().getText() );
 			return;
 		}
 

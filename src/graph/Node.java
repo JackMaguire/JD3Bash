@@ -27,7 +27,7 @@ public class Node {
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
 	private String title_;
-	private String xml_script_ = "script.xml";
+	private String xml_script_filename_ = "script.xml";
 
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
@@ -142,7 +142,7 @@ public class Node {
 			}
 
 			if( split[ 0 ].equals( "script" ) ) {
-				xml_script_ = split[ 1 ];
+				xml_script_filename_ = split[ 1 ];
 				continue;
 			}
 		} // for string line
@@ -267,20 +267,20 @@ public class Node {
 		title_ = setting;
 	}
 
-	public final String getXMLScript() {
-		return xml_script_;
+	public final String getXMLScriptFilename() {
+		return xml_script_filename_;
 	}
 
-	public final String getScript() {
-		return xml_script_;
+	public final String getScriptFilename() {
+		return xml_script_filename_;
 	}
 
-	public final void setXMLScript( String setting ) {
-		xml_script_ = setting;
+	public final void setXMLScriptFilename( String setting ) {
+		xml_script_filename_ = setting;
 	}
 
-	public final void setScript( String setting ) {
-		xml_script_ = setting;
+	public final void setScriptFilename( String setting ) {
+		xml_script_filename_ = setting;
 	}
 
 	public final int getStage() throws UndefinedValueException {
@@ -384,7 +384,7 @@ public class Node {
 			// Intermediate Poses' box in the compile tab" );
 		}
 
-		list.add( "-parser:protocol ../" + xml_script_ );
+		list.add( "-parser:protocol ../" + xml_script_filename_ );
 
 		return list;
 	}
@@ -410,7 +410,7 @@ public class Node {
 		save_string += "b " + color_.getBlue() + "\n";
 		save_string += "command " + command_ + "\n";
 		save_string += "title " + title_ + "\n";
-		save_string += "script " + xml_script_ + "\n";
+		save_string += "script " + xml_script_filename_ + "\n";
 
 		save_string += "START_FLAGS\n";
 		for( String flag : user_rosetta_flags_ ) {

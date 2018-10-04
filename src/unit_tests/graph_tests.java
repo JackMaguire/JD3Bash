@@ -123,7 +123,7 @@ public class graph_tests {
 		nodes[ 0 ].setColor( new Color( 1, 2, 3 ) );
 		nodes[ 1 ].setCommand( "../unit_test.sh" );
 		nodes[ 2 ].setNotes( "UNIT TEST" );
-		nodes[ 3 ].setScript( "unit_test.xml" );
+		nodes[ 3 ].setScriptFilename( "unit_test.xml" );
 		nodes[ 4 ].setTitle( "unit_test" );
 		nodes[ 0 ].addUserRosettaFlag( "-unit test" );
 		nodes[ 1 ].setX( 100 );
@@ -263,10 +263,10 @@ public class graph_tests {
 			}
 
 			// Script
-			if( !nodes[ node ].getScript().equals( new_node.getScript() ) ) {
+			if( !nodes[ node ].getScriptFilename().equals( new_node.getScriptFilename() ) ) {
 				System.err
-						.println( "New node " + node + " has script " + new_node.getScript()
-								+ " instead of " + nodes[ node ].getScript() );
+						.println( "New node " + node + " has script " + new_node.getScriptFilename()
+								+ " instead of " + nodes[ node ].getScriptFilename() );
 				success = false;
 			}
 
