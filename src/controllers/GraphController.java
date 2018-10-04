@@ -127,7 +127,7 @@ public class GraphController
 				if( graph_.getNumNodes() > 1 ) {// Don't want an empty graph
 					shift_was_down_when_most_recent_object_was_selected_ = false;
 					if( graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y ) ) {
-						//TODO perhaps add a warning here
+						// TODO perhaps add a warning here
 						graph_.removeNodeAndDeleteItsEdges( graph_.selectedNode() );
 						graph_.setSelectedNode( graph_.getNode( 0 ) );
 						GlobalViewData.top_panel.repaint();
@@ -137,7 +137,7 @@ public class GraphController
 			} else if( graph_.selectedEdge() != null ) {
 				shift_was_down_when_most_recent_object_was_selected_ = false;
 				if( graph_view_.boxForEdge_const().get( graph_.selectedEdge() ).pointIsInBox( x, y ) ) {
-					//TODO perhaps add a warning here
+					// TODO perhaps add a warning here
 					graph_.removeEdgeAndNotifyItsNodes( graph_.selectedEdge() );
 					graph_.setSelectedNode( graph_.getNode( 0 ) );
 					GlobalViewData.top_panel.repaint();
