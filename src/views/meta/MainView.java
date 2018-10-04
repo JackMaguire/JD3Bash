@@ -35,7 +35,7 @@ public class MainView extends JPanel {
 	private final CompileView compile_view_;
 	private final SaveLoadView save_load_view_;
 	private final GlobalOptionsView options_view_ = new GlobalOptionsView();
-	
+
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
 
