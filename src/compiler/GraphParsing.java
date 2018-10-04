@@ -22,19 +22,21 @@ public class GraphParsing {
 	// This can return null if an error occurs!
 	public static Pair< String, String > parseGraph( Graph g,
 			GraphParsingOptions options ) throws InvalidGraphException {
-		
-		//Check for easy things
+
+		// Check for easy things
 		if( cycleExists( g ) ) {
 			throw new InvalidGraphException( "Cycle Detected In Graph" );
 		}
-		
+
 		if( Options.getNumProcessors() == 0 ) {
-			throw new InvalidGraphException( "Number of processors is not set. Please go to the 'Options' tab and select a number larger than 0" );
+			throw new InvalidGraphException(
+					"Number of processors is not set. Please go to the 'Options' tab and select a number larger than 0" );
 		}
-		
+
 		if( Options.getNumProcessors() < 0 ) {
-			throw new InvalidGraphException( "Number of processors is less than zero: " + Options.getNumProcessors()
-				+ ". Please go to the 'Options' tab and select a number larger than 0" );
+			throw new InvalidGraphException(
+					"Number of processors is less than zero: " + Options.getNumProcessors()
+							+ ". Please go to the 'Options' tab and select a number larger than 0" );
 		}
 
 		PBRWrapper< String > run_script = new PBRWrapper< String >( "#!/bin/bash\n\n" );
@@ -83,7 +85,7 @@ public class GraphParsing {
 				System.out.println( j + " " + u_node.numDownstreamEdges() + " " + u_node.numUpstreamEdges() );
 			}
 		}*/
-		
+
 		while ( true ) {
 			// Add nodes that do not depend on any unassigned node
 			// Work backwards so that we can easily delete while we work
@@ -145,15 +147,17 @@ public class GraphParsing {
 			setup_script.value += "echo \"" + flag + "\" >> " + dirname + "/flags\n";
 		}
 
-		if( ! n.getUseScriptFile() ) {
-			//Write out custom file
+		if( !n.getUseScriptFile() ) {
+			// Write out custom file
 			String[] split = n.getScript().split( "\n" );
 			for( String s : split ) {
-				final String reformatted_quotes = s.replaceAll( "'", "\"" );//Using double quotes for everything so that we can use single quotes 
+				final String reformatted_quotes = s.replaceAll( "'", "\"" );// Using double quotes for
+																																		// everything so that we can use
+																																		// single quotes
 				setup_script.value += "echo '" + reformatted_quotes + "' >> " + dirname + "/script.xml\n";
 			}
 		}
-		
+
 		if( options.serialize_intermediate_poses ) {
 			if( n.numUpstreamEdges() > 0 ) {
 				setup_script.value += "echo \"-in:file:srlz 1\" >> " + dirname + "/flags\n";
@@ -174,7 +178,7 @@ public class GraphParsing {
 
 		run_script.value += "\ncd " + dirname + "\n";
 
-		//THE COMMAND
+		// THE COMMAND
 
 		run_script.value += "if " + n.getEffectiveCommand() + " ;then \n"
 				+ "    echo \"Done running " + dirname + "\" >> ../JD3BASH_runlog.txt\n"

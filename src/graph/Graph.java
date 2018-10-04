@@ -109,19 +109,19 @@ public class Graph {
 	public void setGhostEdge( PreliminaryEdge ge ) {
 		ghost_edge_ = ge;
 	}
-	
+
 	public void removeNodeAndDeleteItsEdges( Node n ) {
 		for( int i = n.numUpstreamEdges() - 1; i >= 0; --i ) {
 			removeEdgeAndNotifyItsNodes( n.getUpstreamEdge( i ) );
 		}
-		
+
 		for( int i = n.numDownstreamEdges() - 1; i >= 0; --i ) {
 			removeEdgeAndNotifyItsNodes( n.getDownstreamEdge( i ) );
 		}
-		
+
 		nodes_.remove( n );
 	}
-	
+
 	public void removeEdgeAndNotifyItsNodes( Edge e ) {
 		e.destinationNode().removeUpstreamEdge( e );
 		e.sourceNode().removeDownstreamEdge( e );

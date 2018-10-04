@@ -30,7 +30,8 @@ public class Edge {
 		destination_node_ = dest_node;
 	}
 
-	public Edge( BufferedReader in, ArrayList< Node > nodes ) throws IOException, LoadFailureException {
+	public Edge( BufferedReader in, ArrayList< Node > nodes )
+			throws IOException, LoadFailureException {
 		final String first_line = in.readLine();
 		if( !first_line.equals( "START_EDGE" ) ) {
 			throw new LoadFailureException(

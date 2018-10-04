@@ -94,7 +94,8 @@ public class GraphController
 		} else {
 			// Potentially Select A Node
 			for( Node n : graph_.allNodes_const() ) {
-				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				if( graph_view_.boxForNode_const().get( n ).pointIsInBox( last_mouse_press_x_,
+						last_mouse_press_y_ ) ) {
 					graph_.setSelectedNode( n );
 					shift_was_down_when_most_recent_object_was_selected_ = e.isShiftDown();
 					node_is_currently_being_dragged_ = true;
@@ -105,7 +106,8 @@ public class GraphController
 
 			// Potentially Select An Edge
 			for( Edge edge : graph_.allEdges_const() ) {
-				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox( last_mouse_press_x_, last_mouse_press_y_ ) ) {
+				if( graph_view_.boxForEdge_const().get( edge ).pointIsInBox( last_mouse_press_x_,
+						last_mouse_press_y_ ) ) {
 					graph_.setSelectedEdge( edge );
 					shift_was_down_when_most_recent_object_was_selected_ = e.isShiftDown();
 					GlobalViewData.top_panel.repaint();
@@ -122,7 +124,7 @@ public class GraphController
 
 		if( shift_was_down_when_most_recent_object_was_selected_ && e.isShiftDown() ) {
 			if( graph_.selectedNode() != null ) {
-				if( graph_.getNumNodes() > 1 ) {//Don't want an empty graph
+				if( graph_.getNumNodes() > 1 ) {// Don't want an empty graph
 					shift_was_down_when_most_recent_object_was_selected_ = false;
 					if( graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y ) ) {
 						graph_.removeNodeAndDeleteItsEdges( graph_.selectedNode() );
@@ -141,7 +143,7 @@ public class GraphController
 			}
 			return;
 		}
-		
+
 		if( node_is_currently_being_dragged_ ) {
 			if( Math.abs( x - last_mouse_press_x_ ) > 4
 					|| Math.abs( y - last_mouse_press_y_ ) > 4 ) {
@@ -153,7 +155,7 @@ public class GraphController
 			node_is_currently_being_dragged_ = false;
 			return;
 		}
-		
+
 		if( edge_is_currently_being_created_ ) {
 			edge_is_currently_being_created_ = false;
 			graph_.setGhostEdge( null );
@@ -169,7 +171,7 @@ public class GraphController
 					return;
 				}
 			}
-			
+
 			GlobalViewData.top_panel.repaint();
 			return;
 		}

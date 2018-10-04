@@ -85,7 +85,7 @@ public class NodeController implements DocumentListener, ActionListener {
 			node_view_.redetermineAutoFlags();
 			return;
 		}
-		
+
 		if( e.getSource() == node_view_.getUseDefaultCommandCheckbox() ) {
 			final boolean is_selected = node_view_.getUseDefaultCommandCheckbox().isSelected();
 			node_.setUseDefaultCommand( is_selected );

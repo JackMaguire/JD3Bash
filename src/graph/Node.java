@@ -160,7 +160,7 @@ public class Node {
 			if( split[ 0 ].equals( "title" ) ) {
 				title_ = split[ 1 ];
 				for( int i = 2; i < split.length; ++i ) {
-					title_ += " " + split[i];
+					title_ += " " + split[ i ];
 				}
 				continue;
 			}
@@ -174,7 +174,7 @@ public class Node {
 				use_script_file_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "use_default_command" ) ) {
 				continue;
 			}
@@ -289,7 +289,7 @@ public class Node {
 	public final void setCommand( String setting ) {
 		command_ = setting;
 	}
-	
+
 	public final String getEffectiveCommand() {
 		if( use_default_command_ ) {
 			return Options.getDefaultRunCommand();
@@ -414,11 +414,11 @@ public class Node {
 	public void setNotes( String notes ) {
 		notes_ = notes;
 	}
-	
+
 	public boolean getUseDefaultCommand() {
 		return use_default_command_;
 	}
-	
+
 	public void setUseDefaultCommand( boolean setting ) {
 		use_default_command_ = setting;
 	}
@@ -426,7 +426,7 @@ public class Node {
 	/*public void removeUpstreamEdge( Edge e ) {
 		upstream_edges_.remove( e );
 	}*/
-	
+
 	///////////////////////////
 	// Graph Parsing Utilities//
 	///////////////////////////
@@ -468,7 +468,6 @@ public class Node {
 		} else {
 			list.add( "-parser:protocol script.xml" );
 		}
-		
 
 		return list;
 	}
@@ -497,7 +496,7 @@ public class Node {
 		save_string += "script " + xml_script_filename_ + "\n";
 		save_string += "use_script_file " + use_script_file_ + "\n";
 		save_string += "use_default_command " + use_default_command_ + "\n";
-		
+
 		save_string += "START_FLAGS\n";
 		for( String flag : user_rosetta_flags_ ) {
 			save_string += flag + "\n";
