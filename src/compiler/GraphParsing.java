@@ -138,7 +138,7 @@ public class GraphParsing {
 
 		setup_script.value += "mkdir " + dirname + "\n";
 		if( n.numUpstreamEdges() > 0 ) {
-			setup_script.value += "touch > " + dirname + "/input_files\n";
+			setup_script.value += "touch " + dirname + "/input_files\n";
 		}
 
 		for( String flag : n.getAllRosettaFlags() ) {
