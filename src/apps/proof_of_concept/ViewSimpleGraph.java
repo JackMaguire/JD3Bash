@@ -12,8 +12,8 @@ public class ViewSimpleGraph {
 
 	public static void main( String[] args ) {
 		Graph simple_graph = new Graph();
-		Node n0 = simple_graph.addNode( new Node( "Dock", 0, 30 ) );
-		Node n1 = simple_graph.addNode( new Node( "HBNet", 20, 10 ) );
+		Node n0 = simple_graph.addNode( new Node( "Dock", 20, 10 ) );
+		Node n1 = simple_graph.addNode( new Node( "HBNet", 20, 30 ) );
 		Edge e1 = simple_graph.addEdge( n0, n1 );
 
 		e1.setColumnNameToSortBy( "total_score" );
