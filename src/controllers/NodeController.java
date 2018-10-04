@@ -71,7 +71,8 @@ public class NodeController implements DocumentListener, ActionListener {
 	public void actionPerformed( ActionEvent e ) {
 		if( e.getSource() == node_view_.getUseScriptFromDiskCheckbox() ) {
 			node_.setUseScriptFile( node_view_.getUseScriptFromDiskCheckbox().isSelected() );
-			node_view_.getEditorPane().setEnabled( !node_view_.getUseScriptFromDiskCheckbox().isSelected() );
+			node_view_.getEditorPane()
+					.setEnabled( !node_view_.getUseScriptFromDiskCheckbox().isSelected() );
 		}
 	}
 

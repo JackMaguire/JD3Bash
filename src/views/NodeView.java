@@ -66,11 +66,12 @@ public class NodeView extends JPanel {
 	private final JTextArea help_area_ = new JTextArea();
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
-	//XML: look into this: http://java-sl.com/xml_editor_kit.html
-	private final JCheckBox use_script_from_disk_ = new JCheckBox( "Use existing script instead of script below" );
-	private final JEditorPane editor_pane_ = new JEditorPane( );
+	// XML: look into this: http://java-sl.com/xml_editor_kit.html
+	private final JCheckBox use_script_from_disk_ = new JCheckBox(
+			"Use existing script instead of script below" );
+	private final JEditorPane editor_pane_ = new JEditorPane();
 	private final JScrollPane editor_scroll_pane_ = new JScrollPane( editor_pane_ );
-	
+
 	public NodeView( Node n ) {
 		node_ = n;
 
@@ -84,7 +85,7 @@ public class NodeView extends JPanel {
 
 		use_script_from_disk_.setSelected( n.getUseScriptFile() );
 		editor_pane_.setText( n.getScript() );
-		
+
 		notes_area_.setText( n.getNotes() );
 
 		String user_flag_string = "";
@@ -116,7 +117,7 @@ public class NodeView extends JPanel {
 		notes_area_.getDocument().addDocumentListener( node_controller_ );
 
 		use_script_from_disk_.addActionListener( node_controller_ );
-		
+
 		auto_flags_area_.setEditable( false );
 		recommended_flags_area_.setEditable( false );
 		help_area_.setEditable( false );
@@ -138,7 +139,7 @@ public class NodeView extends JPanel {
 		this.setLayout( new GridLayout( 2, 1 ) );
 
 		JPanel upper_half = new JPanel( new GridLayout( 4, 1 ) );
-		
+
 		JPanel segment1 = new JPanel( new GridLayout( 3, 2 ) );
 		segment1.add( title_label_ );
 		segment1.add( title_field_ );
@@ -161,11 +162,11 @@ public class NodeView extends JPanel {
 		segment4.add( recommended_flags_scroll_pane_, BorderLayout.CENTER );
 		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
 
-		JPanel segments34 = new JPanel( new GridLayout(1,2) );
+		JPanel segments34 = new JPanel( new GridLayout( 1, 2 ) );
 		segments34.add( segment3 );
 		segments34.add( segment4 );
 		upper_half.add( segments34 );
-		
+
 		JPanel segment5 = new JPanel( new BorderLayout() );
 		segment5.add( notes_scroll_pane_, BorderLayout.CENTER );
 		segment5.add( notes_label_, BorderLayout.NORTH );
@@ -173,15 +174,15 @@ public class NodeView extends JPanel {
 		JPanel segment6 = new JPanel( new BorderLayout() );
 		segment6.add( help_scroll_pane_, BorderLayout.CENTER );
 		segment6.add( help_label_, BorderLayout.NORTH );
-		
-		JPanel segments56 = new JPanel( new GridLayout(1,2) );
+
+		JPanel segments56 = new JPanel( new GridLayout( 1, 2 ) );
 		segments56.add( segment5 );
 		segments56.add( segment6 );
 		upper_half.add( segments56 );
-		
+
 		this.add( upper_half );
-		
-		//xml
+
+		// xml
 		JPanel bottom_half = new JPanel( new BorderLayout() );
 		bottom_half.add( editor_scroll_pane_, BorderLayout.CENTER );
 		bottom_half.add( use_script_from_disk_, BorderLayout.NORTH );
@@ -211,11 +212,11 @@ public class NodeView extends JPanel {
 	public JTextArea getNotesArea() {
 		return notes_area_;
 	}
-	
+
 	public JCheckBox getUseScriptFromDiskCheckbox() {
 		return use_script_from_disk_;
 	}
-	
+
 	public JEditorPane getEditorPane() {
 		return editor_pane_;
 	}

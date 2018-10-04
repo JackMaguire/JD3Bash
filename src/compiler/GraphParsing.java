@@ -154,7 +154,8 @@ public class GraphParsing {
 				final String name_of_next_stage_directory = de.destinationNode().dirname();
 				final String sort_column = de.columnNameToSortBy();
 				run_script.value += "\n#####\n";
-				run_script.value += "# Extract the best results for stage " + de.destinationNode().getTitle() + "\n";
+				run_script.value += "# Extract the best results for stage "
+						+ de.destinationNode().getTitle() + "\n";
 				run_script.value += "# This awk command prints the data for the column with header "
 						+ sort_column + " along with the title for each result\n";
 				run_script.value += "awk -v c1=\"" + sort_column
@@ -168,10 +169,10 @@ public class GraphParsing {
 
 				run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
 				if( de.usePercentageInsteadOfCount() ) {
-					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer()	+ "\"\n";
+					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer() + "\"\n";
 					run_script.value += "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
 				} else {
-					run_script.value += "nresults=\"" + de.numResultsToTransfer() 	+ "\"\n";
+					run_script.value += "nresults=\"" + de.numResultsToTransfer() + "\"\n";
 				}
 				run_script.value += "# Extract structures that will survive until the next stage\n";
 				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";

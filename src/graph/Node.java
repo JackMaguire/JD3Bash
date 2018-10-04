@@ -21,29 +21,30 @@ public class Node {
 	private Color color_ = Color.gray;
 
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
-	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
+	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this
+																										// node
 
 	private String command_ = "mpirun -n $nproc rosetta_scripts.mpiserialization.linuxgccrelease @ flags";
 	private String title_;
-	
+
 	private boolean use_script_file_ = false;
 	private String xml_script_filename_ = "script.xml";
-	private String xml_script_ = "<ROSETTASCRIPTS>\n" + 
-			"    <SCOREFXNS>\n" + 
-			"    </SCOREFXNS>\n" + 
-			"    <RESIDUE_SELECTORS>\n" + 
-			"    </RESIDUE_SELECTORS>\n" + 
-			"    <TASKOPERATIONS>\n" + 
-			"    </TASKOPERATIONS>\n" + 
-			"    <FILTERS>\n" + 
-			"    </FILTERS>\n" + 
-			"    <MOVERS>\n" + 
-			"    </MOVERS>\n" + 
-			"    <PROTOCOLS>\n" + 
-			"    </PROTOCOLS>\n" + 
-			"    <OUTPUT />\n" + 
+	private String xml_script_ = "<ROSETTASCRIPTS>\n" +
+			"    <SCOREFXNS>\n" +
+			"    </SCOREFXNS>\n" +
+			"    <RESIDUE_SELECTORS>\n" +
+			"    </RESIDUE_SELECTORS>\n" +
+			"    <TASKOPERATIONS>\n" +
+			"    </TASKOPERATIONS>\n" +
+			"    <FILTERS>\n" +
+			"    </FILTERS>\n" +
+			"    <MOVERS>\n" +
+			"    </MOVERS>\n" +
+			"    <PROTOCOLS>\n" +
+			"    </PROTOCOLS>\n" +
+			"    <OUTPUT />\n" +
 			"</ROSETTASCRIPTS>\n";
-	
+
 	// The graph parser will assign a stage to this node, set stage_is_valid_ to
 	// true, run methods that call stage_, and set stage_is_valid_ to false
 	// stage_is_valid_ is meant to prevent other methods from calling getStage()
@@ -103,7 +104,7 @@ public class Node {
 				}
 				continue;
 			}
-			
+
 			if( line.equals( "START_SCRIPT" ) ) {
 				xml_script_ = "";
 				for( String line2 = in.readLine(); !line2
@@ -165,7 +166,7 @@ public class Node {
 				xml_script_filename_ = split[ 1 ];
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "use_script_file" ) ) {
 				use_script_file_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
@@ -323,15 +324,15 @@ public class Node {
 	public final void setScript( String setting ) {
 		xml_script_ = setting;
 	}
-	
+
 	public final boolean getUseScriptFile() {
 		return use_script_file_;
 	}
-	
+
 	public final void setUseScriptFile( boolean setting ) {
 		use_script_file_ = setting;
 	}
-	
+
 	public final int getStage() throws UndefinedValueException {
 		return stage();
 	}
@@ -461,7 +462,7 @@ public class Node {
 		save_string += "title " + title_ + "\n";
 		save_string += "script " + xml_script_filename_ + "\n";
 		save_string += "use_script_file " + use_script_file_ + "\n";
-		
+
 		save_string += "START_FLAGS\n";
 		for( String flag : user_rosetta_flags_ ) {
 			save_string += flag + "\n";
@@ -470,18 +471,18 @@ public class Node {
 
 		save_string += "START_NOTES\n";
 		save_string += notes_;
-		if( ! notes_.endsWith( "\n" ) ) {
+		if( !notes_.endsWith( "\n" ) ) {
 			save_string += "\n";
 		}
 		save_string += "END_NOTES\n";
 
 		save_string += "START_SCRIPT\n";
 		save_string += xml_script_;
-		if( ! xml_script_.endsWith( "\n" ) ) {
+		if( !xml_script_.endsWith( "\n" ) ) {
 			save_string += "\n";
 		}
 		save_string += "END_SCRIPT\n";
-		
+
 		save_string += "END_NODE\n";
 		out.write( save_string );
 	}

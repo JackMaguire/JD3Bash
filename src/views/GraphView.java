@@ -78,11 +78,11 @@ public class GraphView extends JPanel {
 	}
 
 	public void drawNodes( Graphics2D g2D ) {
-		if(Options.getShowNodeTitles( )) {
-			int new_font_size = (int)( 2 * grid_size_ );
-			g2D.setFont( new Font("TimesRoman", Font.PLAIN, new_font_size) );
+		if( Options.getShowNodeTitles() ) {
+			int new_font_size = (int) ( 2 * grid_size_ );
+			g2D.setFont( new Font( "TimesRoman", Font.PLAIN, new_font_size ) );
 		}
-		
+
 		final int selection_width = grid_size_ / 2;
 		for( Node n : graph_.allNodes_const() ) {
 			int x = n.x() * grid_size_ + ( grid_size_ / 2 );
@@ -100,12 +100,12 @@ public class GraphView extends JPanel {
 			g2D.setColor( n.color() );
 			g2D.fillOval( x, y, diameter, diameter );
 			setBoxForNode( n, new Box( x, y, diameter, diameter ) );
-			
-			if( Options.getShowNodeTitles( ) ) {
+
+			if( Options.getShowNodeTitles() ) {
 				g2D.setColor( Color.black );
-				//g2D.font
+				// g2D.font
 				if( Options.getPutNodeTitlesToSide() ) {
-					g2D.drawString( n.title(), x + diameter + selection_width, y + diameter/2 );
+					g2D.drawString( n.title(), x + diameter + selection_width, y + diameter / 2 );
 				} else {
 					g2D.drawString( n.title(), x, y - selection_width );
 				}

@@ -35,13 +35,13 @@ public class Options {
 	public static void setSerializeIntermediatePoses( boolean serialize_intermediate_poses ) {
 		serialize_intermediate_poses_ = serialize_intermediate_poses;
 	}
-	
+
 	private static int num_processors_ = 0;
-	
+
 	public static int getNumProcessors() {
 		return num_processors_;
 	}
-	
+
 	public static void setNumProcessors( int nproc ) {
 		num_processors_ = nproc;
 	}
