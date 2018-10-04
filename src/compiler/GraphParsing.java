@@ -147,7 +147,7 @@ public class GraphParsing {
 		final String dirname = n.dirname();
 
 		run_script.value += "\ncd " + dirname + "\n";
-		run_script.value += n.command() + "\n";
+		run_script.value += n.getEffectiveCommand() + "\n";
 		if( n.numDownstreamEdges() > 0 ) {
 			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 			for( Edge de : n.downstreamEdges_const() ) {

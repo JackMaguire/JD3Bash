@@ -24,7 +24,7 @@ public class Node {
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
 	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this
 																										// node
-
+	private boolean use_default_command_ = true;
 	private String command_;
 	private String title_;
 
@@ -282,6 +282,14 @@ public class Node {
 	public final void setCommand( String setting ) {
 		command_ = setting;
 	}
+	
+	public final String getEffectiveCommand() {
+		if( use_default_command_ ) {
+			return Options.getDefaultRunCommand();
+		} else {
+			return command_;
+		}
+	}
 
 	public final String getTitle() {
 		return title_;
@@ -398,6 +406,14 @@ public class Node {
 
 	public void setNotes( String notes ) {
 		notes_ = notes;
+	}
+	
+	public boolean getUseDefaultCommand() {
+		return use_default_command_;
+	}
+	
+	public void setUseDefaultCommand( boolean setting ) {
+		use_default_command_ = setting;
 	}
 
 	///////////////////////////
