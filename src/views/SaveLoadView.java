@@ -33,19 +33,18 @@ public class SaveLoadView extends JPanel
 	private static final long serialVersionUID = -9088179087599621175L;
 
 	private final Graph graph_;
-	
+
 	private final JFileChooser file_chooser_ = new JFileChooser();
 	private final JTextField save_path_field_ = new JTextField();
 	private final JTextField save_filename_field_ = new JTextField(
 			"pipeline.dat" );
 	private final JButton save_button_ = new JButton( "Save" );
-	
-	
+
 	public SaveLoadView( Graph g ) {
 		graph_ = g;
 
 		save_button_.addActionListener( this );
-		
+
 		file_chooser_.setApproveButtonText( "Load" );
 		file_chooser_.addActionListener( this );
 
@@ -65,62 +64,71 @@ public class SaveLoadView extends JPanel
 
 	@Override
 	public void actionPerformed( ActionEvent e ) {
-		
+
 		if( e.getSource() == save_button_ ) {
-			final String filename = save_path_field_.getText() + save_filename_field_.getText();
+			final String filename = save_path_field_.getText()
+					+ save_filename_field_.getText();
 			final File f = new File( filename );
-			
-			//Prevent overwriting existing files
+
+			// Prevent overwriting existing files
 			if( f.exists() ) {
 				final Object[] options = { "Yes, overwrite this file",
 						"No, don't save" };
 				int n = JOptionPane.showOptionDialog( new JFrame(),
-				    filename + " already exists. Overwrite this file?",
-				    "Overwrite?",
-				    JOptionPane.YES_NO_OPTION,
-				    JOptionPane.QUESTION_MESSAGE,
-				    null,
-				    options,
-				    options[1] );
-				System.out.println( n );
-				if( n == 1 ) return;
+						filename + " already exists. Overwrite this file?",
+						"Overwrite?",
+						JOptionPane.YES_NO_OPTION,
+						JOptionPane.QUESTION_MESSAGE,
+						null,
+						options,
+						options[ 1 ] );
+
+				if( n == 1 )
+					return;
 			}
-			
+
 			BufferedWriter out = null;
 			try {
 				out = new BufferedWriter( new FileWriter( f ) );
 				graph_.saveSelfNodesAndEdges( out );
 			}
 			catch( IOException e1 ) {
-				utility.PopupMessages.send( "Problem writing to file " + filename + "!\n" + e1.getMessage() );
-			} finally {
+				utility.PopupMessages.send(
+						"Problem writing to file " + filename + "!\n" + e1.getMessage() );
+			}
+			finally {
 				try {
 					out.close();
 				}
 				catch( IOException e1 ) {
-					utility.PopupMessages.send( "Problem closing file " + filename + "!\n" + e1.getMessage() );
+					utility.PopupMessages.send(
+							"Problem closing file " + filename + "!\n" + e1.getMessage() );
 				}
 			}
 			file_chooser_.rescanCurrentDirectory();
 			return;
-		}//save
-		
+		} // save
+
 		if( e.getActionCommand()
 				.equals( javax.swing.JFileChooser.APPROVE_SELECTION ) ) {
-			final String file_to_load_from = file_chooser_.getSelectedFile().getPath();
+			final String file_to_load_from = file_chooser_.getSelectedFile()
+					.getPath();
 			BufferedReader in = null;
 			try {
 				in = new BufferedReader( new FileReader( file_to_load_from ) );
 				graph_.loadSelfNodesAndEdges( in );
 			}
 			catch( FileNotFoundException e1 ) {
-				utility.PopupMessages.send( "File " + file_to_load_from + " not found!" );
+				utility.PopupMessages
+						.send( "File " + file_to_load_from + " not found!" );
 			}
 			catch( IOException e1 ) {
-				utility.PopupMessages.send( "Problem loading file " + file_to_load_from + "!\n" + e1.getMessage() );
+				utility.PopupMessages.send( "Problem loading file " + file_to_load_from
+						+ "!\n" + e1.getMessage() );
 			}
 			catch( LoadFailureException e1 ) {
-				utility.PopupMessages.send( "Problem loading importing graph from " + file_to_load_from + "!\n" + e1.getMessage() );
+				utility.PopupMessages.send( "Problem loading importing graph from "
+						+ file_to_load_from + "!\n" + e1.getMessage() );
 			}
 			finally {
 				if( in != null ) {
@@ -131,8 +139,8 @@ public class SaveLoadView extends JPanel
 						e1.printStackTrace();
 					}
 				}
-			}//finally
-		}//load
+			} // finally
+		} // load
 		GlobalData.top_panel.repaint();
 	}
 
