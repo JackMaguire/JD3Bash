@@ -149,7 +149,8 @@ public class GraphParsing {
 			//Write out custom file
 			String[] split = n.getScript().split( "\n" );
 			for( String s : split ) {
-				setup_script.value += "echo \"" + s + "\" >> " + dirname + "/script.xml\n";
+				final String reformatted_quotes = s.replaceAll( "'", "\"" );//Using double quotes for everything so that we can use single quotes 
+				setup_script.value += "echo '" + reformatted_quotes + "' >> " + dirname + "/script.xml\n";
 			}
 		}
 		
