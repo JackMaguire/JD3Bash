@@ -1,5 +1,7 @@
 package controllers;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.event.DocumentEvent;
@@ -8,7 +10,7 @@ import javax.swing.event.DocumentListener;
 import graph.Node;
 import views.NodeView;
 
-public class NodeController implements DocumentListener {
+public class NodeController implements DocumentListener, ActionListener {
 
 	private final Node node_;
 	private final NodeView node_view_;// circular references are okay in Java
@@ -62,6 +64,14 @@ public class NodeController implements DocumentListener {
 		if( e.getDocument() == node_view_.getNotesArea().getDocument() ) {
 			node_.setNotes( node_view_.getNotesArea().getText() );
 			return;
+		}
+	}
+
+	@Override
+	public void actionPerformed( ActionEvent e ) {
+		if( e.getSource() == node_view_.getUseScriptFromDiskCheckbox() ) {
+			node_.setUseScriptFile( node_view_.getUseScriptFromDiskCheckbox().isSelected() );
+			node_view_.getEditorPane().setEnabled( !node_view_.getUseScriptFromDiskCheckbox().isSelected() );
 		}
 	}
 

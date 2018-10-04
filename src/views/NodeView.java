@@ -69,6 +69,7 @@ public class NodeView extends JPanel {
 	//XML: look into this: http://java-sl.com/xml_editor_kit.html
 	private final JCheckBox use_script_from_disk_ = new JCheckBox( "Use existing script instead of script below" );
 	private final JEditorPane editor_pane_ = new JEditorPane( );
+	private final JScrollPane editor_scroll_pane_ = new JScrollPane( editor_pane_ );
 	
 	public NodeView( Node n ) {
 		node_ = n;
@@ -81,7 +82,7 @@ public class NodeView extends JPanel {
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScriptFilename() );
 
-		use_script_from_disk_.setEnabled( n.getUseScriptFile() );
+		use_script_from_disk_.setSelected( n.getUseScriptFile() );
 		editor_pane_.setText( n.getScript() );
 		
 		notes_area_.setText( n.getNotes() );
@@ -114,6 +115,8 @@ public class NodeView extends JPanel {
 		user_flags_area_.getDocument().addDocumentListener( node_controller_ );
 		notes_area_.getDocument().addDocumentListener( node_controller_ );
 
+		use_script_from_disk_.addActionListener( node_controller_ );
+		
 		auto_flags_area_.setEditable( false );
 		recommended_flags_area_.setEditable( false );
 		help_area_.setEditable( false );
@@ -180,7 +183,7 @@ public class NodeView extends JPanel {
 		
 		//xml
 		JPanel bottom_half = new JPanel( new BorderLayout() );
-		bottom_half.add( editor_pane_, BorderLayout.CENTER );
+		bottom_half.add( editor_scroll_pane_, BorderLayout.CENTER );
 		bottom_half.add( use_script_from_disk_, BorderLayout.NORTH );
 		this.add( bottom_half );
 	}
@@ -207,6 +210,14 @@ public class NodeView extends JPanel {
 
 	public JTextArea getNotesArea() {
 		return notes_area_;
+	}
+	
+	public JCheckBox getUseScriptFromDiskCheckbox() {
+		return use_script_from_disk_;
+	}
+	
+	public JEditorPane getEditorPane() {
+		return editor_pane_;
 	}
 
 }
