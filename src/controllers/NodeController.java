@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import global_data.GlobalViewData;
 import graph.Node;
 import views.NodeView;
 
@@ -38,6 +39,7 @@ public class NodeController implements DocumentListener, ActionListener {
 	private void processDocumentChange( DocumentEvent e ) {
 		if( e.getDocument() == node_view_.getTitleField().getDocument() ) {
 			node_.setTitle( node_view_.getTitleField().getText() );
+			GlobalViewData.top_panel.repaint();
 			return;
 		}
 
