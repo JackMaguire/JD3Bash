@@ -37,8 +37,7 @@ public class SaveLoadView extends JPanel
 
 	private final JFileChooser file_chooser_ = new JFileChooser();
 	private final JTextField save_path_field_ = new JTextField();
-	private final JTextField save_filename_field_ = new JTextField(
-			"pipeline.dat" );
+	private final JTextField save_filename_field_ = new JTextField( "pipeline.dat" );
 	private final JButton save_button_ = new JButton( "Save" );
 
 	public SaveLoadView( Graph g ) {
@@ -110,10 +109,8 @@ public class SaveLoadView extends JPanel
 			return;
 		} // save
 
-		if( e.getActionCommand()
-				.equals( javax.swing.JFileChooser.APPROVE_SELECTION ) ) {
-			final String file_to_load_from = file_chooser_.getSelectedFile()
-					.getPath();
+		if( e.getActionCommand().equals( javax.swing.JFileChooser.APPROVE_SELECTION ) ) {
+			final String file_to_load_from = file_chooser_.getSelectedFile().getPath();
 			BufferedReader in = null;
 			try {
 				in = new BufferedReader( new FileReader( file_to_load_from ) );
