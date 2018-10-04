@@ -88,8 +88,7 @@ public class Node {
 					"Expected 'START_NODE' instead of '" + first_line + "'" );
 		}
 
-		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in
-				.readLine() ) {
+		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in.readLine() ) {
 			if( line.equals( "START_FLAGS" ) ) {
 				for( String line2 = in.readLine(); !line2
 						.equals( "END_FLAGS" ); line2 = in.readLine() ) {

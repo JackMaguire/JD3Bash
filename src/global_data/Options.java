@@ -1,5 +1,11 @@
 package global_data;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+
+import exceptions.LoadFailureException;
+
 public class Options {
 
 	//////////////
@@ -56,5 +62,51 @@ public class Options {
 
 	public static void setDefaultRunCommand( String setting ) {
 		default_run_command_ = setting;
+	}
+	
+	////////////
+	//Save/Load
+	public static void save( BufferedWriter out ) throws IOException {
+		out.write( "START_OPTIONS\n" );
+		out.write( "show_node_titles " + show_node_titles_ + "\n" );
+		out.write( "put_node_titles_to_side " + put_node_titles_to_side_ + "\n" );
+		out.write( "num_processors " + num_processors_ + "\n" );
+		out.write( "default_run_command " + default_run_command_ + "\n" );
+		out.write( "END_OPTIONS\n" );
+	}
+	
+	public static void load( BufferedReader in ) throws IOException, LoadFailureException {
+		final String first_line = in.readLine();
+		if( !first_line.equals( "START_OPTIONS" ) ) {
+			throw new LoadFailureException( "Expected 'START_OPTIONS' instead of '" + first_line + "'" );
+		}
+
+		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in.readLine() ) {
+			final String[] split = line.split( "\\s+" );
+			if( split.length == 0 ) continue;
+			
+			if( split[0].equals( "show_node_titles" ) ) {
+				show_node_titles_ = Boolean.parseBoolean( split[1] );
+				continue;
+			}
+			
+			if( split[0].equals( "put_node_titles_to_side" ) ) {
+				put_node_titles_to_side_ = Boolean.parseBoolean( split[1] );
+				continue;
+			}
+			
+			if( split[0].equals( "num_processors" ) ) {
+				num_processors_ = Integer.parseInt( split[1] );
+				continue;
+			}
+			
+			if( split[0].equals( "default_run_command" ) ) {
+				default_run_command_ = split[1];
+				for( int i=2; i< split.length; ++i ) {
+					default_run_command_ += " " + split[i];
+				}
+				continue;
+			}
+		}
 	}
 }
