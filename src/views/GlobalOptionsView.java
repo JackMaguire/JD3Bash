@@ -87,6 +87,7 @@ public class GlobalOptionsView extends JPanel {
 		serialize_intermediate_poses_checkbox_.addActionListener( controller_ );
 		
 		n_proc_field_.getDocument().addDocumentListener( controller_ );
+		default_command_field_.getDocument().addDocumentListener( controller_ );
 	}
 
 	public final JCheckBox getShowNodeTitlesCheckbox() {
