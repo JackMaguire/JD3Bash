@@ -13,6 +13,7 @@ import views.CompileView;
 import views.EdgeView;
 import views.GraphView;
 import views.NodeView;
+import views.SaveLoadView;
 
 public class MainView extends JPanel {
 
@@ -31,7 +32,8 @@ public class MainView extends JPanel {
 	private EdgeView edge_view_ = null;
 
 	private final CompileView compile_view_;
-
+	private final SaveLoadView save_load_view_ = new SaveLoadView();
+	
 	private final JSplitPane main_panel_;
 	private JTabbedPane tabs_;
 
@@ -57,12 +59,14 @@ public class MainView extends JPanel {
 		tabs_ = new JTabbedPane();
 		tabs_.addTab( "Edit", node_view_ );
 		tabs_.add( "Compile", compile_view_ );
-
+		tabs_.add( "Save/Load", save_load_view_ );
+		
 		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_,
 				tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
 
+		
 		this.setLayout( new GridLayout( 1, 1 ) );
 		this.add( main_panel_ );
 	}
