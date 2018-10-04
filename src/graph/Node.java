@@ -419,7 +419,7 @@ public class Node {
 		save_string += "END_FLAGS\n";
 
 		save_string += "START_NOTES\n";
-		save_string += notes_ + "\n";
+		save_string += notes_;
 		save_string += "END_NOTES\n";
 
 		save_string += "END_NODE\n";

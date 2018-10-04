@@ -176,7 +176,7 @@ public class Edge {
 		save_string += "use_perc " + use_percentage_instead_of_count_ + "\n";
 
 		save_string += "START_NOTES\n";
-		save_string += notes_ + "\n";
+		save_string += notes_;
 		save_string += "END_NOTES\n";
 
 		save_string += "END_EDGE\n";
