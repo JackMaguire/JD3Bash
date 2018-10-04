@@ -7,8 +7,11 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 
 import javax.swing.JButton;
@@ -64,6 +67,40 @@ public class SaveLoadView extends JPanel
 	public void actionPerformed( ActionEvent e ) {
 		
 		if( e.getSource() == save_button_ ) {
+			final String filename = save_path_field_.getText() + save_filename_field_.getText();
+			final File f = new File( filename );
+			
+			//Prevent overwriting existing files
+			if( f.exists() ) {
+				final Object[] options = { "Yes, overwrite this file",
+						"No, don't save" };
+				int n = JOptionPane.showOptionDialog( new JFrame(),
+				    filename + " already exists. Overwrite this file?",
+				    "Overwrite?",
+				    JOptionPane.YES_NO_OPTION,
+				    JOptionPane.QUESTION_MESSAGE,
+				    null,
+				    options,
+				    options[1] );
+				System.out.println( n );
+				if( n == 1 ) return;
+			}
+			
+			BufferedWriter out = null;
+			try {
+				out = new BufferedWriter( new FileWriter( f ) );
+				graph_.saveSelfNodesAndEdges( out );
+			}
+			catch( IOException e1 ) {
+				utility.PopupMessages.send( "Problem writing to file " + filename + "!\n" + e1.getMessage() );
+			} finally {
+				try {
+					out.close();
+				}
+				catch( IOException e1 ) {
+					utility.PopupMessages.send( "Problem closing file " + filename + "!\n" + e1.getMessage() );
+				}
+			}
 			
 			return;
 		}
