@@ -198,11 +198,94 @@ public class graph_tests {
 
 		for( int node = 0; node < 5; ++node ) {
 			Node new_node = new_graph.getNode( node );
+			
+			//ID
 			if( nodes[ node ].id() != new_node.id() ) {
 				System.err.println( "New node " + node + " has id " + new_node.id()
 						+ " instead of " + nodes[ node ].id() );
 				success = false;
 			}
+			
+			//X
+			if( nodes[ node ].x() != new_node.x() ) {
+				System.err.println( "New node " + node + " has x " + new_node.x()
+						+ " instead of " + nodes[ node ].x() );
+				success = false;
+			}
+			
+			//Y
+			if( nodes[ node ].y() != new_node.y() ) {
+				System.err.println( "New node " + node + " has y " + new_node.y()
+						+ " instead of " + nodes[ node ].y() );
+				success = false;
+			}
+			
+			//Red
+			if( nodes[ node ].getColor().getRed() != new_node.getColor().getRed() ) {
+				System.err.println( "New node " + node + " has Red " + new_node.getColor().getRed()
+						+ " instead of " + nodes[ node ].getColor().getRed() );
+				success = false;
+			}
+			
+			//Green
+			if( nodes[ node ].getColor().getGreen() != new_node.getColor().getGreen() ) {
+				System.err.println( "New node " + node + " has Red " + new_node.getColor().getGreen()
+						+ " instead of " + nodes[ node ].getColor().getGreen() );
+				success = false;
+			}
+			
+			//Blue
+			if( nodes[ node ].getColor().getBlue() != new_node.getColor().getBlue() ) {
+				System.err.println( "New node " + node + " has Red " + new_node.getColor().getBlue()
+						+ " instead of " + nodes[ node ].getColor().getBlue() );
+				success = false;
+			}
+			
+			//Notes: Hard to test because of whitespace changes
+			/*if( ! nodes[ node ].getNotes().equals( new_node.getNotes() + "\n" ) ) {
+				System.err.println( "New node " + node + " has notes " + new_node.getNotes()
+						+ " instead of " + nodes[ node ].getNotes() );
+				success = false;
+			}*/
+			
+			//Command
+			if( ! nodes[ node ].command().equals( new_node.command() ) ) {
+				System.err.println( "New node " + node + " has command " + new_node.command()
+						+ " instead of " + nodes[ node ].command() );
+				success = false;
+			}
+			
+			//Script
+			if( ! nodes[ node ].getScript().equals( new_node.getScript() ) ) {
+				System.err.println( "New node " + node + " has script " + new_node.getScript()
+						+ " instead of " + nodes[ node ].getScript() );
+				success = false;
+			}
+			
+			//Title
+			if( ! nodes[ node ].getTitle().equals( new_node.getTitle() ) ) {
+				System.err.println( "New node " + node + " has title " + new_node.getTitle()
+						+ " instead of " + nodes[ node ].getTitle() );
+				success = false;
+			}
+			
+			//Flags
+			for( String flag : nodes[ node ].getUserRosettaFlags() ) {
+				if( flag.length() == 0 ) continue;
+				
+				boolean exists_in_new_node = false;
+				for( String new_flag : new_node.getUserRosettaFlags() ) {
+					if( new_flag.equals( flag ) ) {
+						exists_in_new_node = true;
+						break;
+					}
+				}
+				if( ! exists_in_new_node ) {
+					System.err.println( "New node " + node + " is missing flag " + flag );
+					success = false;
+				}
+			}
+			
 		}
 
 		return success;
