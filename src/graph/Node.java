@@ -159,6 +159,9 @@ public class Node {
 
 			if( split[ 0 ].equals( "title" ) ) {
 				title_ = split[ 1 ];
+				for( int i = 2; i < split.length; ++i ) {
+					title_ += " " + split[i];
+				}
 				continue;
 			}
 
@@ -436,7 +439,7 @@ public class Node {
 	}
 
 	public final String dirname() throws UndefinedValueException {
-		return "stage" + stage() + "_" + title_;
+		return "stage" + stage() + "_" + title_.replace( "\\s+", "_" );
 	}
 
 	public final ArrayList< String > determineAutoFlags() {
