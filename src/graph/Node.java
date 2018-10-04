@@ -439,7 +439,7 @@ public class Node {
 	}
 
 	public final String dirname() throws UndefinedValueException {
-		return "stage" + stage() + "_" + title_.replace( "\\s+", "_" );
+		return "stage" + stage() + "_" + title_.replaceAll( "\\s+", "_" );
 	}
 
 	public final ArrayList< String > determineAutoFlags() {

@@ -81,7 +81,7 @@ public class Options {
 			throw new LoadFailureException( "Expected 'START_OPTIONS' instead of '" + first_line + "'" );
 		}
 
-		for( String line = in.readLine(); !line.equals( "END_NODE" ); line = in.readLine() ) {
+		for( String line = in.readLine(); !line.equals( "END_OPTIONS" ); line = in.readLine() ) {
 			final String[] split = line.split( "\\s+" );
 			if( split.length == 0 ) continue;
 			

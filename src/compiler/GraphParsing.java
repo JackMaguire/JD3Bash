@@ -77,13 +77,19 @@ public class GraphParsing {
 			unassigned_nodes.add( n );
 		}
 
+		/*for( int j = unassigned_nodes.size() - 1; j >= 0; --j ) {
+			Node u_node = unassigned_nodes.get( j );
+			if( u_node.inDegreeIgnoringTheseNodes( assigned_nodes_in_order ) == 0 ) {
+				System.out.println( j + " " + u_node.numDownstreamEdges() + " " + u_node.numUpstreamEdges() );
+			}
+		}*/
+		
 		while ( true ) {
 			// Add nodes that do not depend on any unassigned node
 			// Work backwards so that we can easily delete while we work
 			for( int j = unassigned_nodes.size() - 1; j >= 0; --j ) {
 				Node u_node = unassigned_nodes.get( j );
-				if( u_node
-						.inDegreeIgnoringTheseNodes( assigned_nodes_in_order ) == 0 ) {
+				if( u_node.inDegreeIgnoringTheseNodes( assigned_nodes_in_order ) == 0 ) {
 					assigned_nodes_in_order.add( u_node );
 					unassigned_nodes.remove( j );
 				}
