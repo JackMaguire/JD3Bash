@@ -101,9 +101,9 @@ public class SaveLoadView extends JPanel
 					utility.PopupMessages.send( "Problem closing file " + filename + "!\n" + e1.getMessage() );
 				}
 			}
-			
+			file_chooser_.rescanCurrentDirectory();
 			return;
-		}
+		}//save
 		
 		if( e.getActionCommand()
 				.equals( javax.swing.JFileChooser.APPROVE_SELECTION ) ) {
