@@ -118,6 +118,7 @@ public class SaveLoadView extends JPanel
 			try {
 				in = new BufferedReader( new FileReader( file_to_load_from ) );
 				graph_.loadSelfNodesAndEdges( in );
+				utility.PopupMessages.send( "Load Successful!" );
 			}
 			catch( FileNotFoundException e1 ) {
 				utility.PopupMessages
