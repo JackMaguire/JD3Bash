@@ -210,8 +210,8 @@ public class GraphParsing {
 					run_script.value += "nresults=\"" + de.numResultsToTransfer() + "\"\n";
 				}
 				run_script.value += "# Extract structures that will survive until the next stage\n";
-				run_script.value += "head -n $nresults temp2 | awk '{print $2\".srlz\"}' > temp3\n";
-				run_script.value += "cat temp3 | while read line; do echo `pwd`/$line ; done >> ../"
+				run_script.value += "head -n $nresults temp2 | awk '{print $2}' > temp3\n";
+				run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> ../"
 						+ name_of_next_stage_directory + "/input_files\n";
 			}
 
