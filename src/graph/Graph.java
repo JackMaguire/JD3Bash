@@ -111,12 +111,12 @@ public class Graph {
 	}
 	
 	public void removeNodeAndDeleteItsEdges( Node n ) {
-		for( Edge e : n.upstreamEdges_const() ) {
-			removeEdgeAndNotifyItsNodes( e );
+		for( int i = n.numUpstreamEdges() - 1; i >= 0; --i ) {
+			removeEdgeAndNotifyItsNodes( n.getUpstreamEdge( i ) );
 		}
 		
-		for( Edge e : n.downstreamEdges_const() ) {
-			removeEdgeAndNotifyItsNodes( e );
+		for( int i = n.numDownstreamEdges() - 1; i >= 0; --i ) {
+			removeEdgeAndNotifyItsNodes( n.getDownstreamEdge( i ) );
 		}
 		
 		nodes_.remove( n );
