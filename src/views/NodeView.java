@@ -29,13 +29,17 @@ public class NodeView extends JPanel {
 	// Segment1
 	private final JLabel title_label_ = new JLabel( "Title:   " );
 	private final JTextField title_field_;
-
+	private final JLabel dummy_ = new JLabel("");
+	
 	private final JLabel command_label_ = new JLabel( "Command:   " );
 	private final JTextField command_field_;
-
+	private final JCheckBox use_default_command_checkbox_ = new JCheckBox( "Use Default Command" );
+	
 	private final JLabel script_label_ = new JLabel( "Script:   " );
 	private final JTextField script_field_;
-
+	private final JCheckBox use_script_from_disk_ = new JCheckBox(
+			"Use this file instead of script below" );
+	
 	// Segment 2
 	private final JLabel user_flags_label_ = new JLabel( "Rosetta Flags" );
 	private final JTextArea user_flags_area_ = new JTextArea();
@@ -67,8 +71,6 @@ public class NodeView extends JPanel {
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
 	// XML: look into this: http://java-sl.com/xml_editor_kit.html
-	private final JCheckBox use_script_from_disk_ = new JCheckBox(
-			"Use existing script instead of script below" );
 	private final JEditorPane editor_pane_ = new JEditorPane();
 	private final JScrollPane editor_scroll_pane_ = new JScrollPane( editor_pane_ );
 
@@ -83,6 +85,9 @@ public class NodeView extends JPanel {
 		command_field_ = new JTextField( node_.command() );
 		script_field_ = new JTextField( node_.getXMLScriptFilename() );
 
+		use_default_command_checkbox_.setSelected( n.getUseDefaultCommand() );
+		getCommandField().setEnabled(! n.getUseDefaultCommand() );
+		
 		use_script_from_disk_.setSelected( n.getUseScriptFile() );
 		editor_pane_.setText( n.getScript() );
 
@@ -116,8 +121,10 @@ public class NodeView extends JPanel {
 		user_flags_area_.getDocument().addDocumentListener( node_controller_ );
 		notes_area_.getDocument().addDocumentListener( node_controller_ );
 		editor_pane_.getDocument().addDocumentListener( node_controller_ );
+		
 		use_script_from_disk_.addActionListener( node_controller_ );
-
+		use_default_command_checkbox_.addActionListener( node_controller_ );
+		
 		auto_flags_area_.setEditable( false );
 		recommended_flags_area_.setEditable( false );
 		help_area_.setEditable( false );
@@ -143,11 +150,15 @@ public class NodeView extends JPanel {
 
 		JPanel upper_half = new JPanel( new GridLayout( 4, 1 ) );
 
-		JPanel segment1 = new JPanel( new GridLayout( 3, 2 ) );
+		JPanel segment1 = new JPanel( new GridLayout( 3, 3 ) );
 		segment1.add( title_label_ );
 		segment1.add( title_field_ );
+		segment1.add( dummy_ );
+		
 		segment1.add( command_label_ );
 		segment1.add( command_field_ );
+		segment1.add( use_default_command_checkbox_ );
+		
 		segment1.add( script_label_ );
 		segment1.add( script_field_ );
 		upper_half.add( segment1 );
@@ -186,10 +197,7 @@ public class NodeView extends JPanel {
 		this.add( upper_half );
 
 		// xml
-		JPanel bottom_half = new JPanel( new BorderLayout() );
-		bottom_half.add( editor_scroll_pane_, BorderLayout.CENTER );
-		bottom_half.add( use_script_from_disk_, BorderLayout.NORTH );
-		this.add( bottom_half );
+		this.add( editor_scroll_pane_ );
 	}
 
 	public Node getNode() {
@@ -222,6 +230,10 @@ public class NodeView extends JPanel {
 
 	public JEditorPane getEditorPane() {
 		return editor_pane_;
+	}
+	
+	public JCheckBox getUseDefaultCommandCheckbox() {
+		return use_default_command_checkbox_;
 	}
 
 }
