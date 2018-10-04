@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -64,6 +65,9 @@ public class NodeView extends JPanel {
 	private final JTextArea help_area_ = new JTextArea();
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
+	//XML: look into this: http://java-sl.com/xml_editor_kit.html
+	private final JEditorPane editor_pane_ = new JEditorPane( );
+	
 	public NodeView( Node n ) {
 		node_ = n;
 
@@ -123,8 +127,10 @@ public class NodeView extends JPanel {
 	}
 
 	private void setupView() {
-		this.setLayout( new GridLayout( 8, 1 ) );
+		this.setLayout( new GridLayout( 2, 1 ) );
 
+		JPanel upper_half = new JPanel( new GridLayout( 4, 1 ) );
+		
 		JPanel segment1 = new JPanel( new GridLayout( 3, 2 ) );
 		segment1.add( title_label_ );
 		segment1.add( title_field_ );
@@ -132,32 +138,43 @@ public class NodeView extends JPanel {
 		segment1.add( command_field_ );
 		segment1.add( script_label_ );
 		segment1.add( script_field_ );
-		this.add( segment1 );
+		upper_half.add( segment1 );
 
 		JPanel segment2 = new JPanel( new BorderLayout() );
 		segment2.add( user_flags_scroll_pane_, BorderLayout.CENTER );
 		segment2.add( user_flags_label_, BorderLayout.NORTH );
-		this.add( segment2 );
+		upper_half.add( segment2 );
 
 		JPanel segment3 = new JPanel( new BorderLayout() );
 		segment3.add( auto_flags_scroll_pane_, BorderLayout.CENTER );
 		segment3.add( auto_flags_label_, BorderLayout.NORTH );
-		this.add( segment3 );
 
 		JPanel segment4 = new JPanel( new BorderLayout() );
 		segment4.add( recommended_flags_scroll_pane_, BorderLayout.CENTER );
 		segment4.add( recommended_flags_label_, BorderLayout.NORTH );
-		this.add( segment4 );
 
+		JPanel segments34 = new JPanel( new GridLayout(1,2) );
+		segments34.add( segment3 );
+		segments34.add( segment4 );
+		upper_half.add( segments34 );
+		
 		JPanel segment5 = new JPanel( new BorderLayout() );
 		segment5.add( notes_scroll_pane_, BorderLayout.CENTER );
 		segment5.add( notes_label_, BorderLayout.NORTH );
-		this.add( segment5 );
 
 		JPanel segment6 = new JPanel( new BorderLayout() );
 		segment6.add( help_scroll_pane_, BorderLayout.CENTER );
 		segment6.add( help_label_, BorderLayout.NORTH );
-		this.add( segment6 );
+		
+		JPanel segments56 = new JPanel( new GridLayout(1,2) );
+		segments56.add( segment5 );
+		segments56.add( segment6 );
+		upper_half.add( segments56 );
+		
+		this.add( upper_half );
+		//xml
+		//editor_pane_.setContentType( "html" );
+		this.add( editor_pane_ );
 	}
 
 	public Node getNode() {

@@ -54,7 +54,7 @@ public class GlobalOptionsView extends JPanel {
 		compile_options_panel.add( compile_options_label_, BorderLayout.NORTH );
 		compile_options_panel.add( inner_compile_options_panel, BorderLayout.CENTER );
 
-		setLayout( new GridLayout( 2, 1 ) );
+		setLayout( new GridLayout( 10, 1 ) );
 		add( view_options_panel );
 		add( compile_options_panel );
 
