@@ -94,6 +94,7 @@ public class Options {
 		out.write( "default_run_command " + default_run_command_ + "\n" );
 		out.write( "delete_unused_intermediate_poses " + delete_unused_intermediate_poses_ + "\n" );
 		out.write( "grid_size " + grid_size_ + "\n" );
+		out.write( "serialize_intermediate_poses " + serialize_intermediate_poses_ + "\n" );
 		out.write( "END_OPTIONS\n" );
 	}
 
@@ -138,6 +139,11 @@ public class Options {
 
 			if( split[ 0 ].equals( "delete_unused_intermediate_poses" ) ) {
 				delete_unused_intermediate_poses_ = Boolean.parseBoolean( split[ 1 ] );
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "serialize_intermediate_poses" ) ) {
+				serialize_intermediate_poses_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
 			}
 		}
