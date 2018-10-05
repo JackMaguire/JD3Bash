@@ -141,7 +141,7 @@ public class Options {
 				delete_unused_intermediate_poses_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "serialize_intermediate_poses" ) ) {
 				serialize_intermediate_poses_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;

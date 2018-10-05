@@ -35,13 +35,13 @@ public class GlobalOptionsView extends JPanel {
 	private final JTextArea serialize_intermediate_poses_explanation_ = new JTextArea( "TODO" );
 	private final JScrollPane serialize_intermediate_poses_explanation_scroll_pane_ = new JScrollPane(
 			serialize_intermediate_poses_explanation_ );
-	
-	private final JCheckBox delete_unused_intermediate_poses_checkbox_
-		= new JCheckBox( "Delete Unused Structures", Options.getDeleteUnusedIntermediatePoses() );
+
+	private final JCheckBox delete_unused_intermediate_poses_checkbox_ = new JCheckBox(
+			"Delete Unused Structures", Options.getDeleteUnusedIntermediatePoses() );
 	private final JTextArea delete_unused_intermediate_poses_explanation_ = new JTextArea( "TODO" );
 	private final JScrollPane delete_unused_intermediate_poses_explanation_scroll_pane_ = new JScrollPane(
 			delete_unused_intermediate_poses_explanation_ );
-	
+
 	private final JLabel run_options_label_ = new JLabel( "Run" );
 	private final JLabel n_proc_label_ = new JLabel( "Num Processors:" );
 	private final JTextField n_proc_field_ = new JTextField( Options.getNumProcessors() + "" );
@@ -83,7 +83,7 @@ public class GlobalOptionsView extends JPanel {
 		delete_unused_intermediate_poses_explanation_.setEditable( false );
 		inner_compile_options_panel.add( delete_unused_intermediate_poses_checkbox_ );
 		inner_compile_options_panel.add( delete_unused_intermediate_poses_explanation_scroll_pane_ );
-		
+
 		final JPanel compile_options_panel = new JPanel( new BorderLayout() );
 		compile_options_label_.setHorizontalAlignment( JLabel.CENTER );
 		compile_options_panel.add( compile_options_label_, BorderLayout.NORTH );
@@ -130,7 +130,7 @@ public class GlobalOptionsView extends JPanel {
 	public final JCheckBox getSerializeIntermediatePosesCheckbox() {
 		return serialize_intermediate_poses_checkbox_;
 	}
-	
+
 	public final JCheckBox getDeleteUnusedIntermediatePosesCheckbox() {
 		return delete_unused_intermediate_poses_checkbox_;
 	}

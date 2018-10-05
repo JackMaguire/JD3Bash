@@ -38,7 +38,7 @@ public class GlobalOptionsController implements ActionListener, DocumentListener
 			GlobalViewData.top_panel.repaint();
 			return;
 		}
-		
+
 		if( e.getSource() == view_.getDeleteUnusedIntermediatePosesCheckbox() ) {
 			Options.setDeleteUnusedIntermediatePoses(
 					view_.getDeleteUnusedIntermediatePosesCheckbox().isSelected() );
