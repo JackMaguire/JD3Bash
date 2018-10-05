@@ -154,7 +154,7 @@ public class GraphParsing {
 			for( String s : split ) {
 				final String reformatted_quotes = s.replaceAll( "'", "\"" );// Using double quotes for
 																																		// everything so that we can use
-																																		// single quotes
+																																		// single quotes for echo
 				setup_script.value += "echo '" + reformatted_quotes + "' >> " + dirname + "/script.xml\n";
 			}
 		}
@@ -170,9 +170,8 @@ public class GraphParsing {
 		}
 	}
 
-	private static void createRunInstructionsForNode( Node n,
-			PBRWrapper< String > run_script, GraphParsingOptions options )
-			throws UndefinedValueException {
+	private static void createRunInstructionsForNode( Node n, PBRWrapper< String > run_script,
+			GraphParsingOptions options ) throws UndefinedValueException {
 
 		addStageIntroToScript( n.stage(), run_script );
 		final String dirname = n.dirname();
@@ -188,40 +187,59 @@ public class GraphParsing {
 				+ "    exit 1\n"
 				+ "fi\n";
 
-		if( n.numDownstreamEdges() > 0 ) {
-			run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
-			for( Edge de : n.downstreamEdges_const() ) {
-				final String name_of_next_stage_directory = de.destinationNode().dirname();
-				final String sort_column = de.columnNameToSortBy();
-				run_script.value += "\n#####\n";
-				run_script.value += "# Extract the best results for stage \""
-						+ de.destinationNode().getTitle() + "\"\n";
-				run_script.value += "# This awk command prints the data for the column with header "
-						+ sort_column + " along with the title for each result\n";
-				run_script.value += "awk -v c1=\"" + sort_column
-						+ "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
 
-				if( de.positiveScoresAreBetter() ) {
-					run_script.value += "sort -nrk1 temp > temp2\n";
-				} else {
-					run_script.value += "sort -nk1 temp > temp2\n";
-				}
+		run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
+		for( Edge de : n.downstreamEdges_const() ) {
+			final String name_of_next_stage_directory = de.destinationNode().dirname();
+			final String sort_column = de.columnNameToSortBy();
+			run_script.value += "\n#####\n";
+			run_script.value += "# Extract the best results for stage \""
+					+ de.destinationNode().getTitle() + "\"\n";
+			run_script.value += "# This awk command prints the data for the column with header "
+					+ sort_column + " along with the title for each result\n";
+			run_script.value += "awk -v c1=\"" + sort_column
+					+ "\" 'NR==1 {for (i=1; i<=NF; i++) {ix[$i] = i}}NR>1 {print $ix[c1] \" \" $NF}' no_first_line.score.sc > temp\n";
 
-				run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
-				if( de.usePercentageInsteadOfCount() ) {
-					run_script.value += "perc=\"" + de.percentageOfResultsToTransfer() + "\"\n";
-					run_script.value += "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
-				} else {
-					run_script.value += "nresults=\"" + de.numResultsToTransfer() + "\"\n";
-				}
-				run_script.value += "# Extract structures that will survive until the next stage\n";
-				run_script.value += "head -n $nresults temp2 | awk '{print $2}' > temp3\n";
-				run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> ../"
-						+ name_of_next_stage_directory + "/input_files\n";
+			if( de.positiveScoresAreBetter() ) {
+				run_script.value += "sort -nrk1 temp > temp2\n";
+			} else {
+				run_script.value += "sort -nk1 temp > temp2\n";
 			}
 
+			run_script.value += "x=`cat no_first_line.score.sc | wc -l`\n";
+			if( de.usePercentageInsteadOfCount() ) {
+				run_script.value += "perc=\"" + de.percentageOfResultsToTransfer() + "\"\n";
+				run_script.value += "nresults=`echo \"($x - 1) * $perc / 1\" | bc`\n";
+			} else {
+				run_script.value += "nresults=\"" + de.numResultsToTransfer() + "\"\n";
+			}
+			run_script.value += "# Extract structures that will survive until the next stage\n";
+			run_script.value += "head -n $nresults temp2 | awk '{print $2}' > temp3\n";
+			run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> ../"
+					+ name_of_next_stage_directory + "/input_files\n";
+			
+			if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
+				//Save good files so that they do not get deleted later
+				run_script.value += "cat temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
+			}
 		}
 
+		if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
+			//Delete bad files
+			/* awk '{print $2}' temp | while read line; do
+			 *     if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then
+			 *         echo $line
+			 *     fi
+			 * done
+			 */
+			run_script.value += "\n# Delete poses not needed for future stages\n";
+			run_script.value += "awk '{print $2}' temp | while read line; do\n"
+					+ "    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
+					+ "         echo $line\n"
+					+ "     fi\n"
+					+ "done\n";
+		}
+		
 		run_script.value += "\ncd ..\n";
 		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}
