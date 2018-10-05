@@ -269,6 +269,8 @@ public class NodeView extends JPanel {
 			color_ = c;
 			this.setBackground( c );
 			this.setForeground( c );
+			this.setOpaque(true);
+			setBorderPainted(false);
 			//this.set
 		}
 		
