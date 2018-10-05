@@ -74,6 +74,16 @@ public class Options {
 		default_run_command_ = setting;
 	}
 
+	private static boolean delete_unused_intermediate_poses_ = true;
+	
+	public static boolean getDeleteUnusedIntermediatePoses() {
+		return delete_unused_intermediate_poses_;
+	}
+
+	public static void setDeleteUnusedIntermediatePoses( boolean delete_unused_intermediate_poses ) {
+		delete_unused_intermediate_poses_ = delete_unused_intermediate_poses;
+	}
+	
 	////////////
 	// Save/Load
 	public static void save( BufferedWriter out ) throws IOException {
@@ -82,6 +92,7 @@ public class Options {
 		out.write( "put_node_titles_to_side " + put_node_titles_to_side_ + "\n" );
 		out.write( "num_processors " + num_processors_ + "\n" );
 		out.write( "default_run_command " + default_run_command_ + "\n" );
+		out.write( "delete_unused_intermediate_poses " + delete_unused_intermediate_poses_ + "\n" );
 		out.write( "grid_size " + grid_size_ + "\n" );
 		out.write( "END_OPTIONS\n" );
 	}
@@ -122,6 +133,11 @@ public class Options {
 				for( int i = 2; i < split.length; ++i ) {
 					default_run_command_ += " " + split[ i ];
 				}
+				continue;
+			}
+
+			if( split[ 0 ].equals( "delete_unused_intermediate_poses" ) ) {
+				delete_unused_intermediate_poses_ = Boolean.parseBoolean( split[ 1 ] );
 				continue;
 			}
 		}
