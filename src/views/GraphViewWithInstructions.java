@@ -17,8 +17,9 @@ public class GraphViewWithInstructions extends JPanel {
 
 	private final GraphView graph_view_;
 	private final JTextArea instructions_ = new JTextArea();
-	//private final JButton controls_button_ = new JButton( "Controls" );
-	//private final JScrollPane instruct_scroll_pane_ = new JScrollPane( instructions_ );
+	// private final JButton controls_button_ = new JButton( "Controls" );
+	// private final JScrollPane instruct_scroll_pane_ = new JScrollPane(
+	// instructions_ );
 
 	public GraphViewWithInstructions( GraphView graph_view ) {
 		graph_view_ = graph_view;
@@ -30,12 +31,12 @@ public class GraphViewWithInstructions extends JPanel {
 				+ "so try to prevent overlapping arrows from different edges" );
 		instructions_.setEditable( false );
 
-		//instructions_.setMinimumSize( new Dimension(100,1) );
-		//controls_button_.setMinimumSize( new Dimension(10,1) );
-		
+		// instructions_.setMinimumSize( new Dimension(100,1) );
+		// controls_button_.setMinimumSize( new Dimension(10,1) );
+
 		this.setLayout( new BorderLayout() );
 		this.add( graph_view_, BorderLayout.CENTER );
-		//this.add( controls_button_, BorderLayout.SOUTH );
+		// this.add( controls_button_, BorderLayout.SOUTH );
 	}
 
 }

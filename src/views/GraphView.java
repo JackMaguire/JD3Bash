@@ -26,7 +26,7 @@ public class GraphView extends JPanel {
 
 	private final Graph graph_;
 
-	//private int grid_size_ = 10;
+	// private int grid_size_ = 10;
 	private int node_width_ = 3;
 	private boolean view_grid_ = true;
 
@@ -80,7 +80,7 @@ public class GraphView extends JPanel {
 
 	public void drawNodes( Graphics2D g2D ) {
 		final int grid_size = Options.getGridSize();
-		
+
 		if( Options.getShowNodeTitles() ) {
 			int new_font_size = (int) ( 2 * grid_size );
 			g2D.setFont( new Font( "TimesRoman", Font.PLAIN, new_font_size ) );
@@ -214,5 +214,5 @@ public class GraphView extends JPanel {
 	public void setBoxForEdge( Edge n, Box b ) {
 		box_for_edge_.put( n, b );
 	}
-	
+
 }

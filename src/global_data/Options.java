@@ -31,15 +31,15 @@ public class Options {
 	}
 
 	private static int grid_size_ = 10;
-	
+
 	public static int getGridSize() {
 		return grid_size_;
 	}
-	
+
 	public static void setGridSize( int setting ) {
 		grid_size_ = setting;
 	}
-	
+
 	/////////////////
 	// Compile Options
 	private static boolean serialize_intermediate_poses_ = false;
@@ -111,7 +111,7 @@ public class Options {
 				num_processors_ = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
-			
+
 			if( split[ 0 ].equals( "grid_size" ) ) {
 				grid_size_ = Integer.parseInt( split[ 1 ] );
 				continue;
