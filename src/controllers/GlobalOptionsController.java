@@ -38,6 +38,13 @@ public class GlobalOptionsController implements ActionListener, DocumentListener
 			GlobalViewData.top_panel.repaint();
 			return;
 		}
+		
+		if( e.getSource() == view_.getDeleteUnusedIntermediatePosesCheckbox() ) {
+			Options.setDeleteUnusedIntermediatePoses(
+					view_.getDeleteUnusedIntermediatePosesCheckbox().isSelected() );
+			GlobalViewData.top_panel.repaint();
+			return;
+		}
 
 		if( e.getSource() == view_.getDecreaseGridSizeButton() ) {
 			final int current_size = Options.getGridSize();

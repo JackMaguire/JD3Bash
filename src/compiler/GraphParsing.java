@@ -229,9 +229,9 @@ public class GraphParsing {
 			// run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ;
 			// done >> $destination\n";
 			run_script.value += "cat temp3 | while read line; do\n"
-					+ " 	if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
-					+ " 		echo `pwd`/$line.* >> $destination\n"
-					+ "  fi\n"
+					+ " if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
+					+ "  echo `pwd`/$line.* >> $destination\n"
+					+ " fi\n"
 					+ "done\n";
 
 			if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
