@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.util.List;
 
 import exceptions.LoadFailureException;
+import global_data.undo.UndoStack;
+import graph.undo.AddNodeCommand;
 
 public class Graph {
 
@@ -36,7 +38,18 @@ public class Graph {
 	public Node addNode( Node n ) {
 		n.setId( getNextNodeID() );
 		nodes_.add( n );
+		UndoStack.addCommand( new AddNodeCommand( this, n ) );
 		return n;
+	}
+	
+	public void _undoAddNode( Node n ) {
+		//Removes node without creating a new Undo Command
+		nodes_.remove( n );
+	}
+	
+	public void _redoAddNode( Node n ) {
+		//Add node without creating a new Undo Command
+		nodes_.add( n );
 	}
 
 	public List< Node > allNodes_const() {

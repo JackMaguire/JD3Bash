@@ -19,12 +19,12 @@ public class AddNodeCommand implements UndoableCommand {
 		if( node_.numDownstreamEdges() > 0 || node_.numUpstreamEdges() > 0 ) {
 			System.err.println( "Node being removed has edges that 'redo' cannot bring back." );
 		}
-		graph_.removeNodeAndDeleteItsEdges( node_ );//Doesn't this just spawn another UndoableCommand?
+		graph_._undoAddNode( node_ );
 	}
 
 	@Override
 	public void performRedo() {
-		graph_.addNode( node_ );//Doesn't this just spawn another UndoableCommand?
+		graph_._redoAddNode( node_ );
 	}
 
 	
