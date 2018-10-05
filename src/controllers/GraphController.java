@@ -6,6 +6,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import global_data.GlobalViewData;
 import graph.*;
 import views.GraphView;
@@ -127,7 +130,18 @@ public class GraphController
 				if( graph_.getNumNodes() > 1 ) {// Don't want an empty graph
 					shift_was_down_when_most_recent_object_was_selected_ = false;
 					if( graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y ) ) {
-						// TODO perhaps add a warning here
+						final Object[] options = { "Yes, delete",
+								"No, don't delete" };
+						int n = JOptionPane.showOptionDialog( new JFrame(),
+								"Delete Node \"" + graph_.selectedNode().getTitle() + "\"?",
+								"Delete?",
+								JOptionPane.YES_NO_OPTION,
+								JOptionPane.QUESTION_MESSAGE,
+								null,
+								options,
+								options[ 1 ] );
+						if( n == 1 )
+							return;
 						graph_.removeNodeAndDeleteItsEdges( graph_.selectedNode() );
 						graph_.setSelectedNode( graph_.getNode( 0 ) );
 						GlobalViewData.top_panel.repaint();
@@ -137,7 +151,18 @@ public class GraphController
 			} else if( graph_.selectedEdge() != null ) {
 				shift_was_down_when_most_recent_object_was_selected_ = false;
 				if( graph_view_.boxForEdge_const().get( graph_.selectedEdge() ).pointIsInBox( x, y ) ) {
-					// TODO perhaps add a warning here
+					final Object[] options = { "Yes, delete",
+							"No, don't delete" };
+					int n = JOptionPane.showOptionDialog( new JFrame(),
+							"Delete Selected Edge?",
+							"Delete?",
+							JOptionPane.YES_NO_OPTION,
+							JOptionPane.QUESTION_MESSAGE,
+							null,
+							options,
+							options[ 1 ] );
+					if( n == 1 )
+						return;
 					graph_.removeEdgeAndNotifyItsNodes( graph_.selectedEdge() );
 					graph_.setSelectedNode( graph_.getNode( 0 ) );
 					GlobalViewData.top_panel.repaint();
