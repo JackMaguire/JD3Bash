@@ -215,11 +215,28 @@ public class GraphParsing {
 			}
 			run_script.value += "# Extract structures that will survive until the next stage\n";
 			run_script.value += "head -n $nresults temp2 | awk '{print $2}' > temp3\n";
-			run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> ../"
-					+ name_of_next_stage_directory + "/input_files\n";
+
+			run_script.value += "# move successful runs to next stage if not there already\n";
+			run_script.value += "destination=../" + name_of_next_stage_directory + "/input_files\n";
+			/*
+			 * cat temp3 | while read line; do
+			 * 	if [[ `grep $line $destination | wc -l` -eq 0 ]]; then
+			 * 		echo `pwd`/$line.* >> $destination
+			 * 	fi
+			 * done
+			 * 
+			 * 
+			 */
+			//run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> $destination\n";
+			run_script.value += "cat temp3 | while read line; do\n"
+					+ " 	if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
+					+ " 		echo `pwd`/$line.* >> $destination\n"
+					+ "  fi\n"
+					+ "done\n";
 			
 			if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
 				//Save good files so that they do not get deleted later
+				run_script.value += "\n#Save good files so that they do not get deleted later\n";
 				run_script.value += "cat temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
 			}
 		}
@@ -235,7 +252,7 @@ public class GraphParsing {
 			run_script.value += "\n# Delete poses not needed for future stages\n";
 			run_script.value += "awk '{print $2}' temp | while read line; do\n"
 					+ "    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
-					+ "         rm $line\n"
+					+ "         rm $line.*\n"
 					+ "     fi\n"
 					+ "done\n";
 		}
