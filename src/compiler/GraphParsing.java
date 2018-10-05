@@ -228,14 +228,14 @@ public class GraphParsing {
 			//Delete bad files
 			/* awk '{print $2}' temp | while read line; do
 			 *     if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then
-			 *         echo $line
+			 *         rm $line
 			 *     fi
 			 * done
 			 */
 			run_script.value += "\n# Delete poses not needed for future stages\n";
 			run_script.value += "awk '{print $2}' temp | while read line; do\n"
 					+ "    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
-					+ "         echo $line\n"
+					+ "         rm $line\n"
 					+ "     fi\n"
 					+ "done\n";
 		}
