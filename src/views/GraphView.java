@@ -14,7 +14,10 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import global_data.Options;
-import graph.*;
+import graph.Edge;
+import graph.Graph;
+import graph.Node;
+import graph.PreliminaryEdge;
 import utility.Box;
 
 public class GraphView extends JPanel {

@@ -8,7 +8,9 @@ import javax.swing.JSplitPane;
 import javax.swing.JTabbedPane;
 
 import controllers.GraphController;
-import graph.*;
+import graph.Edge;
+import graph.Graph;
+import graph.Node;
 import views.CompileView;
 import views.EdgeView;
 import views.GlobalOptionsView;

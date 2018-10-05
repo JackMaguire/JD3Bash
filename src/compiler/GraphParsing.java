@@ -1,16 +1,17 @@
 package compiler;
 
-import graph.*;
-import info.VersionInfo;
-import utility.PBRWrapper;
-import utility.Pair;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 
 import exceptions.InvalidGraphException;
 import exceptions.UndefinedValueException;
 import global_data.Options;
+import graph.Edge;
+import graph.Graph;
+import graph.Node;
+import info.VersionInfo;
+import utility.PBRWrapper;
+import utility.Pair;
 
 /*  This can be as slow as we want it to be.
  *  Let's focus more on clarity and correctness than speed here.

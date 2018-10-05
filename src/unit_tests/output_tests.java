@@ -2,8 +2,9 @@ package unit_tests;
 
 import java.util.ArrayList;
 
-import compiler.*;
-import graph.*;
+import compiler.GraphParsing;
+import graph.Graph;
+import graph.Node;
 
 public class output_tests {
 

@@ -3,7 +3,9 @@ package apps.proof_of_concept;
 import compiler.GraphParsing;
 import compiler.GraphParsingOptions;
 import exceptions.InvalidGraphException;
-import graph.*;
+import graph.Edge;
+import graph.Graph;
+import graph.Node;
 import utility.Pair;
 
 public class PrintStringsForSimpleGraph {

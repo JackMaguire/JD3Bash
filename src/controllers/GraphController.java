@@ -10,7 +10,10 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import global_data.GlobalViewData;
-import graph.*;
+import graph.Edge;
+import graph.Graph;
+import graph.Node;
+import graph.PreliminaryEdge;
 import views.GraphView;
 
 public class GraphController
