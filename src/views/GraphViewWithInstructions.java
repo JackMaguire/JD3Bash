@@ -17,7 +17,7 @@ public class GraphViewWithInstructions extends JPanel {
 
 	private final GraphView graph_view_;
 	private final JTextArea instructions_ = new JTextArea();
-	private final JButton controls_button_ = new JButton( "Controls" );
+	//private final JButton controls_button_ = new JButton( "Controls" );
 	//private final JScrollPane instruct_scroll_pane_ = new JScrollPane( instructions_ );
 
 	public GraphViewWithInstructions( GraphView graph_view ) {
