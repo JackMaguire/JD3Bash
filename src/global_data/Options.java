@@ -30,6 +30,16 @@ public class Options {
 		put_node_titles_to_side_ = put_node_titles_to_side;
 	}
 
+	private static int grid_size_ = 12;
+	
+	public static int getGridSize() {
+		return grid_size_;
+	}
+	
+	public static void setGridSize( int setting ) {
+		grid_size_ = setting;
+	}
+	
 	/////////////////
 	// Compile Options
 	private static boolean serialize_intermediate_poses_ = false;
@@ -72,6 +82,7 @@ public class Options {
 		out.write( "put_node_titles_to_side " + put_node_titles_to_side_ + "\n" );
 		out.write( "num_processors " + num_processors_ + "\n" );
 		out.write( "default_run_command " + default_run_command_ + "\n" );
+		out.write( "grid_size " + grid_size_ + "\n" );
 		out.write( "END_OPTIONS\n" );
 	}
 
@@ -98,6 +109,11 @@ public class Options {
 
 			if( split[ 0 ].equals( "num_processors" ) ) {
 				num_processors_ = Integer.parseInt( split[ 1 ] );
+				continue;
+			}
+			
+			if( split[ 0 ].equals( "grid_size" ) ) {
+				grid_size_ = Integer.parseInt( split[ 1 ] );
 				continue;
 			}
 

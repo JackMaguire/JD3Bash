@@ -207,5 +207,13 @@ public class GraphView extends JPanel {
 	public void setBoxForEdge( Edge n, Box b ) {
 		box_for_edge_.put( n, b );
 	}
+	
+	public int getGridSize() {
+		return grid_size_;
+	}
 
+	public void setGridSize( int setting ) {
+		grid_size_ = setting;
+	}
+	
 }
