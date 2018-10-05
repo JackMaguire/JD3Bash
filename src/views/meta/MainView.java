@@ -68,7 +68,7 @@ public class MainView extends JPanel {
 		tabs_.add( "Compile", compile_view_ );
 		tabs_.add( "Save/Load", save_load_view_ );
 
-		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_instruct_,
+		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_,
 				tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );

@@ -1,8 +1,11 @@
 package views;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 public class GraphViewWithInstructions extends JPanel {
@@ -13,21 +16,26 @@ public class GraphViewWithInstructions extends JPanel {
 	private static final long serialVersionUID = 2678497215847049113L;
 
 	private final GraphView graph_view_;
-	private final JTextArea instrucitons_ = new JTextArea();
+	private final JTextArea instructions_ = new JTextArea();
+	private final JButton controls_button_ = new JButton( "Controls" );
+	//private final JScrollPane instruct_scroll_pane_ = new JScrollPane( instructions_ );
 
 	public GraphViewWithInstructions( GraphView graph_view ) {
 		graph_view_ = graph_view;
-		instrucitons_.setText( "Click: selects nodes and edges\n"
+		instructions_.setText( "Click: selects nodes and edges\n"
 				+ "Ctrl + click: creates nodes\n"
 				+ "Ctrl + click-and-drag: creates edges\n"
 				+ "Shift + click: deletes nodes and edges\n\n"
 				+ "Tip: edges need to be clicked on near their arrow,\n"
 				+ "so try to prevent overlapping arrows from different edges" );
-		instrucitons_.setEditable( false );
+		instructions_.setEditable( false );
 
+		//instructions_.setMinimumSize( new Dimension(100,1) );
+		//controls_button_.setMinimumSize( new Dimension(10,1) );
+		
 		this.setLayout( new BorderLayout() );
 		this.add( graph_view_, BorderLayout.CENTER );
-		this.add( instrucitons_, BorderLayout.SOUTH );
+		//this.add( controls_button_, BorderLayout.SOUTH );
 	}
 
 }
