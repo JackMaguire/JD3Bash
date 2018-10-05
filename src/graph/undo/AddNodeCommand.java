@@ -1,8 +1,8 @@
 package graph.undo;
 
+import global_data.undo.UndoableCommand;
 import graph.Graph;
 import graph.Node;
-import undo.UndoableCommand;
 
 public class AddNodeCommand implements UndoableCommand {
 	

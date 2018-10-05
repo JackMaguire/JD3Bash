@@ -1,4 +1,4 @@
-package undo;
+package global_data.undo;
 
 public interface UndoableCommand {
 
