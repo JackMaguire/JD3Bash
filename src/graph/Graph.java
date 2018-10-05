@@ -41,14 +41,14 @@ public class Graph {
 		UndoStack.addCommand( new AddNodeCommand( this, n ) );
 		return n;
 	}
-	
+
 	public void _undoAddNode( Node n ) {
-		//Removes node without creating a new Undo Command
+		// Removes node without creating a new Undo Command
 		nodes_.remove( n );
 	}
-	
+
 	public void _redoAddNode( Node n ) {
-		//Add node without creating a new Undo Command
+		// Add node without creating a new Undo Command
 		nodes_.add( n );
 	}
 

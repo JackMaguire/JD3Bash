@@ -13,26 +13,28 @@ public class UndoStack {
 	 * 
 	 * future_commands: {F, G, H}
 	 */
-	
+
 	public static void undo() {
-		if( past_commands.isEmpty() ) return;
-		
+		if( past_commands.isEmpty() )
+			return;
+
 		final UndoableCommand command = past_commands.removeLast();
 		command.performUndo();
 		future_commands.addFirst( command );
 	}
-	
+
 	public static void redo() {
-		if( future_commands.isEmpty() ) return;
-		
+		if( future_commands.isEmpty() )
+			return;
+
 		final UndoableCommand command = future_commands.removeFirst();
 		command.performRedo();
 		past_commands.addLast( command );
 	}
-	
+
 	public static void addCommand( UndoableCommand command ) {
 		past_commands.addLast( command );
 		future_commands.clear();
 	}
-	
+
 }

@@ -5,10 +5,10 @@ import graph.Graph;
 import graph.Node;
 
 public class AddNodeCommand implements UndoableCommand {
-	
+
 	private final Graph graph_;
 	private final Node node_;
-	
+
 	public AddNodeCommand( Graph g, Node n ) {
 		graph_ = g;
 		node_ = n;
@@ -27,6 +27,4 @@ public class AddNodeCommand implements UndoableCommand {
 		graph_._redoAddNode( node_ );
 	}
 
-	
-	
 }
