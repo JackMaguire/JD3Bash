@@ -13,6 +13,7 @@ import views.CompileView;
 import views.EdgeView;
 import views.GlobalOptionsView;
 import views.GraphView;
+import views.GraphViewWithInstructions;
 import views.NodeView;
 import views.SaveLoadView;
 
@@ -25,6 +26,7 @@ public class MainView extends JPanel {
 
 	private final Graph graph_;
 	private final GraphView graph_view_;
+	private final GraphViewWithInstructions graph_view_instruct_;
 
 	private Node selected_node_;
 	private Edge selected_edge_ = null;
@@ -43,6 +45,7 @@ public class MainView extends JPanel {
 		graph_ = g;
 		GraphController graph_controller = new GraphController( g );
 		graph_view_ = graph_controller.view();
+		graph_view_instruct_ = new GraphViewWithInstructions( graph_view_ );
 		Dimension minimum_size_for_graph_view = new Dimension( 500,
 				getHeight() / 2 );
 		graph_view_.setMinimumSize( minimum_size_for_graph_view );
@@ -65,7 +68,7 @@ public class MainView extends JPanel {
 		tabs_.add( "Compile", compile_view_ );
 		tabs_.add( "Save/Load", save_load_view_ );
 
-		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_,
+		main_panel_ = new JSplitPane( JSplitPane.HORIZONTAL_SPLIT, graph_view_instruct_,
 				tabs_ );
 		main_panel_.setOneTouchExpandable( true );
 		main_panel_.setContinuousLayout( true );
