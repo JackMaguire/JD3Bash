@@ -3,6 +3,7 @@ package views;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,7 +25,10 @@ public class GlobalOptionsView extends JPanel {
 	private final JCheckBox show_node_titles_checkbox_ = new JCheckBox( "Show node titles" );
 	private final JCheckBox put_node_titles_to_side_checkbox_ = new JCheckBox(
 			"Move node titles to side" );
-
+	private final JLabel grid_size_label_ = new JLabel( "Zoom: " );
+	private final JButton decrease_grid_size_button_ = new JButton( "-" );
+	private final JButton increase_grid_size_button_ = new JButton( "+" );
+	
 	private final JLabel compile_options_label_ = new JLabel( "Compile" );
 	private final JCheckBox serialize_intermediate_poses_checkbox_ = new JCheckBox(
 			"Serialize Intermediate Poses" );
@@ -46,11 +50,19 @@ public class GlobalOptionsView extends JPanel {
 		put_node_titles_to_side_checkbox_.setSelected( Options.getPutNodeTitlesToSide() );
 		serialize_intermediate_poses_checkbox_.setSelected( Options.getSerializeIntermediatePoses() );
 
+		grid_size_label_.setHorizontalAlignment( JLabel.RIGHT );
+		
 		// View
+		final JPanel plus_minus_buttons = new JPanel( new GridLayout( 1, 2 ) );
+		plus_minus_buttons.add( decrease_grid_size_button_ );
+		plus_minus_buttons.add( increase_grid_size_button_ );
+		
 		final JPanel inner_view_options_panel = new JPanel( new GridLayout( 1, 4 ) );
 		inner_view_options_panel.add( show_node_titles_checkbox_ );
 		inner_view_options_panel.add( put_node_titles_to_side_checkbox_ );
-
+		inner_view_options_panel.add( grid_size_label_ );
+		inner_view_options_panel.add( plus_minus_buttons );
+		
 		final JPanel view_options_panel = new JPanel( new BorderLayout() );
 		view_options_label_.setHorizontalAlignment( JLabel.CENTER );
 		view_options_panel.add( view_options_label_, BorderLayout.NORTH );
@@ -89,6 +101,8 @@ public class GlobalOptionsView extends JPanel {
 		show_node_titles_checkbox_.addActionListener( controller_ );
 		put_node_titles_to_side_checkbox_.addActionListener( controller_ );
 		serialize_intermediate_poses_checkbox_.addActionListener( controller_ );
+		decrease_grid_size_button_.addActionListener( controller_ );
+		increase_grid_size_button_.addActionListener( controller_ );
 
 		n_proc_field_.getDocument().addDocumentListener( controller_ );
 		default_command_field_.getDocument().addDocumentListener( controller_ );
@@ -113,5 +127,12 @@ public class GlobalOptionsView extends JPanel {
 	public final JTextField getDefaultCommandField() {
 		return default_command_field_;
 	}
+	
+	public final JButton getDecreaseGridSizeButton() {
+		return decrease_grid_size_button_;
+	}
 
+	public final JButton getIncreaseGridSizeButton() {
+		return increase_grid_size_button_;
+	}
 }

@@ -30,7 +30,7 @@ public class Options {
 		put_node_titles_to_side_ = put_node_titles_to_side;
 	}
 
-	private static int grid_size_ = 12;
+	private static int grid_size_ = 10;
 	
 	public static int getGridSize() {
 		return grid_size_;

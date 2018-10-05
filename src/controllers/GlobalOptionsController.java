@@ -38,6 +38,22 @@ public class GlobalOptionsController implements ActionListener, DocumentListener
 			GlobalViewData.top_panel.repaint();
 			return;
 		}
+		
+		if( e.getSource() == view_.getDecreaseGridSizeButton() ) {
+			final int current_size = Options.getGridSize();
+			if( current_size > 1 ) {
+				Options.setGridSize( current_size - 1 );
+				GlobalViewData.top_panel.repaint();
+			}
+			return;
+		}
+		
+		if( e.getSource() == view_.getIncreaseGridSizeButton() ) {
+			final int current_size = Options.getGridSize();
+			Options.setGridSize( current_size + 1 );
+			GlobalViewData.top_panel.repaint();
+			return;
+		}
 	}
 
 	@Override
