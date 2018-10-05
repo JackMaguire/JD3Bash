@@ -75,7 +75,7 @@ public class Options {
 	}
 
 	private static boolean delete_unused_intermediate_poses_ = true;
-	
+
 	public static boolean getDeleteUnusedIntermediatePoses() {
 		return delete_unused_intermediate_poses_;
 	}
@@ -83,7 +83,7 @@ public class Options {
 	public static void setDeleteUnusedIntermediatePoses( boolean delete_unused_intermediate_poses ) {
 		delete_unused_intermediate_poses_ = delete_unused_intermediate_poses;
 	}
-	
+
 	////////////
 	// Save/Load
 	public static void save( BufferedWriter out ) throws IOException {

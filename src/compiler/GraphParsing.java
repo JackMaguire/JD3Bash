@@ -187,7 +187,6 @@ public class GraphParsing {
 				+ "    exit 1\n"
 				+ "fi\n";
 
-
 		run_script.value += "grep -v 'SEQUENCE:' score.sc > no_first_line.score.sc\n";
 		for( Edge de : n.downstreamEdges_const() ) {
 			final String name_of_next_stage_directory = de.destinationNode().dirname();
@@ -227,22 +226,23 @@ public class GraphParsing {
 			 * 
 			 * 
 			 */
-			//run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ; done >> $destination\n";
+			// run_script.value += "cat temp3 | while read line; do echo `pwd`/$line.* ;
+			// done >> $destination\n";
 			run_script.value += "cat temp3 | while read line; do\n"
 					+ " 	if [[ `grep $line $destination | wc -l` -eq 0 ]]; then\n"
 					+ " 		echo `pwd`/$line.* >> $destination\n"
 					+ "  fi\n"
 					+ "done\n";
-			
+
 			if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
-				//Save good files so that they do not get deleted later
+				// Save good files so that they do not get deleted later
 				run_script.value += "\n#Save good files so that they do not get deleted later\n";
 				run_script.value += "cat temp3 | while read line; do echo $line.* ; done > results_to_keep.txt\n";
 			}
 		}
 
 		if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
-			//Delete bad files
+			// Delete bad files
 			/* awk '{print $2}' temp | while read line; do
 			 *     if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then
 			 *         rm $line
@@ -256,7 +256,7 @@ public class GraphParsing {
 					+ "     fi\n"
 					+ "done\n";
 		}
-		
+
 		run_script.value += "\ncd ..\n";
 		run_script.value += "echo \"Done With " + dirname + "\" >> JD3BASH_runlog.txt\n";
 	}
