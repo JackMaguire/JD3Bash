@@ -22,8 +22,7 @@ public class Node {
 	private Color color_ = Color.gray;
 
 	private final ArrayList< Edge > upstream_edges_;// Connecting to nodes that occur before this node
-	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this
-																										// node
+	private final ArrayList< Edge > downstream_edges_;// Connecting to nodes that occur after this node
 	private boolean use_default_command_ = true;
 	private String command_;
 	private String title_;
