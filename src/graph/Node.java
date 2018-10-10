@@ -219,6 +219,10 @@ public class Node {
 		return y_;
 	}
 
+	public final void setY( int y ) {
+		y_ = y;
+	}
+	
 	public final Color color() {
 		return color_;
 	}
@@ -229,10 +233,6 @@ public class Node {
 
 	public final void setColor( Color setting ) {
 		color_ = setting;
-	}
-
-	public final void setY( int y ) {
-		y_ = y;
 	}
 
 	public final void addUpstreamEdge( Edge e ) {
