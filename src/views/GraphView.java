@@ -91,15 +91,15 @@ public class GraphView extends JPanel {
 
 		final int selection_width = grid_size / 2;
 		for( Node n : graph_.allNodes_const() ) {
-			int x = n.x() * grid_size + ( grid_size / 2 );
-			int y = n.y() * grid_size + ( grid_size / 2 );
-			int diameter = grid_size * node_width_;
+			final int x = n.x() * grid_size + ( grid_size / 2 );
+			final int y = n.y() * grid_size + ( grid_size / 2 );
+			final int diameter = grid_size * node_width_;
 
 			if( n == graph_.selectedNode() ) {
 				g2D.setColor( Color.black );
-				int sx = x - selection_width;
-				int sy = y - selection_width;
-				int sdiameter = diameter + 2 * selection_width;
+				final int sx = x - selection_width;
+				final int sy = y - selection_width;
+				final int sdiameter = diameter + 2 * selection_width;
 				g2D.fillOval( sx, sy, sdiameter, sdiameter );
 			}
 

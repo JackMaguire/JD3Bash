@@ -242,13 +242,6 @@ public class GraphParsing {
 		}
 
 		if( Options.getDeleteUnusedIntermediatePoses() && n.numDownstreamEdges() > 0 ) {
-			// Delete bad files
-			/* awk '{print $2}' temp | while read line; do
-			 *     if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then
-			 *         rm $line
-			 *     fi
-			 * done
-			 */
 			run_script.value += "\n# Delete poses not needed for future stages\n";
 			run_script.value += "awk '{print $2}' temp | while read line; do\n"
 					+ "    if [[ `grep $line temp3 | wc -l` -eq 0 ]]; then\n"
