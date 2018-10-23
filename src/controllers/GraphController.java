@@ -131,7 +131,6 @@ public class GraphController
 		if( shift_was_down_when_most_recent_object_was_selected_ && e.isShiftDown() ) {
 			if( graph_.selectedNode() != null ) {
 				if( graph_.getNumNodes() > 1 ) {// Don't want an empty graph
-					shift_was_down_when_most_recent_object_was_selected_ = false;
 					if( graph_view_.boxForNode_const().get( graph_.selectedNode() ).pointIsInBox( x, y ) ) {
 						final Object[] options = { "Yes, delete",
 								"No, don't delete" };
