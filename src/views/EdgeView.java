@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 
 import controllers.EdgeController;
 import graph.Edge;
+import graph.Node;
 
 public class EdgeView extends JPanel {
 
@@ -49,7 +50,7 @@ public class EdgeView extends JPanel {
 	private final JScrollPane notes_scroll_pane_ = new JScrollPane( notes_area_ );
 
 	private final JLabel help_label_ = new JLabel( "Help" );
-	private final JTextArea help_area_ = new JTextArea();
+	private final JTextArea help_area_ = new JTextArea( Node.getHelp() );
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
 	public EdgeView( Edge e ) {

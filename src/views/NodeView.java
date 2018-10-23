@@ -74,7 +74,7 @@ public class NodeView extends JPanel {
 
 	// Segment 6: TODO
 	private final JLabel help_label_ = new JLabel( "Help" );
-	private final JTextArea help_area_ = new JTextArea();
+	private final JTextArea help_area_ = new JTextArea( Node.getHelp() );
 	private final JScrollPane help_scroll_pane_ = new JScrollPane( help_area_ );
 
 	// XML: look into this: http://java-sl.com/xml_editor_kit.html
