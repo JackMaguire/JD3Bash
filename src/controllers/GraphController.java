@@ -69,9 +69,9 @@ public class GraphController
 	public void mouseClicked( MouseEvent e ) {
 		if( e.isControlDown() ) {
 			// create new node
-			int x = graph_view_.getClosestPointForPoint( e.getX() );
-			int y = graph_view_.getClosestPointForPoint( e.getY() );
-			Node new_node = new Node( x, y );
+			final int x = graph_view_.getClosestPointForPoint( e.getX() );
+			final int y = graph_view_.getClosestPointForPoint( e.getY() );
+			final Node new_node = new Node( x, y );
 			graph_.addNode( new_node );
 			GlobalViewData.top_panel.repaint();
 			return;
