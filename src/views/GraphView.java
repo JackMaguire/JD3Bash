@@ -106,7 +106,7 @@ public class GraphView extends JPanel {
 			g2D.setColor( n.color() );
 			g2D.fillOval( x, y, diameter, diameter );
 			setBoxForNode( n, new Box( x, y, diameter, diameter ) );
-			
+
 			if( Options.getShowNodeTitles() ) {
 				g2D.setColor( Color.black );
 				// g2D.font

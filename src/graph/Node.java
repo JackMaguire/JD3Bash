@@ -521,7 +521,7 @@ public class Node {
 		save_string += "END_NODE\n";
 		out.write( save_string );
 	}
-	
+
 	public static String getHelp() {
 		return "Click on a node to select a node\n" +
 				"Click on the arrow of an edge to select that edge\n" +
