@@ -28,15 +28,15 @@ public class NodeView extends JPanel {
 	private final NodeController node_controller_;// circular references are okay in Java
 
 	// Segment 0: colors
-	private final JLabel color_label_ = new JLabel( "Set Color:" );
+	/*private final JLabel color_label_ = new JLabel( "Set Color:" );
 	private final ColorButton color_button1_ = new ColorButton( Color.red );
 	private final ColorButton color_button2_ = new ColorButton( Color.green );
-	private final ColorButton color_button3_ = new ColorButton( Color.BLUE );
+	private final ColorButton color_button3_ = new ColorButton( Color.BLUE );*/
 
 	// Segment1 3x3
 	private final JLabel title_label_ = new JLabel( "Title:   " );
 	private final JTextField title_field_;
-	// private final JLabel dummy_ = new JLabel( "" );
+	private final JLabel dummy_ = new JLabel( "" );
 
 	private final JLabel command_label_ = new JLabel( "Command:   " );
 	private final JTextField command_field_;
@@ -160,12 +160,13 @@ public class NodeView extends JPanel {
 		JPanel segment1 = new JPanel( new GridLayout( 3, 3 ) );
 		segment1.add( title_label_ );
 		segment1.add( title_field_ );
-		final JPanel color_panel = new JPanel( new GridLayout( 1, 4 ) );
+		/*final JPanel color_panel = new JPanel( new GridLayout( 1, 4 ) );
 		color_panel.add( color_label_ );
 		color_panel.add( color_button1_ );
 		color_panel.add( color_button2_ );
 		color_panel.add( color_button3_ );
-		segment1.add( color_panel );
+		segment1.add( color_panel );*/
+		segment1.add( dummy_ );
 
 		segment1.add( command_label_ );
 		segment1.add( command_field_ );
