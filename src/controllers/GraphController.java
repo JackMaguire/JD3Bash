@@ -151,7 +151,6 @@ public class GraphController
 					return;
 				}
 			} else if( graph_.selectedEdge() != null ) {
-				shift_was_down_when_most_recent_object_was_selected_ = false;
 				if( graph_view_.boxForEdge_const().get( graph_.selectedEdge() ).pointIsInBox( x, y ) ) {
 					final Object[] options = { "Yes, delete",
 							"No, don't delete" };
