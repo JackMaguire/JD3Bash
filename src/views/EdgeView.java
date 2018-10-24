@@ -36,14 +36,14 @@ public class EdgeView extends JPanel {
 			"Num Results To Transfer:   " );
 	private final JTextField num_results_to_transfer_field_;
 
-	private final JLabel percentage_of_results_to_transfer_label_ = new JLabel(
-			"Percentage Of Results To Transfer:   " );
-	private final JTextField percentage_of_results_to_transfer_field_;
+	private final JLabel fraction_of_results_to_transfer_label_ = new JLabel(
+			"Fraction Of Results To Transfer:   " );
+	private final JTextField fraction_of_results_to_transfer_field_;
 
-	private final JLabel use_percentage_instead_of_count_label_ = new JLabel(
+	private final JLabel use_fraction_instead_of_count_label_ = new JLabel(
 			"" );
-	private final JCheckBox use_percentage_instead_of_count_box_ = new JCheckBox(
-			"Use Percentage Instead Of Count" );
+	private final JCheckBox use_fraction_instead_of_count_box_ = new JCheckBox(
+			"Use Fraction Instead Of Count" );
 
 	private final JLabel notes_label_ = new JLabel( "Notes" );
 	private final JTextArea notes_area_ = new JTextArea();
@@ -61,21 +61,21 @@ public class EdgeView extends JPanel {
 
 		num_results_to_transfer_field_ = new JTextField(
 				"" + edge_.numResultsToTransfer() );
-		percentage_of_results_to_transfer_field_ = new JTextField(
+		fraction_of_results_to_transfer_field_ = new JTextField(
 				"" + edge_.percentageOfResultsToTransfer() );
 
 		// Percent Vs Num
 		final boolean use_perc = edge_.usePercentageInsteadOfCount();
-		use_percentage_instead_of_count_box_.setSelected( use_perc );
+		use_fraction_instead_of_count_box_.setSelected( use_perc );
 		num_results_to_transfer_label_.setEnabled( !use_perc );
 		num_results_to_transfer_field_.setEnabled( !use_perc );
-		percentage_of_results_to_transfer_label_.setEnabled( use_perc );
-		percentage_of_results_to_transfer_field_.setEnabled( use_perc );
+		fraction_of_results_to_transfer_label_.setEnabled( use_perc );
+		fraction_of_results_to_transfer_field_.setEnabled( use_perc );
 
 		// Label Formatting
 		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
 		num_results_to_transfer_label_.setHorizontalAlignment( JLabel.RIGHT );
-		percentage_of_results_to_transfer_label_
+		fraction_of_results_to_transfer_label_
 				.setHorizontalAlignment( JLabel.RIGHT );
 
 		// Listeners
@@ -84,10 +84,10 @@ public class EdgeView extends JPanel {
 		column_name_field_.getDocument().addDocumentListener( edge_controller_ );
 		num_results_to_transfer_field_.getDocument()
 				.addDocumentListener( edge_controller_ );
-		percentage_of_results_to_transfer_field_.getDocument()
+		fraction_of_results_to_transfer_field_.getDocument()
 				.addDocumentListener( edge_controller_ );
 		positive_scores_are_better_box_.addChangeListener( edge_controller_ );
-		use_percentage_instead_of_count_box_.addChangeListener( edge_controller_ );
+		use_fraction_instead_of_count_box_.addChangeListener( edge_controller_ );
 		notes_area_.getDocument().addDocumentListener( edge_controller_ );
 
 		// TextAreas
@@ -107,11 +107,11 @@ public class EdgeView extends JPanel {
 		top_view.add( num_results_to_transfer_label_ );
 		top_view.add( num_results_to_transfer_field_ );
 
-		top_view.add( percentage_of_results_to_transfer_label_ );
-		top_view.add( percentage_of_results_to_transfer_field_ );
+		top_view.add( fraction_of_results_to_transfer_label_ );
+		top_view.add( fraction_of_results_to_transfer_field_ );
 
-		top_view.add( use_percentage_instead_of_count_label_ );
-		top_view.add( use_percentage_instead_of_count_box_ );
+		top_view.add( use_fraction_instead_of_count_label_ );
+		top_view.add( use_fraction_instead_of_count_box_ );
 
 		JPanel notes_panel = new JPanel( new BorderLayout() );
 		notes_panel.add( notes_scroll_pane_, BorderLayout.CENTER );
@@ -144,15 +144,15 @@ public class EdgeView extends JPanel {
 	}
 
 	public JTextField getPercentageOfResultsToTransferField() {
-		return percentage_of_results_to_transfer_field_;
+		return fraction_of_results_to_transfer_field_;
 	}
 
 	public JLabel getPercentageOfResultsToTransferLabel() {
-		return percentage_of_results_to_transfer_label_;
+		return fraction_of_results_to_transfer_label_;
 	}
 
 	public JCheckBox getUsePercentageInsteadOfCountBox() {
-		return use_percentage_instead_of_count_box_;
+		return use_fraction_instead_of_count_box_;
 	}
 
 	public Edge getEdge() {
