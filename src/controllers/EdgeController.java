@@ -18,18 +18,16 @@ public class EdgeController implements ChangeListener, DocumentListener {
 	@Override
 	public void stateChanged( ChangeEvent e ) {
 		if( e.getSource() == edge_view_.getPositiveScoresAreBetterBox() ) {
-			edge_view_.getEdge().setPositiveScoresAreBetter(
-					edge_view_.getPositiveScoresAreBetterBox().isSelected() );
-		} else if( e.getSource() == edge_view_
-				.getUsePercentageInsteadOfCountBox() ) {
-			final boolean use_perc = edge_view_.getUsePercentageInsteadOfCountBox()
-					.isSelected();
+			final boolean is_selected = edge_view_.getPositiveScoresAreBetterBox().isSelected();
+			edge_view_.getEdge().setPositiveScoresAreBetter( is_selected );
+		} else if( e.getSource() == edge_view_.getUsePercentageInsteadOfCountBox() ) {
+			final boolean use_perc = edge_view_.getUsePercentageInsteadOfCountBox().isSelected();
 			edge_view_.getEdge().setUsePercentageInsteadOfCount( use_perc );
 			edge_view_.getPercentageOfResultsToTransferField().setEnabled( use_perc );
 			edge_view_.getPercentageOfResultsToTransferLabel().setEnabled( use_perc );
 			edge_view_.getNumResultsToTransferField().setEnabled( !use_perc );
 			edge_view_.getNumResultsToTransferLabel().setEnabled( !use_perc );
-		}
+		}//else if ( e.getSource() == edge_view_.getPositiveScoresAreBetterBox() )
 	}
 
 	@Override
@@ -49,13 +47,12 @@ public class EdgeController implements ChangeListener, DocumentListener {
 
 	private void processDocumentChange( DocumentEvent e ) {
 		if( e.getDocument() == edge_view_.getColumnNameField().getDocument() ) {
-			edge_view_.getEdge()
-					.setColumnNameToSortBy( edge_view_.getColumnNameField().getText() );
-		} else if( e.getDocument() == edge_view_.getNumResultsToTransferField()
-				.getDocument() ) {
+			final String text = edge_view_.getColumnNameField().getText();
+			edge_view_.getEdge().setColumnNameToSortBy( text );
+		} else if( e.getDocument() == edge_view_.getNumResultsToTransferField().getDocument() ) {
 			try {
-				int setting = Integer
-						.parseInt( edge_view_.getNumResultsToTransferField().getText() );
+				final String text = edge_view_.getNumResultsToTransferField().getText();
+				int setting = Integer.parseInt( text );
 				edge_view_.getEdge().setNumResultsToTransfer( setting );
 			}
 			catch( Exception X ) {
@@ -63,8 +60,8 @@ public class EdgeController implements ChangeListener, DocumentListener {
 		} else if( e.getDocument() == edge_view_
 				.getPercentageOfResultsToTransferField().getDocument() ) {
 			try {
-				double setting = Double.parseDouble(
-						edge_view_.getPercentageOfResultsToTransferField().getText() );
+				final String text = edge_view_.getPercentageOfResultsToTransferField().getText();
+				final double setting = 	Double.parseDouble( text );
 				edge_view_.getEdge().setPercentageOfResultsToTransfer( setting );
 			}
 			catch( Exception X ) {

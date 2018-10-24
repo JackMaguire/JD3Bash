@@ -57,6 +57,7 @@ public class EdgeView extends JPanel {
 		edge_ = e;
 		column_name_field_ = new JTextField( edge_.columnNameToSortBy() );
 		positive_scores_are_better_box_.setText( "Positive Scores Are Better" );
+		positive_scores_are_better_box_.setSelected( edge_.positiveScoresAreBetter() );
 		notes_area_.setText( e.getNotes() );
 
 		num_results_to_transfer_field_ = new JTextField(
