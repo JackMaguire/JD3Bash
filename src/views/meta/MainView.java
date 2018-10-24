@@ -62,7 +62,7 @@ public class MainView extends JPanel {
 		node_view_ = new NodeView( selected_node_ );
 
 		compile_view_ = new CompileView( graph_ );
-		save_load_view_ = new SaveLoadView( graph_ );
+		save_load_view_ = new SaveLoadView( graph_, options_view_ );
 
 		tabs_ = new JTabbedPane();
 		tabs_.addTab( "Edit", node_view_ );

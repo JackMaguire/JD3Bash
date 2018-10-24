@@ -41,9 +41,12 @@ public class SaveLoadView extends JPanel
 	private final JTextField save_filename_field_ = new JTextField( "pipeline.dat" );
 	private final JButton save_button_ = new JButton( "Save" );
 
-	public SaveLoadView( Graph g ) {
+	private final GlobalOptionsView goview_;
+	
+	public SaveLoadView( Graph g, GlobalOptionsView goview ) {
 		graph_ = g;
-
+		goview_ = goview;
+		
 		save_button_.addActionListener( this );
 
 		file_chooser_.setApproveButtonText( "Load" );
@@ -118,6 +121,7 @@ public class SaveLoadView extends JPanel
 				in = new BufferedReader( new FileReader( file_to_load_from ) );
 				graph_.loadSelfNodesAndEdges( in );
 				Options.load( in );
+				goview_.update();
 				utility.PopupMessages.send( "Load Successful!" );
 			}
 			catch( FileNotFoundException e1 ) {
