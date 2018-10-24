@@ -194,7 +194,7 @@ public class Graph {
 			if( split[ 0 ].equals( "num_edges" ) ) {
 				int num_edges = Integer.parseInt( split[ 1 ] );
 				for( int i = 0; i < num_edges; ++i ) {
-					//System.out.println( i );
+					// System.out.println( i );
 					edges_.add( new Edge( in, nodes_ ) );
 				}
 				continue;

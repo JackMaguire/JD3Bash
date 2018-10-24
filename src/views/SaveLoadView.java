@@ -42,11 +42,11 @@ public class SaveLoadView extends JPanel
 	private final JButton save_button_ = new JButton( "Save" );
 
 	private final GlobalOptionsView goview_;
-	
+
 	public SaveLoadView( Graph g, GlobalOptionsView goview ) {
 		graph_ = g;
 		goview_ = goview;
-		
+
 		save_button_.addActionListener( this );
 
 		file_chooser_.setApproveButtonText( "Load" );
