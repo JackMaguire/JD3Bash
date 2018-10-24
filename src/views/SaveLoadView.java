@@ -148,8 +148,7 @@ public class SaveLoadView extends JPanel
 
 	@Override
 	public void propertyChange( PropertyChangeEvent evt ) {
-		save_path_field_
-				.setText( file_chooser_.getCurrentDirectory().getPath() + "/" );
+		save_path_field_.setText( file_chooser_.getCurrentDirectory().getPath() + "/" );
 	}
 
 }

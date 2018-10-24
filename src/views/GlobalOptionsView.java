@@ -23,8 +23,7 @@ public class GlobalOptionsView extends JPanel {
 
 	private final JLabel view_options_label_ = new JLabel( "View" );
 	private final JCheckBox show_node_titles_checkbox_ = new JCheckBox( "Show node titles" );
-	private final JCheckBox put_node_titles_to_side_checkbox_ = new JCheckBox(
-			"Move node titles to side" );
+	private final JCheckBox put_node_titles_to_side_checkbox_ = new JCheckBox( "Move node titles to side" );
 	private final JLabel grid_size_label_ = new JLabel( "Zoom: " );
 	private final JButton decrease_grid_size_button_ = new JButton( "-" );
 	private final JButton increase_grid_size_button_ = new JButton( "+" );
