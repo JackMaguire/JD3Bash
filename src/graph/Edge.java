@@ -178,6 +178,9 @@ public class Edge {
 
 		save_string += "START_NOTES\n";
 		save_string += notes_;
+		if( !notes_.endsWith( "\n" ) ) {
+			save_string += "\n";
+		}
 		save_string += "END_NOTES\n";
 
 		save_string += "END_EDGE\n";

@@ -65,12 +65,12 @@ public class EdgeView extends JPanel {
 				"" + edge_.percentageOfResultsToTransfer() );
 
 		// Percent Vs Num
-		final boolean use_perc = edge_.usePercentageInsteadOfCount();
-		use_fraction_instead_of_count_box_.setSelected( use_perc );
-		num_results_to_transfer_label_.setEnabled( !use_perc );
-		num_results_to_transfer_field_.setEnabled( !use_perc );
-		fraction_of_results_to_transfer_label_.setEnabled( use_perc );
-		fraction_of_results_to_transfer_field_.setEnabled( use_perc );
+		final boolean use_frac = edge_.usePercentageInsteadOfCount();
+		use_fraction_instead_of_count_box_.setSelected( use_frac );
+		num_results_to_transfer_label_.setEnabled( !use_frac );
+		num_results_to_transfer_field_.setEnabled( !use_frac );
+		fraction_of_results_to_transfer_label_.setEnabled( use_frac );
+		fraction_of_results_to_transfer_field_.setEnabled( use_frac );
 
 		// Label Formatting
 		column_name_label_.setHorizontalAlignment( JLabel.RIGHT );
