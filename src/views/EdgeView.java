@@ -22,8 +22,8 @@ public class EdgeView extends JPanel {
 	private static final long serialVersionUID = -5395763224098285614L;
 
 	private final Edge edge_;
-	private final EdgeController edge_controller_;// circular references are okay
-																								// in Java
+	private final EdgeController edge_controller_;
+	// circular references are okay in Java
 
 	private final JLabel column_name_label_ = new JLabel(
 			"Column Name To Sort By:   " );
